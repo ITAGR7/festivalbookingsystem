@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Client", "Festivalproject.Client\Festivalproject.Client.csproj", "{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Festivalproject.Client", "Festivalproject.Client\Festivalproject.Client.csproj", "{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Server", "Festivalproject.Server\Festivalproject.Server.csproj", "{84C23084-8CB5-48CE-B792-4A0618AB7EE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Festivalproject.Server", "Festivalproject.Server\Festivalproject.Server.csproj", "{84C23084-8CB5-48CE-B792-4A0618AB7EE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Shared", "Festivalproject.Shared\Festivalproject.Shared.csproj", "{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Festivalproject.Shared", "Festivalproject.Shared\Festivalproject.Shared.csproj", "{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,11 @@ Global
 		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABCB5790-4423-4835-BB38-29F48ABCB082}
 	EndGlobalSection
 EndGlobal

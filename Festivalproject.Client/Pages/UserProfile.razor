@@ -1,0 +1,51 @@
+﻿    @page "/userprofile"
+    @using Festivalproject.Shared.Models;
+    @inject HttpClient Http;
+
+    <h3>UserInformation</h3>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>FrivilligId </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var user in userList)
+            {
+
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Address</td>
+                    <td>@user.PhoneNumber</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+    @code {
+
+
+        private List<User> userList { get; set; } = new List<User>();
+
+        protected override async Task OnInitializedAsync()
+        {
+
+            userList = await Http.GetFromJsonAsync<List<User>>("https://localhost:7251/api/user");
+
+        }
+
+
+
+
+
+
+    }
