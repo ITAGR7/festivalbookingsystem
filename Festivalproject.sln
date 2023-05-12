@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Client", "Festivalproject.Client\Festivalproject.Client.csproj", "{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Server", "Festivalproject.Server\Festivalproject.Server.csproj", "{84C23084-8CB5-48CE-B792-4A0618AB7EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festivalproject.Shared", "Festivalproject.Shared\Festivalproject.Shared.csproj", "{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB8764EB-0B0B-44AD-9DF8-969C4771F6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C23084-8CB5-48CE-B792-4A0618AB7EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C23084-8CB5-48CE-B792-4A0618AB7EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C23084-8CB5-48CE-B792-4A0618AB7EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C23084-8CB5-48CE-B792-4A0618AB7EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8CF7E6-1050-46BB-B27A-9C200E00CC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
