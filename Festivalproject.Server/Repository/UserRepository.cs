@@ -23,22 +23,26 @@ namespace Festivalproject.Server.Repository
         }
 
 
-        public bool IsValidLogin(string username, string password)
+
+
+        public LoginResult GetLoginResult(string username, string password)
         {
-            Console.WriteLine("isvalidlogin repo");
 
             var filter = Builders<User>.Filter.And(
                 Builders<User>.Filter.Eq(u => u.UserName, username),
                 Builders<User>.Filter.Eq(u => u.Password, password)
             );
             var result = collection.Find(filter).FirstOrDefault();
+
             if (result != null)
             {
-                return true;
+                return new LoginResult { IsValid = true, UserType = result.UserType };
             }
-            return false;
-
+            return new LoginResult { IsValid = false, UserType = " " }; // use -1 or any other invalid value for RoleType
         }
+
+
+
 
         public List<User> GetAllUsers()
         {
@@ -46,6 +50,13 @@ namespace Festivalproject.Server.Repository
 
             return collection.Find(new BsonDocument()).ToList();
 
+        }
+
+        public User GetUserById(string id)
+        {
+            Console.WriteLine("Getuserbyid repo");
+            User user = collection.Find<User>(i => i.UserName == id).FirstOrDefault();
+           return user;
         }
 
         public string CreateUser(User newUser)

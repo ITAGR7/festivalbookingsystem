@@ -2,8 +2,7 @@
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Festivalproject.Server.Interface;
-
-
+using MongoDB.Driver.Core.Authentication;
 
 namespace Festivalproject.Server.Controllers
 {
@@ -22,6 +21,8 @@ namespace Festivalproject.Server.Controllers
 
         }
 
+
+
         [HttpGet]
         public List<User> GetAllUsers()
         {
@@ -30,19 +31,35 @@ namespace Festivalproject.Server.Controllers
 
         }
 
-        [HttpGet("login")]
 
-        public bool IsValidLogin(string username, string password)
+        //Her anvender vi et parameter ifm. logind
+        [HttpGet("{id}")]
+        public User GetUserById(string id)
         {
-            Console.WriteLine("IsvalidLogin");
-            var user = UserRepository.IsValidLogin(username, password);
-            if (user != true)
-            {
-                return false;
-            }
-            else { return true; }
 
+            User user =  UserRepository.GetUserById(id);
+            return user; 
         }
+
+
+        [HttpPost("login")]
+        public LoginResult GetLoginResult([FromBody] LoginData loginData)
+        {
+            Console.WriteLine(loginData.username);
+            Console.WriteLine("login");
+                var result = UserRepository.GetLoginResult(loginData.username,loginData.password);
+                return result;
+        }
+
+
+
+        public class LoginData
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+
+
 
 
         [HttpPost]
@@ -52,6 +69,8 @@ namespace Festivalproject.Server.Controllers
             UserRepository.CreateUser(user);
             return user.UserName;
         }
+
+
 
 
 

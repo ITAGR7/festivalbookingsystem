@@ -4,12 +4,12 @@ namespace Festivalproject.Client.Services
 {
     public interface IUserService
     {
-        public Task<User> GetUser(int userid);
+        public Task<User> GetUserById(string id);
         public void CreateUser(User user);
         public Task UpdateUser(User user);
-        public Task DeleteUser(int userid);
+        public Task DeleteUser(string id);
 
-        public Task<bool> IsValidLogin(string username, string password);
+        //public Task<LoginResult> IsValidLogin(string username, string password);
     }
 }
 

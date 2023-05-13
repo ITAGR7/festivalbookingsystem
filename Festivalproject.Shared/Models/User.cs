@@ -16,8 +16,24 @@ namespace Festivalproject.Shared.Models
         public string Id { get; set; } = "";
 
 
-        [BsonElement("name")]
-        public string Name { get; set; }
+        [BsonElement("firstName")]
+        public string FirstName { get; set; }
+
+
+        [BsonElement("surName")]
+        public string LastName { get; set; }
+
+
+
+        [BsonElement("zip")]
+         public int Zip{ get; set; }
+
+
+
+        [BsonElement("city")]
+        public string City { get; set; }
+
+
 
         [BsonElement("phone")]
         public int PhoneNumber { get; set; }
@@ -34,6 +50,9 @@ namespace Festivalproject.Shared.Models
 
         [BsonElement("password")]
         public string Password { get; set; }
+
+        [BsonElement("userType")]
+        public string UserType { get; set; }
 
         //[BsonElement("volunteerId")]
         //public string VolunteerId { get; set; }

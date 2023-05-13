@@ -1,0 +1,66 @@
+﻿    @page "/volunteer"
+    @using Festivalproject.Shared.Models;
+    @using Festivalproject.Client.Services;
+    @inject HttpClient Http;
+    @inject IUserService userService; 
+
+    <h3> Velkommen @user.FirstName</h3>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Navn</th>
+                <th>Brugernavn</th>
+                <th>Addresse</th>
+                <th>TelefonNummer</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    
+                    <td>@user.FirstName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Address</td>
+                    <td>@user.PhoneNumber</td>
+
+                </tr>
+            
+        </tbody>
+    </table>
+
+
+
+
+
+    <h3> Mine vagter </h3> 
+
+@code {
+
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? id { get; set; }
+
+    private List<User> userList { get; set; } = new List<User>();
+
+    private User user { get; set; } = new User(); 
+
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        //userList = await Http.GetFromJsonAsync<List<User>>("https://localhost:7251/api/user");
+        Console.WriteLine("Load userinfo on paameter client");
+     
+        user = await userService.GetUserById(id);
+       
+        
+    }
+
+
+}

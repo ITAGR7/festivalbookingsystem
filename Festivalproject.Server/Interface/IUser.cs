@@ -8,7 +8,9 @@ namespace Festivalproject.Server.Interface
         public List<User> GetAllUsers();
         public string CreateUser(User newUser);
 
-        public bool IsValidLogin(string username, string password);
+        public LoginResult GetLoginResult(string username, string password);
+
+        public User GetUserById(string id); 
 
         //int PostUser(User user);
 
