@@ -22,6 +22,9 @@
     protected override async Task OnInitializedAsync()
     {
         AvailableShift = await Http.GetFromJsonAsync<List<Shifts>>("https://localhost:7251/api/Shifts/false");
+        
+    // Create a DotNetObjectReference to pass to JavaScript
+        var dotNetReference = DotNetObjectReference.Create(this);
 
     // Convert the list of shifts to an array of events thats later passed over to the js function
         var events = AvailableShift.Select(s => new
@@ -35,13 +38,17 @@
 
     //importing the js file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
-        await module.InvokeVoidAsync("initializeCalendar", new object[] { events });
+        await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }
-
-    private async Task ShiftsDialog(string shiftName)
-    {    
+    
+    [JSInvokable]
+    public async Task ShiftsDialog(string shiftName)
+    {
         var options = new ModalOptions { Size = ModalSize.Small };
-        var dialog = ModalService.Show<ShiftsDialog>("Successfully signed up", options);
+        var parameters = new ModalParameters();
+        parameters.Add("ModalTitle", shiftName);
+
+        var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
         var result = await dialog.Result;
     }
 }
