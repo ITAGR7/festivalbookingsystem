@@ -1,0 +1,117 @@
+@page "/AvailableShifts"
+@using Festivalproject.Shared.Models
+@inject HttpClient Http
+
+
+<h3>AvailableShifts</h3>
+
+@{ var currentMonth = DateTime.Now.Month; var currentYear = DateTime.Now.Year; }
+
+<div class="container mt-3">
+    <h2 class="text-center">@DateTime.Now.ToString("MMMM yyyy")</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered text-center" style="table-layout: fixed; border: 1px solid #F8F3F2;">
+            <thead>
+                <tr>
+                    @for (var dayOfWeek = 1; dayOfWeek <= 7; dayOfWeek++)
+                    {
+                        var dayName = Enum.GetNames(typeof(DayOfWeek))[(dayOfWeek) % 7];
+                        <th>@dayName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (var day = 1; day <= DateTime.DaysInMonth(currentYear, currentMonth); day++)
+                {
+                    var date = new DateTime(currentYear, currentMonth, day);
+                    if ((day == 1 && date.DayOfWeek != DayOfWeek.Monday) || (date.DayOfWeek == DayOfWeek.Monday))
+                    {
+                        @:<tr>
+                    }
+                    if (day == 1 && date.DayOfWeek != DayOfWeek.Monday)
+                    {
+                        var diff = (int)date.DayOfWeek - 1;
+                        diff = diff < 0 ? 7 - Math.Abs(diff) : diff;
+                        for (int i = 0; i < diff; i++)
+                        {
+                            @:<td></td>
+                        }
+                    }
+
+                    if (ShiftsByDay.ContainsKey(date))
+                    {
+                        foreach (var shift in ShiftsByDay[date])
+                        {
+                            var shiftDays = (shift.endTime.Date - shift.startTime.Date).Days + 1;
+                            <td colspan="@shiftDays" style="border: 1px solid #F8F3F2;" class="@(DateTime.Now.Date == date ? "table-info" : "") p-2">
+                                <div class="font-weight-bold">@day</div>
+                                <div class="btn-shift btn btn-sm btn-light text-left mt-1" @onclick="() => SelectShift(shift)">
+                                    @shift.Name - @shift.startTime.ToString("HH:mm") - @shift.endTime.ToString("HH:mm")
+                                </div>
+                            </td>
+                            day += shiftDays - 1;  // skip the next few days covered by this shift
+                        }
+                    }
+                    else
+                    {
+                        <td style="border: 1px solid #F8F3F2;" class="@(DateTime.Now.Date == date ? "table-info" : "") p-2">
+                            <div class="font-weight-bold">@day</div>
+                        </td>
+                    }
+
+                    if (date.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        @:</tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@if (SelectedShift != null)
+{
+    <div class="modal show d-block" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@SelectedShift.Name</h5>
+                    <button type="button" class="btn-close" @onclick="() => SelectedShift = null"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Area:</strong> @SelectedShift.Area</p>
+                    <p><strong>Status:</strong> @(SelectedShift.Status ? "Occupied" : "Available")</p>
+                    <p><strong>Description:</strong> @SelectedShift.Description</p>
+                    <p><strong>Capacity:</strong> @SelectedShift.Capacity</p>
+                    <p><strong>Duration:</strong> @SelectedShift.Duration</p>
+                    <p><strong>Start Time:</strong> @SelectedShift.startTime.ToString("yyyy-MM-dd HH:mm")</p>
+                    <p><strong>End Time:</strong> @SelectedShift.endTime.ToString("yyyy-MM-dd HH:mm")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop show"></div>
+}
+
+@code {
+    
+    private Shifts SelectedShift { get; set; }
+
+    private List<Shifts> AvailableShift { get; set; } = new List<Shifts>();
+    private Dictionary<DateTime, List<Shifts>> ShiftsByDay { get; set; } = new Dictionary<DateTime, List<Shifts>>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        AvailableShift = await Http.GetFromJsonAsync<List<Shifts>>("https://localhost:7251/api/Shifts/false");
+        ShiftsByDay = AvailableShift.GroupBy(s => s.startTime.Date)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+    }
+    
+    private void SelectShift(Shifts shift)
+    {
+        SelectedShift = shift;
+    }
+}
