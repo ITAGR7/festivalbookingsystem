@@ -66,33 +66,36 @@
 
     private string yourUsername = "";
     private string yourPassword = "";
+    private string id = "";
 
-    
 
     public async Task Login()
     {
 
         var result= await loginService.GetLoginResult(yourUsername, yourPassword);
-       
+
+
 
         if (result != null && result.UserType == "1") 
         {
+            var id = result.ObjectId;
 
-            navigationManager.NavigateTo("/volunteer?id=" + yourUsername);
+            navigationManager.NavigateTo("/volunteer?id=" + id);
 
         }
         else if (result != null && result.UserType == "2")
         {
 
 
-    
-            navigationManager.NavigateTo("/coordinator?id=" + yourUsername);
-            
+            var id = result.ObjectId;
+            navigationManager.NavigateTo("/coordinator?id=" + id);
+
         }
         else
         {
             yourUsername = "";
             yourPassword = ""; //Setting these variables to nul as a way of resetting after login button is clicked
+            id = " ";
         }
 
     }

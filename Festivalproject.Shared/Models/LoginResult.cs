@@ -11,6 +11,8 @@ namespace Festivalproject.Shared.Models
 
         public bool IsValid { get; set; }
         public string UserType { get; set; }
+
+        public string ObjectId { get; set; }
     }
 
 

@@ -22,7 +22,7 @@
         <tr>
 
             <td>@user.FirstName</td>
-            <td>@user.UserName</td>
+            @*<td>@user.UserName</td>*@
             <td>@user.Address</td>
             <td>@user.PhoneNumber</td>
 
@@ -50,7 +50,7 @@
     protected override async Task OnInitializedAsync()
     {
 
-        user = await userService.GetUserById(id);
+        user = await userService.GetUserByObjectId(id);
 
     }
 

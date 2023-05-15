@@ -16,12 +16,12 @@
             <tr>
                 <th> Navn</th>
                 <th> Efternavn</th>
-
                 <th>Addresse</th>
                 <td>Postnummer</td>
                 <td>By</td>
                 <th>TelefonNummer</th>
                 <th>Brugernavn</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                 <td>@user.SurName</td>
                 <td>@user.Address</td>
                 <td>@user.Zip</td>
-                <td> @user.City</td>
+                <td>@user.City</td>
                 <td>@user.PhoneNumber</td>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
@@ -106,7 +106,7 @@ else
     protected override async Task OnInitializedAsync()
     {
 
-        user = await userService.GetUserById(id);
+        user = await userService.GetUserByObjectId(id);
 
 
     }
@@ -126,11 +126,10 @@ else
         userUpdated.City = user.City;
         userUpdated.UserName = user.UserName;
         userUpdated.Email = user.Email;
-
-        //Ønskede at undlade disse, men de skal indgå åbenbart 
         userUpdated.Password = user.Password;
         userUpdated.UserType = user.UserType;
-   
+        userUpdated.Id = user.Id;
+
 
     }
 
@@ -139,7 +138,7 @@ else
     private async Task Save()
     {
         await userService.UpdateUser(userUpdated);
-        user = await userService.GetUserById(id); 
+        user = await userService.GetUserByObjectId(id); 
         EditMode = false;
   
         

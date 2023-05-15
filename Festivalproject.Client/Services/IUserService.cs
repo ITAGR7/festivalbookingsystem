@@ -4,7 +4,7 @@ namespace Festivalproject.Client.Services
 {
     public interface IUserService
     {
-        public Task<User> GetUserById(string id);
+        public Task<User> GetUserByObjectId(string id);
         public void CreateUser(User user);
         public Task UpdateUser(User user);
         public Task DeleteUser(string id);

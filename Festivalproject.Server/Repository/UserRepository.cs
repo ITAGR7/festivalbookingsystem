@@ -29,17 +29,18 @@ namespace Festivalproject.Server.Repository
         {
 
             var filter = Builders<User>.Filter.And(
-                Builders<User>.Filter.Eq(u => u.UserName, username),
+                Builders<User>.Filter.Eq(u => u.UserName, username),//Husk at ændre til username 
                 Builders<User>.Filter.Eq(u => u.Password, password)
             );
             var result = collection.Find(filter).FirstOrDefault();
 
             if (result != null)
             {
-                return new LoginResult { IsValid = true, UserType = result.UserType };
+                return new LoginResult { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
             }
-            return new LoginResult { IsValid = false, UserType = " " }; // use -1 or any other invalid value for RoleType
+            return new LoginResult { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
         }
+
 
 
 
@@ -52,11 +53,11 @@ namespace Festivalproject.Server.Repository
 
         }
 
-        public User GetUserById(string id)
+        public User GetUserByObjectId(string id)
         {
             Console.WriteLine("Getuserbyid repo");
 
-            User user = collection.Find<User>(i => i.UserName == id).FirstOrDefault();
+            User user = collection.Find<User>(i => i.Id == id).FirstOrDefault();
             return user;
         }
 
@@ -73,9 +74,9 @@ namespace Festivalproject.Server.Repository
         public async Task<bool> UpdateUser(User userUpdated)
         {
 
-            
+
             // Her burde vi måske anvende user.ID fremfor username? I så fald skal det opdateres på client også
-            var filter = Builders<User>.Filter.Eq(u => u.UserName, userUpdated.UserName);
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userUpdated.Id);
 
             var update = Builders<User>.Update
                 .Set(u => u.UserName, userUpdated.UserName)
@@ -86,10 +87,11 @@ namespace Festivalproject.Server.Repository
                 .Set(u => u.City, userUpdated.City)
                 .Set(u => u.PhoneNumber, userUpdated.PhoneNumber)
                 .Set(u => u.Email, userUpdated.Email)
-                .Set(u => u.Password, userUpdated.Password);
+                .Set(u => u.Password, userUpdated.Password)
+                .Set(u => u.Id, userUpdated.Id); 
 
 
-   
+
 
             var result = await collection.UpdateOneAsync(filter, update);
 
@@ -98,7 +100,8 @@ namespace Festivalproject.Server.Repository
 
         }
 
-
     }
+
+    
 }
 

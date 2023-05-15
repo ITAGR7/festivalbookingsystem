@@ -1,8 +1,9 @@
-﻿using Festivalproject.Server.Repository;
+﻿
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Festivalproject.Server.Interface;
-using MongoDB.Driver.Core.Authentication;
+
+
 
 namespace Festivalproject.Server.Controllers
 {
@@ -34,10 +35,10 @@ namespace Festivalproject.Server.Controllers
 
         //Her anvender vi et parameter ifm. logind
         [HttpGet("{id}")]
-        public User GetUserById(string id)
+        public User GetUserByObjectId(string id)
         {
 
-            User user =  UserRepository.GetUserById(id);
+            User user =  UserRepository.GetUserByObjectId(id);
             return user; 
         }
 
@@ -67,18 +68,30 @@ namespace Festivalproject.Server.Controllers
         {
             //Test of CreateUser on Controller
             UserRepository.CreateUser(user);
-            return user.UserName;
+            return user.Id; //Husk at ændre til username
         }
 
 
 
 
+
+        //[HttpPut]
+        //public void UpdateUser(User userUpdated)
+        //{
+        //    UserRepository.UpdateUser(userUpdated);
+        //}
 
         [HttpPut]
-        public void UpdateUser(User userUpdated)
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult UpdateUser(User userUpdated)
         {
             UserRepository.UpdateUser(userUpdated);
+            return NoContent();
         }
+
+
+
+
 
         //[HttpDelete]
         //public void DeleteUser(int userid)

@@ -21,7 +21,7 @@ namespace Festivalproject.Client.Services
 
 
 
-        public async Task<User> GetUserById(string id)
+        public async Task<User> GetUserByObjectId(string id)
         {
             try
             {

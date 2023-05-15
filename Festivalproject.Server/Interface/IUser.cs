@@ -10,7 +10,7 @@ namespace Festivalproject.Server.Interface
 
         public LoginResult GetLoginResult(string username, string password);
 
-        public User GetUserById(string id); 
+        public User GetUserByObjectId(string id); 
 
         //int PostUser(User user);
 
