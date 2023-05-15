@@ -5,83 +5,54 @@
     @inject HttpClient Http;
     @inject IUserService userService; 
     @inject NavigationManager navigationManager; 
+    @using Festivalproject.Client.Components; 
+ 
 
 
-    <h3> Velkommen @user.FirstName</h3>
-<p class="mt-4 text-sm text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</p>
 
-@*@if (!EditMode)
-{
-    <table class="table table-striped">
+<div>
+  <div>
+    <img class="h-32 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
+  </div>
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+      <div class="flex">
+        <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="/ProfileHead.png" alt="">
+      </div>
+      <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+        <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
+          <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName</h1>
+        </div>
+        <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <button type="button" class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+            <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+              <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+            </svg>
+            <span>Message</span>
+          </button>
+          <button type="button" class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+            <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+            </svg>
+          @*  <span>Call</span>*@
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
+      <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName</h1>
+    </div>
+  </div>
+</div>
 
-        <thead>
-            <tr>
-                <th> Navn</th>
-                <th> Efternavn</th>
-                <th>Addresse</th>
-                <td>Postnummer</td>
-                <td>By</td>
-                <th>TelefonNummer</th>
-                <th>Brugernavn</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@user.FirstName</td>
-                <td>@user.SurName</td>
-                <td>@user.Address</td>
-                <td>@user.Zip</td>
-                <td>@user.City</td>
-                <td>@user.PhoneNumber</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
+<div class="md:container md:mx-auto">
+<h4 class="mt-36 text-3xl"> Velkommen! </h4>
+<h2 class="mt-8  text-lg text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</h2> 
 
-            </tr>
+<div class="grid grid-cols-2"></div> 
 
-        </tbody>
-    </table>
-    <button @onclick="Edit">Rediger oplysninger</button>
-}
-else
-{
-    <table class="table table-striped">
-
-        <thead>
-            <tr>
-                <th> Navn</th>
-                <th> Efternavn</th>
-
-                <th>Addresse</th>
-                <td>POstnummer</td>
-                <td>By</td>
-                <th>TelefonNummer</th>
-                <th>Brugernavn</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <td><input type="text" @bind="@userUpdated.FirstName" /></td>
-                <td><input type="text" @bind="@userUpdated.SurName" /></td>
-                <td><input type="text" @bind="@userUpdated.Address" /></td>
-                <td><input type="text" @bind="@userUpdated.Zip" /></td>
-                <td> <input type="text"@bind="@userUpdated.City" /></td>
-                <td><input type="text" @bind="@userUpdated.PhoneNumber" /></td>
-                <td><input type="text" @bind="@userUpdated.UserName" /></td>
-                <td><input type="text" @bind="@userUpdated.Email" /></td>
-               
-
-            </tr>
-
-        </tbody>
-    </table>
-    <button @onclick="Save">Gem oplysninger</button>
-
-}
-*@
-
-
+<h4 class="mt-36 text-2xl"> Dine oplysninger </h4>
 @if(!EditMode){
 
 
@@ -127,8 +98,6 @@ else
  
                             </td>
                         </tr>
-
-                        <!-- More people... -->
                     </tbody>
                 </table>
             </div>
@@ -139,7 +108,7 @@ else
 else
 {
 
-    <div class="px-4 sm:px-6 lg:px-8">
+<div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
             </div>
@@ -168,7 +137,7 @@ else
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
                             <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"><input type="text" @bind="@userUpdated.FirstName"/></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.FirstName" /></td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.SurName"/></td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.Address"/></td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.City"/></td>
@@ -181,7 +150,6 @@ else
                                 </td>
                             </tr>
 
-                            <!-- More people... -->
                         </tbody>
                     </table>
                 </div>
@@ -193,35 +161,14 @@ else
 }
 
 
-
-    <br />
-    <br />
-    <h3> Mine vagter </h3>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            
-            <th>Username</th>
-            <th>StartTime</th>
-            <th>EndTime</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-
-           
-            <td>@Registration.Username</td>
-            <td>@Registration.startTime</td>
-            <td>@Registration.endTime</td>
-
-        </tr>
-
-    </tbody>
-</table>
-
-    <h3> Mine vagter </h3> 
-    
+<div>   
+     <h4 class="mt-40 text-2xl">Dine vagter </h4>
+   
+<!-- To avoid overabundance of code in this razorpage, we apply use of components -->
+<ShiftList Shifts=ShiftRegistrations/>
+</div>
+</div>
+   
 
 @code {
 
@@ -229,34 +176,24 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public string? id { get; set; }
-    public string? UserId { get; set; }
-
     private List<User> userList { get; set; } = new List<User>();
-
     private User user { get; set; } = new User();
-
     private User userUpdated { get; set; } = new User(); 
-
-
     private bool EditMode { get; set; } = false;
-
     private List<ShiftRegistration> ShiftRegistrations { get; set; } = new List<ShiftRegistration>();
 
-    private ShiftRegistration Registration { get; set; } = new ShiftRegistration();
+
 
 
     protected override async Task OnInitializedAsync()
     {
 
         user = await userService.GetUserByObjectId(id);
-        Registration = await ShiftRegistrationService.GetRegisteredShiftsById(UserId);
+        ShiftRegistrations = await ShiftRegistrationService.GetRegisteredShiftsById(id);
+        Console.WriteLine(ShiftRegistrations.Count());
     }
 
     
-
-
-   
-
 
     private void Edit()
     {
@@ -277,17 +214,18 @@ else
 
     }
 
-
-
     private async Task Save()
     {
         await userService.UpdateUser(userUpdated);
         user = await userService.GetUserByObjectId(id); 
         EditMode = false;
-  
-        
-        //navigationManager.NavigateTo($"/volunteer?id={userUpdated.UserName}");
 
     }
 
+
+    
+      
+    
+
 }
+

@@ -53,7 +53,7 @@ namespace Festivalproject.Server.Controllers
         }
 
 
-
+        //Denne kunne laves om til en klasse  for sig selv 
         public class LoginData
         {
             public string username { get; set; }
@@ -68,7 +68,7 @@ namespace Festivalproject.Server.Controllers
         {
             //Test of CreateUser on Controller
             UserRepository.CreateUser(user);
-            return user.Id; //Husk at ændre til username
+            return user.Id; 
         }
 
 

@@ -13,14 +13,16 @@ namespace Festivalproject.Client.Services
         {
             this.Http = httpClient;
         }
-            public async Task<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+            public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
         {
             try
             {
-                var result = await Http.GetFromJsonAsync<ShiftRegistration>($"https://localhost:7251/api/ShiftRegistration/{UserId}");
+                //Ændrede også denne til Liste
+                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"https://localhost:7251/api/ShiftRegistration/{UserId}"); 
+                Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception ex) // Tror også her der var en fejl fordi der blevthrowet ingenting 
             {
                 Console.WriteLine(ex.Message);
                 throw;
