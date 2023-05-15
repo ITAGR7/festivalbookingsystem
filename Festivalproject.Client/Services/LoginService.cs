@@ -19,8 +19,9 @@ namespace Festivalproject.Client.Services
         public async Task<LoginResult> GetLoginResult(string username, string password)
         {
            
-            var requestBody = new { username, password }; //Når man sender som requestbody, vises ikke parametrene i url 
+            var requestBody = new { username, password }; //Når man sender som requestbody, vises ikke parametrene i url = mere sikkert 
 
+            // Vi anvender httPost fremfor httpGet, da dette ikke returnerer unødvendig data, som vi ikke vil have synlig på clienten 
             var response = await Http.PostAsJsonAsync($"https://localhost:7251/api/user/login", requestBody);
 
             if (response.IsSuccessStatusCode)
@@ -30,7 +31,7 @@ namespace Festivalproject.Client.Services
                 return loginResult;
             }
 
-            throw new Exception("Login lykkes ikke ");
+            throw new Exception("Log ind lykkedes ikke. Passord eller bruger findes ikke ");
 
 
         }

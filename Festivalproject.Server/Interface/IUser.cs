@@ -16,7 +16,7 @@ namespace Festivalproject.Server.Interface
 
         //void DeleteUser(int userid);
 
-        //void PutUser(User user);
+        public Task<bool> UpdateUser(User userUpdated);
 
     }
 

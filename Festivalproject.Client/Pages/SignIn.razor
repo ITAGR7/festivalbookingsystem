@@ -4,6 +4,7 @@
 @inject HttpClient Http;
 
 @inject ILoginService loginService; 
+@inject IUserService userService; 
 @inject NavigationManager navigationManager
 
 
@@ -73,17 +74,19 @@
     {
 
         var result= await loginService.GetLoginResult(yourUsername, yourPassword);
+       
 
         if (result != null && result.UserType == "1") 
         {
-          
+
             navigationManager.NavigateTo("/volunteer?id=" + yourUsername);
 
         }
         else if (result != null && result.UserType == "2")
         {
 
-          
+
+    
             navigationManager.NavigateTo("/coordinator?id=" + yourUsername);
             
         }

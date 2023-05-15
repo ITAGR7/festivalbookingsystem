@@ -55,8 +55,9 @@ namespace Festivalproject.Server.Repository
         public User GetUserById(string id)
         {
             Console.WriteLine("Getuserbyid repo");
+
             User user = collection.Find<User>(i => i.UserName == id).FirstOrDefault();
-           return user;
+            return user;
         }
 
         public string CreateUser(User newUser)
@@ -67,14 +68,37 @@ namespace Festivalproject.Server.Repository
 
         }
 
-        //public UpdateUser(User user)
-        //{
+        // Metode sat til task bool, fordi den er async, fordi den skal returnere resultat af 
+        //..updateoneasync metoden (validering)
+        public async Task<bool> UpdateUser(User userUpdated)
+        {
 
-        //}
+            
+            // Her burde vi måske anvende user.ID fremfor username? I så fald skal det opdateres på client også
+            var filter = Builders<User>.Filter.Eq(u => u.UserName, userUpdated.UserName);
+
+            var update = Builders<User>.Update
+                .Set(u => u.UserName, userUpdated.UserName)
+                .Set(u => u.FirstName, userUpdated.FirstName)
+                .Set(u => u.SurName, userUpdated.SurName)
+                .Set(u => u.Address, userUpdated.Address)
+                .Set(u => u.Zip, userUpdated.Zip)
+                .Set(u => u.City, userUpdated.City)
+                .Set(u => u.PhoneNumber, userUpdated.PhoneNumber)
+                .Set(u => u.Email, userUpdated.Email)
+                .Set(u => u.Password, userUpdated.Password);
+
+
+   
+
+            var result = await collection.UpdateOneAsync(filter, update);
+
+            return result.ModifiedCount > 0;
+
+
+        }
 
 
     }
-
-
 }
 

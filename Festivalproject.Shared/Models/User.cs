@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
+
 namespace Festivalproject.Shared.Models
 {
     public class User
@@ -15,13 +17,13 @@ namespace Festivalproject.Shared.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = "";
 
-
+        
         [BsonElement("firstName")]
         public string FirstName { get; set; }
 
 
         [BsonElement("surName")]
-        public string LastName { get; set; }
+        public string SurName { get; set; }
 
 
 
@@ -45,7 +47,6 @@ namespace Festivalproject.Shared.Models
         public string Email { get; set; }
 
         [BsonElement("userName")]
-
         public string UserName { get; set; }
 
         [BsonElement("password")]

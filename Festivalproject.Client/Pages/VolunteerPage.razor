@@ -3,36 +3,85 @@
     @using Festivalproject.Client.Services;
     @inject HttpClient Http;
     @inject IUserService userService; 
+    @inject NavigationManager navigationManager; 
+
 
     <h3> Velkommen @user.FirstName</h3>
 
-
+@if (!EditMode)
+{
     <table class="table table-striped">
+
         <thead>
             <tr>
                 <th> Navn</th>
-                <th>Brugernavn</th>
+                <th> Efternavn</th>
+
                 <th>Addresse</th>
+                <td>Postnummer</td>
+                <td>By</td>
                 <th>TelefonNummer</th>
+                <th>Brugernavn</th>
             </tr>
         </thead>
         <tbody>
-                <tr>
-                    
-                    <td>@user.FirstName</td>
-                    <td>@user.UserName</td>
-                    <td>@user.Address</td>
-                    <td>@user.PhoneNumber</td>
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.SurName</td>
+                <td>@user.Address</td>
+                <td>@user.Zip</td>
+                <td> @user.City</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
 
-                </tr>
-            
+            </tr>
+
         </tbody>
     </table>
+    <button @onclick="Edit">Rediger oplysninger</button>
+}
+else
+{
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th> Navn</th>
+                <th> Efternavn</th>
+
+                <th>Addresse</th>
+                <td>POstnummer</td>
+                <td>By</td>
+                <th>TelefonNummer</th>
+                <th>Brugernavn</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td><input type="text" @bind="@userUpdated.FirstName" /></td>
+                <td><input type="text" @bind="@userUpdated.SurName" /></td>
+                <td><input type="text" @bind="@userUpdated.Address" /></td>
+                <td><input type="text" @bind="@userUpdated.Zip" /></td>
+                <td> <input type="text"@bind="@userUpdated.City" /></td>
+                <td><input type="text" @bind="@userUpdated.PhoneNumber" /></td>
+                <td><input type="text" @bind="@userUpdated.UserName" /></td>
+                <td><input type="text" @bind="@userUpdated.Email" /></td>
+               
+
+            </tr>
+
+        </tbody>
+    </table>
+    <button @onclick="Save">Gem oplysninger</button>
+
+}
 
 
 
-
-
+    <br />
+    <br />
     <h3> Mine vagter </h3> 
 
 @code {
@@ -44,9 +93,12 @@
 
     private List<User> userList { get; set; } = new List<User>();
 
-    private User user { get; set; } = new User(); 
+    private User user { get; set; } = new User();
+
+    private User userUpdated { get; set; } = new User(); 
 
 
+    private bool EditMode { get; set; } = false;
 
 
 
@@ -54,13 +106,45 @@
     protected override async Task OnInitializedAsync()
     {
 
-        //userList = await Http.GetFromJsonAsync<List<User>>("https://localhost:7251/api/user");
-        Console.WriteLine("Load userinfo on paameter client");
-     
         user = await userService.GetUserById(id);
-       
-        
+
+
     }
 
+
+
+
+    private void Edit()
+    {
+
+        EditMode = true;
+        userUpdated.FirstName = user.FirstName;
+        userUpdated.SurName = user.SurName;
+        userUpdated.PhoneNumber = user.PhoneNumber; 
+        userUpdated.Address = user.Address;
+        userUpdated.Zip = user.Zip;
+        userUpdated.City = user.City;
+        userUpdated.UserName = user.UserName;
+        userUpdated.Email = user.Email;
+
+        //Ønskede at undlade disse, men de skal indgå åbenbart 
+        userUpdated.Password = user.Password;
+        userUpdated.UserType = user.UserType;
+   
+
+    }
+
+
+
+    private async Task Save()
+    {
+        await userService.UpdateUser(userUpdated);
+        user = await userService.GetUserById(id); 
+        EditMode = false;
+  
+        
+        //navigationManager.NavigateTo($"/volunteer?id={userUpdated.UserName}");
+
+    }
 
 }

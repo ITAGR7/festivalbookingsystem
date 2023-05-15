@@ -40,14 +40,16 @@ namespace Festivalproject.Client.Services
         public async void CreateUser(User user)
         {
             await Http.PostAsJsonAsync<User>("https://localhost:7251/api/user", user);
+
         }
 
 
 
 
-        public async Task UpdateUser(User user)
+        public async Task UpdateUser(User userUpdated)
         {
-            await Http.PutAsJsonAsync<User>("https://localhost:7251/api/user", user);
+            Console.WriteLine(userUpdated.FirstName.ToString());
+            await Http.PutAsJsonAsync<User>("https://localhost:7251/api/user", userUpdated);
         }
 
 

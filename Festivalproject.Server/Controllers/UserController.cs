@@ -74,11 +74,11 @@ namespace Festivalproject.Server.Controllers
 
 
 
-        //[HttpPut]
-        //public void PutUser(User user)
-        //{
-        //    Repository.PutUser(user);
-        //}
+        [HttpPut]
+        public void UpdateUser(User userUpdated)
+        {
+            UserRepository.UpdateUser(userUpdated);
+        }
 
         //[HttpDelete]
         //public void DeleteUser(int userid)
