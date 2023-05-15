@@ -1,6 +1,7 @@
 ﻿    @page "/volunteer"
     @using Festivalproject.Shared.Models;
     @using Festivalproject.Client.Services;
+    @inject IShiftRegistrationService ShiftRegistrationService
     @inject HttpClient Http;
     @inject IUserService userService; 
     @inject NavigationManager navigationManager; 
@@ -195,6 +196,30 @@ else
 
     <br />
     <br />
+    <h3> Mine vagter </h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Username</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+           
+            <td>@Registration.Username</td>
+            <td>@Registration.startTime</td>
+            <td>@Registration.endTime</td>
+
+        </tr>
+
+    </tbody>
+</table>
+
     <h3> Mine vagter </h3> 
     
 
@@ -204,6 +229,7 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public string? id { get; set; }
+    public string? UserId { get; set; }
 
     private List<User> userList { get; set; } = new List<User>();
 
@@ -214,18 +240,22 @@ else
 
     private bool EditMode { get; set; } = false;
 
+    private List<ShiftRegistration> ShiftRegistrations { get; set; } = new List<ShiftRegistration>();
 
+    private ShiftRegistration Registration { get; set; } = new ShiftRegistration();
 
 
     protected override async Task OnInitializedAsync()
     {
 
         user = await userService.GetUserByObjectId(id);
-
-
+        Registration = await ShiftRegistrationService.GetRegisteredShiftsById(UserId);
     }
 
+    
 
+
+   
 
 
     private void Edit()
