@@ -2,7 +2,7 @@
 //https://fullcalendar.io/docs/initialize-globals
 
 //making the function available for import in razor
-export function initializeCalendar(events) {
+export function initializeCalendar(events, dotNetReference) {
     //console logging to check that the shifts are correctly being passed to the function
     console.log(events);
     
@@ -12,7 +12,24 @@ export function initializeCalendar(events) {
     //creating a new calendar object and assigning it to a variable, giving it the calendar element and the events as parameters
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: events
+        events: events,
+        selectable: true,
+        selectMirror: true,
+        eventMouseEnter: function( mouseEnterInfo ) { 
+            //Color needs to change to a lighter color when mouse enters
+            mouseEnterInfo.el.style.backgroundColor = 'lightblue';
+            //change mouse pointer to a hand
+            mouseEnterInfo.el.style.cursor = 'pointer';
+        },
+        eventMouseLeave: function( mouseLeaveInfo ) {
+            //return normal color before mouse enter
+            mouseLeaveInfo.el.style.backgroundColor = '';
+        },
+        eventClick: function(info) {
+            // Use the dotNetReference to invoke the C# method
+            dotNetReference.invokeMethodAsync('ShiftsDialog', info.event.title);
+        },
+
     });
     
     //rendering the calendar
