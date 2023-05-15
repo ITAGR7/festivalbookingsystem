@@ -20,6 +20,10 @@ builder.Services.AddHttpClient<ILoginService, LoginService>(client =>
 {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
+builder.Services.AddHttpClient<IShiftRegistrationService, ShiftRegistrationService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
 
 builder.Services.AddBlazoredModal();// tiløjede denne linje for at den kan bruges i program.cs fra dummyShifts og Shifts
 

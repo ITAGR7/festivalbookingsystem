@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IShifts, ShiftRepository>();
 //Adding a service implementing iuser, and userrepository 
 builder.Services.AddSingleton<IUser, UserRepository>();
+builder.Services.AddSingleton<IShiftRegistration, ShiftRegistrationRepository>();
 
 var app = builder.Build();
 
