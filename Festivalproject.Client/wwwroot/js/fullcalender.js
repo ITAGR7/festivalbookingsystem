@@ -12,7 +12,8 @@ export function initializeCalendar(events) {
     //creating a new calendar object and assigning it to a variable, giving it the calendar element and the events as parameters
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: events
+        events: events,
+        selectable: true,
     });
     
     //rendering the calendar
