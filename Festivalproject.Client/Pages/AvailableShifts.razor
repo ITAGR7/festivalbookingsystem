@@ -1,6 +1,12 @@
 @page "/AvailableShifts"
 @using Festivalproject.Shared.Models
+@using Festivalproject.Client.Components
+@using Blazored.Modal
+@using Blazored.Modal.Services
+
+
 @inject HttpClient Http
+@inject IModalService ModalService
 
 
 <h3>AvailableShifts</h3>
@@ -113,5 +119,12 @@
     private void SelectShift(Shifts shift)
     {
         SelectedShift = shift;
+    }
+    
+    private async Task ShiftsDialog(string shiftName)
+    {    
+        var options = new ModalOptions { Size = ModalSize.Small };
+        var dialog = ModalService.Show<ShiftsDialog>("Successfully signed up", options);
+        var result = await dialog.Result;
     }
 }

@@ -1,3 +1,4 @@
+using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Festivalproject.Client.Services;
@@ -19,5 +20,7 @@ builder.Services.AddHttpClient<ILoginService, LoginService>(client =>
 {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
+
+builder.Services.AddBlazoredModal();// tiløjede denne linje for at den kan bruges i program.cs fra dummyShifts og Shifts
 
 await builder.Build().RunAsync();
