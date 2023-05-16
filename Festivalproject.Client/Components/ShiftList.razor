@@ -33,14 +33,12 @@
                                 <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">@shift.ShiftName</td>
                                 <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.StartTime</td>
                                 <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.EndTime</td>
-                                <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">Member</td>
+                                <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">@shift.Description</td>
                                 <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Afmeld<span class="sr-only"></span></a>
                                 </td>
                             </tr>
                             }
-
-                            <!-- More people... -->
                         </tbody>
                     </table>
                 </div>
@@ -51,10 +49,9 @@
 
 @code {
 
-
+    //Parameter passed from Volunteerpage
     [Parameter]
     public List<ShiftRegistration> Shifts { get; set; } = new List<ShiftRegistration>(); 
 
-    [Parameter]
-    public User User{ get; set; } = new User();
+
 }

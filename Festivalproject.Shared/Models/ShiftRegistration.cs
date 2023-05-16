@@ -21,5 +21,8 @@ namespace Festivalproject.Shared.Models
         [BsonElement("endTime")]
         public DateTime EndTime { get; set; }
 
+        [BsonElement("description")]
+        public string Description { get; set; }
+
     }
 }

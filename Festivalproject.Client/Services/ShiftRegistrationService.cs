@@ -22,7 +22,7 @@ namespace Festivalproject.Client.Services
                 Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
             }
-            catch (Exception ex) // Tror også her der var en fejl fordi der blevthrowet ingenting 
+            catch (Exception ex) 
             {
                 Console.WriteLine(ex.Message);
                 throw;
