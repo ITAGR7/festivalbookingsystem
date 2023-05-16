@@ -8,25 +8,37 @@ namespace Festivalproject.Client.Services
 {
     public class ShiftRegistrationService : IShiftRegistrationService
     {
+
+
+
+
         private readonly HttpClient Http;
         public ShiftRegistrationService(HttpClient httpClient)
         {
             this.Http = httpClient;
         }
+
+
+
+
             public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
-        {
-            try
             {
-                //Ændrede også denne til Liste
+                 try
+                {
                 var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"https://localhost:7251/api/ShiftRegistration/{UserId}"); 
                 Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
-            }
-            catch (Exception ex) 
-            {
+                 }
+                 catch (Exception ex) 
+                 {
                 Console.WriteLine(ex.Message);
                 throw;
-            }
-        }
+                 }
+
+             }
+
+
+
+
     }
 }

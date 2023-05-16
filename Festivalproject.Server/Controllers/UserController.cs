@@ -33,7 +33,8 @@ namespace Festivalproject.Server.Controllers
         }
 
 
-        //Her anvender vi et parameter ifm. logind
+        //Using a parameter in the endpoint, which allows for an ID to be passed from client via url, to this endpoint. 
+        //the uri /api/user/123 would then set the id here to 123. 
         [HttpGet("{id}")]
         public User GetUserByObjectId(string id)
         {
@@ -43,32 +44,25 @@ namespace Festivalproject.Server.Controllers
         }
 
 
+        // Using a extension to our endpoint, to distinguish this from other HttpPost calls in the controller. 
+        //
         [HttpPost("login")]
-        public LoginResult GetLoginResult([FromBody] LoginData loginData)
+        public LoginResultDTO GetLoginResult([FromBody] LoginDataDTO loginData)
         {
-            Console.WriteLine(loginData.username);
+            Console.WriteLine(loginData.Username);
             Console.WriteLine("login");
-                var result = UserRepository.GetLoginResult(loginData.username,loginData.password);
+                var result = UserRepository.GetLoginResult(loginData.Username,loginData.Password);
                 return result;
         }
 
 
-        //Denne kunne laves om til en klasse  for sig selv 
-        public class LoginData
-        {
-            public string username { get; set; }
-            public string password { get; set; }
-        }
-
-
-
 
         [HttpPost]
-        public string CreateUser(User user)
+        public User CreateUser(User user)
         {
             //Test of CreateUser on Controller
             UserRepository.CreateUser(user);
-            return user.Id; 
+            return user;
         }
 
 

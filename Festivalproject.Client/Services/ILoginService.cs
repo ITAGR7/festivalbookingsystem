@@ -4,6 +4,6 @@ namespace Festivalproject.Client.Services
 {
     public interface ILoginService
     {
-        public Task<LoginResult> GetLoginResult(string username, string password);   
+        public Task<LoginResultDTO> GetLoginResult(LoginDataDTO loginData);   
     }
 }

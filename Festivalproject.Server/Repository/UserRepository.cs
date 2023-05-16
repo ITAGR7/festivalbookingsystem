@@ -25,7 +25,7 @@ namespace Festivalproject.Server.Repository
 
 
 
-        public LoginResult GetLoginResult(string username, string password)
+        public LoginResultDTO GetLoginResult(string username, string password)
         {
 
             var filter = Builders<User>.Filter.And(
@@ -36,9 +36,9 @@ namespace Festivalproject.Server.Repository
 
             if (result != null)
             {
-                return new LoginResult { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
+                return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
             }
-            return new LoginResult { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
+            return new LoginResultDTO { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
         }
 
 
@@ -61,11 +61,11 @@ namespace Festivalproject.Server.Repository
             return user;
         }
 
-        public string CreateUser(User newUser)
+        public User CreateUser(User newUser)
         {
-
+            Console.WriteLine("Test Create User repo ");
             collection.InsertOne(newUser);
-            return newUser.UserName;
+            return newUser;
 
         }
 

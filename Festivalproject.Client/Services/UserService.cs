@@ -37,9 +37,18 @@ namespace Festivalproject.Client.Services
 
 
 
-        public async void CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            await Http.PostAsJsonAsync<User>("https://localhost:7251/api/user", user);
+           var response = await Http.PostAsJsonAsync<User>("https://localhost:7251/api/user", user);
+            if (response.IsSuccessStatusCode)
+            {
+                var newUser = await response.Content.ReadFromJsonAsync<User>();
+
+                return newUser;
+            }
+
+            //Message appears in console 
+            throw new Exception("Oprettelse af ny bruger fejlet");
 
         }
 

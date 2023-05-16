@@ -2,10 +2,14 @@
 @using Festivalproject.Shared.Models;
 @using Festivalproject.Client.Services;
 @using Microsoft.AspNetCore.Components.Forms;
+@using Festivalproject.Client.Components;
+@using Blazored.Modal.Services;
+
 @inject HttpClient Http;
+@inject NavigationManager navigationManager;
 @inject ILoginService loginService;
 @inject IUserService userService;
-@inject NavigationManager navigationManager
+@inject IModalService modalService;
 
 
 <!-- Implementing a login form with two inputfields. Styled with tailwind css.
@@ -54,13 +58,11 @@ The form binds inputvalue to local variables, which then are passed to be valida
             <p class="text-xl text-center text-rose-400">@message</p>
             <p class="text-xl text-center text-rose-400">@message2</p>
         </div>
-
     </div>
-
-
-
-
 </div>
+
+
+
 
 
 
@@ -74,11 +76,11 @@ The form binds inputvalue to local variables, which then are passed to be valida
     private string id = "";
     private string message = "";
     private string message2 = "";
+    private LoginDataDTO loginData = new LoginDataDTO();
 
 
 
-
-    // Mehtod called by click on login button. Method checks if input fields are empty, and returns a "error" message. If not empty
+    // Mehtod called by click on login button. Method checks if input fields are empty, and returns an "error" message. If not empty
     //...method proceeds to call Login() method. 
     private async Task Submit()
     {
@@ -97,12 +99,18 @@ The form binds inputvalue to local variables, which then are passed to be valida
 
     }
 
+
+
+
+
     //Method that fetches a Loginresult object, and checks result for null value. Based on response method redirects user to 
     //.. new page,based on usertype (coordinator or volunteer), using injected nagivationmanager 
     public async Task Login()
     {
 
-        var result= await loginService.GetLoginResult(yourUsername, yourPassword);
+        loginData.Username = yourUsername;
+        loginData.Password = yourPassword;
+        var result= await loginService.GetLoginResult(loginData);
 
 
         if (result != null && result.UserType == "Volunteer") 
@@ -138,6 +146,6 @@ The form binds inputvalue to local variables, which then are passed to be valida
         navigationManager.NavigateTo("/registrer");
     }
 
-
+   
 
 }
