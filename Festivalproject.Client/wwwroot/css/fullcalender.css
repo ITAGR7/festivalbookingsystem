@@ -1,0 +1,10 @@
+/* Making grids white */
+
+.fc-theme-standard td, .fc-theme-standard th, .fc-theme-standard, .fc-scrollgrid {
+    border-color: #F5F5F5 !important;
+}
+
+.fc .fc-daygrid-week-number {
+    background-color: transparent;
+    color: #E0E0E0;
+}
