@@ -1,9 +1,31 @@
 <div>
     <ModalContent>
         <h3>@ModalTitle</h3>
+        <h3>@ModalDescription</h3>
+        <h3>@ModalDuration</h3>
+        <h3>@ModalStart</h3>
+        <h3>@ModalEnd</h3>
+        <h3>@ModalCapacity</h3>
+        <div class="parent">
+        <div class="div1"> </div>
+        <div class="div2"> </div>
+        <div class="div3"> </div>
+        <div class="div4"> </div>
+        <div class="div5"> </div>
+        <div class="div6"> </div>
+        </div>
     </ModalContent>
 </div>
 
 @code {
     [Parameter] public string ModalTitle { get; set; }
+    [Parameter] public string ModalStart { get; set; }
+    [Parameter] public string ModalEnd { get; set; }
+    [Parameter] public string ModalDuration { get; set; }
+    [Parameter] public string ModalDescription { get; set; }
+    [Parameter] public string ModalCapacity { get; set; }
+    
+    
+    
+    
 }

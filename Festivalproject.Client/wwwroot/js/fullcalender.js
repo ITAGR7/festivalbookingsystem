@@ -35,7 +35,12 @@ export function initializeCalendar(events, dotNetReference) {
         },
         eventClick: function(info) {
             // Use the dotNetReference to invoke the C# method
-            dotNetReference.invokeMethodAsync('ShiftsDialog', info.event.title);
+            dotNetReference.invokeMethodAsync('ShiftsDialog', info.event.title,
+                info.event.extendedProps.description,
+                info.event.extendedProps.capacity,
+                info.event.duration,
+                info.event.start,
+                info.event.end);
         },
         eventTimeFormat: { // like '14:30:00'
             hour: '2-digit',
