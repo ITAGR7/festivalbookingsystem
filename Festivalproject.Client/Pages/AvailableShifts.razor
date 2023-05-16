@@ -32,7 +32,10 @@
     //Setting the properties of the event object -> ex. title = name of the shift...
             title = s.Name,
             start = s.startTime.ToString("s"),
-            end = s.endTime.ToString("s")
+            end = s.endTime.ToString("s"),
+            description = s.Description,
+            capacity = Convert.ToString(s.Capacity),
+            duration = Convert.ToString(s.Duration),
     //to array conversion
         }).ToArray();
 
@@ -42,11 +45,16 @@
     }
     
     [JSInvokable]
-    public async Task ShiftsDialog(string shiftName)
+    public async Task ShiftsDialog(string shiftName, string shiftDescription, string shiftCapacity, string shiftDuration, string shiftStart, string shiftEnd)
     {
-        var options = new ModalOptions { Size = ModalSize.Small };
+        var options = new ModalOptions { Size = ModalSize.Medium };
         var parameters = new ModalParameters();
         parameters.Add("ModalTitle", shiftName);
+        parameters.Add("ModalDescription", shiftDescription);
+        parameters.Add("ModalCapacity", shiftCapacity);
+        parameters.Add("ModalDuration", shiftDuration);
+        parameters.Add("ModalStart", shiftStart);
+        parameters.Add("ModalEnd", shiftEnd);
 
         var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
         var result = await dialog.Result;
