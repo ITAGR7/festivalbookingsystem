@@ -164,10 +164,13 @@ else
 
 
 <div>   
-     <h4 class="mt-40 text-2xl">Dine vagter </h4>
+    <h4 class="mt-40 text-2xl">Dine vagter </h4>
    
 <!-- To avoid overabundance of code in this razorpage, we apply use of components -->
-<ShiftList Shifts=ShiftRegistrations/>
+<!-- Shiftlist = name of component, Shifts = List defined in component. Setting Shifts to equal this pages ShiftRegistrations-->
+<!-- By doing this we are passing the list from here, as parameter, to the component page --> 
+
+    <ShiftList Shifts=ShiftRegistrations/>
 
 </div>
 </div>
