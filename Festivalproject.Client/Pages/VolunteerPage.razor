@@ -46,13 +46,15 @@
   </div>
 </div>
 
-<div class="md:container md:mx-auto">
-<h4 class="mt-36 text-3xl"> Velkommen! </h4>
+<div class="sm:container sm:mx-auto">
+<h4 class="mt-24 text-3xl"> Velkommen! </h4>
 <h2 class="mt-8  text-lg text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</h2> 
 
 <div class="grid grid-cols-2"></div> 
 
-<h4 class="mt-36 text-2xl"> Dine oplysninger </h4>
+<h4 class="mt-24  mb-16 text-2xl"> Dine oplysninger </h4>
+    <button type="button" @onclick="Edit" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger oplysninger</button>
+
 @if(!EditMode){
 
 
@@ -86,17 +88,17 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">@user.FirstName</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
+                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                           @*<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
  
-                            </td>
+                            </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -166,6 +168,7 @@ else
    
 <!-- To avoid overabundance of code in this razorpage, we apply use of components -->
 <ShiftList Shifts=ShiftRegistrations/>
+
 </div>
 </div>
    

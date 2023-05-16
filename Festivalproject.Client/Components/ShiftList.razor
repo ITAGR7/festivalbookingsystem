@@ -1,30 +1,6 @@
 ﻿@using System.Collections.Generic
 @using Festivalproject.Shared.Models
-@inherits ComponentBase;
-
-@*<h3>ShiftList</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var shift in Shifts)
-        {
-            <tr>
-                <td>@shift.StartTime</td>
-                <td>@shift.EndTime</td>
-                <td>@shift.ShiftName</td>
-            </tr>
-        }
-    </tbody>
-</table>
-*@
-
-
+@inherits ComponentBase;//Baseclass for components 
 
 
     <div class="px-4 sm:px-6 lg:px-8">
