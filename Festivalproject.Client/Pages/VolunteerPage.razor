@@ -45,16 +45,15 @@
 </div>
 
 <div class="sm:container sm:mx-auto">
-<h4 class="mt-24 text-3xl"> Velkommen! </h4>
-<h2 class="mt-8  text-lg text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</h2> 
-
+    <h4 class="mt-24 text-3xl"> Velkommen! </h4>
+    <h2 class="mt-8  text-lg text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</h2> 
 <div class="grid grid-cols-2"></div> 
 
 <h4 class="mt-24  mb-16 text-2xl"> Dine oplysninger </h4>
    
 
 
-<!-- Implementing a table of userinformation. We are using an If statement as a switch to display either 1) static data 2) dynamic editable data -->
+<!-- Adding a table for displyaing userinformation. We are using an If statement as a switch to display either 1) static data  or 2) dynamic editable data using inputfields -->
 
 @if(!EditMode){
 <div class="px-4 sm:px-6 lg:px-8">
@@ -162,15 +161,17 @@ else
 
     <div class="mb-40">   
         <h4 class="mt-36 text-2xl">Dine vagter </h4>
-<!-- To avoid overabundance of code in this razorpage, we apply use of components/partial view -->
+<!-- To avoid overabundance of code in this razorpage, we apply use of components/partial view. See components folder on client  -->
         <ShiftList Shifts=ShiftRegistrations/>
     </div>
+
+    <button type="button" @onclick="SeeAvailableShifts" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se ledige vagter</button>
 </div>
    
 
 @code {
 
-
+    // Passing the userobjects ObjectId(BSON) from loginpage to be able to fetch userinformation and shiftregistrations by userId
     [Parameter]
     [SupplyParameterFromQuery]
     public string? id { get; set; }
@@ -191,8 +192,8 @@ else
         Console.WriteLine(ShiftRegistrations.Count());
     }
 
-    
 
+    //Method that sets the binded inputvalues for userUpdated to user, which is passed to service in "Save" method 
     private void Edit()
     {
 
@@ -212,6 +213,8 @@ else
 
     }
 
+    //Method that calls the HttpPut method which updates the changed fields in user-document in the database
+    //..and sets user to the updated userObject returned by GetUserByObjectId - method, så the updated information is displayed 
     private async Task Save()
     {
         await userService.UpdateUser(userUpdated);
@@ -220,8 +223,11 @@ else
 
     }
 
+    private void SeeAvailableShifts()
+    {
+        navigationManager.NavigateTo("/availableshifts");
+    }
 
-    
       
     
 

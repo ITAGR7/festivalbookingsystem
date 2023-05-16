@@ -8,6 +8,9 @@
 @inject NavigationManager navigationManager
 
 
+<!-- Implementing a login form with two inputfields. Styled with tailwind css.
+The form binds inputvalue to local variables, which then are passed to be validated via Login() method
+-->
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Log ind</h2>
@@ -48,13 +51,15 @@
                     </div>
                 </div>
             </div>
+            <p class="text-xl text-center text-rose-400">@message</p>
+            <p class="text-xl text-center text-rose-400">@message2</p>
         </div>
 
     </div>
 
 
 
-    <p class="text-xl text-center text-rose-400">@message</p>
+
 </div>
 
 
@@ -68,12 +73,14 @@
     private string yourPassword = "";
     private string id = "";
     private string message = "";
+    private string message2 = "";
 
 
 
 
-
-    private void Submit()
+    // Mehtod called by click on login button. Method checks if input fields are empty, and returns a "error" message. If not empty
+    //...method proceeds to call Login() method. 
+    private async Task Submit()
     {
 
         if (string.IsNullOrEmpty(yourUsername) || string.IsNullOrEmpty(yourPassword))
@@ -84,29 +91,28 @@
         }
         else
         {
-            Login();
+            message = "";
+            await Login();
         }
 
-          
-        
     }
 
-
+    //Method that fetches a Loginresult object, and checks result for null value. Based on response method redirects user to 
+    //.. new page,based on usertype (coordinator or volunteer), using injected nagivationmanager 
     public async Task Login()
     {
 
         var result= await loginService.GetLoginResult(yourUsername, yourPassword);
 
 
-
         if (result != null && result.UserType == "Volunteer") 
         {
 
-   
+
             var id = result.ObjectId;
             navigationManager.NavigateTo("/volunteer?id=" + id);
 
-           
+
         }
         else if (result != null && result.UserType == "Coordinator")
         {
@@ -114,10 +120,11 @@
 
             var id = result.ObjectId;
             navigationManager.NavigateTo("/coordinator?id=" + id);
-           
+
         }
         else
         {
+            message = "Brugernavn eller kodeord er forkert eller findes ikke.";
             yourUsername = "";
             yourPassword = ""; 
             id = " ";
@@ -125,7 +132,7 @@
 
     }
 
-
+    //Method that redirects user to a signup-page on buttonclick using nagivationmanager 
     public async Task RegistrerUser()
     {
         navigationManager.NavigateTo("/registrer");
