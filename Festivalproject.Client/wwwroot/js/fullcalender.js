@@ -9,12 +9,20 @@ export function initializeCalendar(events, dotNetReference) {
     //grabbing the calendar element from the DOM and assigning it to a variable
     var calendarEl = document.getElementById('calendar');
     
+    
     //creating a new calendar object and assigning it to a variable, giving it the calendar element and the events as parameters
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        timezone: 'local',
+        dayMaxEvents: true,
+        themeSystem: 'bootstrap5',
         initialView: 'dayGridMonth',
+        weekNumbers: true,
         events: events,
-        selectable: true,
-        selectMirror: true,
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek'
+        },
         eventMouseEnter: function( mouseEnterInfo ) { 
             //Color needs to change to a lighter color when mouse enters
             mouseEnterInfo.el.style.backgroundColor = 'lightblue';
@@ -29,6 +37,12 @@ export function initializeCalendar(events, dotNetReference) {
             // Use the dotNetReference to invoke the C# method
             dotNetReference.invokeMethodAsync('ShiftsDialog', info.event.title);
         },
+        eventTimeFormat: { // like '14:30:00'
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: false,
+            hour12: false,
+        }
 
     });
     

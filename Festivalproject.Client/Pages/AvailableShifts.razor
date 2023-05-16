@@ -1,7 +1,6 @@
 @page "/AvailableShifts"
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Components
-@using Blazored.Modal
 @using Blazored.Modal.Services
 
 
@@ -13,7 +12,6 @@
 <h3>AvailableShifts</h3>
 
 <div id="calendar"></div>
-
 
 @code {
     
@@ -32,7 +30,8 @@
     //Setting the properties of the event object -> ex. title = name of the shift...
             title = s.Name,
             start = s.startTime.ToString("s"),
-            end = s.endTime.ToString("s")
+            end = s.endTime.ToString("s"),
+            description = s.Description,
     //to array conversion
         }).ToArray();
 
