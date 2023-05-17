@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IShifts, ShiftRepository>();
+builder.Services.AddSingleton<IShift, ShiftRepository>();
 //Adding a service implementing iuser, and userrepository 
 builder.Services.AddSingleton<IUser, UserRepository>();
 builder.Services.AddSingleton<IShiftRegistration, ShiftRegistrationRepository>();
