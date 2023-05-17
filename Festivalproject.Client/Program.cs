@@ -25,6 +25,7 @@ builder.Services.AddHttpClient<IShiftRegistrationService, ShiftRegistrationServi
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
+
 builder.Services.AddBlazoredModal();// tiløjede denne linje for at den kan bruges i program.cs fra dummyShifts og Shifts
 
 await builder.Build().RunAsync();

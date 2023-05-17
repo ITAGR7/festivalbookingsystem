@@ -93,9 +93,8 @@
             </div>
             <br />
         </div>
-    <button type="submit" @onclick="HandleValidSubmit" >Opret bruger</button>
+    <button type="submit">Opret bruger</button>
 
-@*    <button onclick="@HandleValidSubmit()" >Submit</button>*@
     </EditForm>
 
 
@@ -122,8 +121,12 @@
 
     public async Task HandleValidSubmit()
     {
-        await CreateUser(newUser);
-        newUser = new User();
+        if (aEditContext.Validate())
+        {
+            await CreateUser(newUser);
+            newUser = new User();
+        }
+          
     }
 
 
@@ -131,20 +134,15 @@
     private async Task CreateUser(User newUser)
     {
 
-        try
-        {
+        
             // Call your UserService or Repository to add the user to your database
             await userService.CreateUser(newUser);
 
             // Optionally, display a success message or redirect the user to a success page
             Console.WriteLine("User added successfully!");
             messageSuccess = "User added successfully!";
-        }
-        catch (Exception ex)
-        {
-            // Handle any exceptions that occur while adding the user
-            Console.WriteLine("An error occurred while adding the user: " + ex.Message);
-        }
+        
+       
     }
 
 
