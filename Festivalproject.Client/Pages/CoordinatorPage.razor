@@ -1,8 +1,11 @@
 ﻿@page "/coordinator"
 @using Festivalproject.Shared.Models;
 @using Festivalproject.Client.Services;
+@using Festivalproject.Client.Components;
 @inject HttpClient Http;
 @inject IUserService userService;
+@inject IShiftService shiftService;
+@inject NavigationManager navManager; 
 
 <h3>CoordinatorPage</h3>
 
@@ -71,12 +74,13 @@
             <td>@user.PhoneNumber</td>
 
         </tr>
-
     </tbody>
 </table>
 
 
 <h3> Alle vagter.... </h3>
+
+ <ShiftListCoordinator Shifts=shiftList/>
 
 
 
@@ -91,13 +95,19 @@
     private User user { get; set; } = new User();
 
 
-
+    private List<Shift> shiftList {get; set; } = new List<Shift>(); 
 
     protected override async Task OnInitializedAsync()
     {
 
         user = await userService.GetUserByObjectId(id);
+        shiftList = await shiftService.GetAllShifts();
 
     }
+
+
+    
+
+  
 
 }

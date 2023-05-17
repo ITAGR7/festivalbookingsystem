@@ -5,7 +5,7 @@ namespace Festivalproject.Shared.Models
 {
     // Test udføres først med at der fås fat i et objekt id.
     [BsonIgnoreExtraElements]
-    public class Shifts
+    public class Shift
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

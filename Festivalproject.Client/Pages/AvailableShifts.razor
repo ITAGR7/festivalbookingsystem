@@ -1,4 +1,4 @@
-@page "/AvailableShifts"
+@page "/availableshifts"
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Components
 @using Blazored.Modal
@@ -17,11 +17,11 @@
 
 @code {
     
-    private List<Shifts> AvailableShift { get; set; } = new List<Shifts>();
+    private List<Shift> AvailableShift { get; set; } = new List<Shift>();
 
     protected override async Task OnInitializedAsync()
     {
-        AvailableShift = await Http.GetFromJsonAsync<List<Shifts>>("https://localhost:7251/api/Shifts/false");
+        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shifts/false");
         
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
