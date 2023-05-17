@@ -6,9 +6,9 @@ namespace Festivalproject.Server.Interface
     {
 
         public List<User> GetAllUsers();
-        public string CreateUser(User newUser);
+        public User CreateUser(User newUser);
 
-        public LoginResult GetLoginResult(string username, string password);
+        public LoginResultDTO GetLoginResult(string username, string password);
 
         public User GetUserByObjectId(string id); 
 

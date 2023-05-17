@@ -21,8 +21,9 @@ namespace Festivalproject.Server.Controllers
         [HttpGet("{UserId}")]
         public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
         {
-            List<ShiftRegistration> shiftregistration = ShiftRegistrationRepo.GetRegisteredShiftsById(UserId);
-            return shiftregistration;
+            var result = ShiftRegistrationRepo.GetRegisteredShiftsById(UserId);
+            Console.WriteLine("Controller: Get shifts : Antal shifts fundet " + result.Count());
+            return result; 
         }
 
 

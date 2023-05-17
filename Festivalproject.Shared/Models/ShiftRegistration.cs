@@ -7,19 +7,22 @@ namespace Festivalproject.Shared.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string id { get; set; } = "";
+        public string Id { get; set; } = "";
 
-        [BsonElement("UserId")]
+        [BsonElement("userId")]
         public string UserId { get; set; } = "";
 
-        [BsonElement("Username")]
-        public string Username { get; set; } = "";
+        [BsonElement("shiftName")]
+        public string ShiftName { get; set; } = "";
 
         [BsonElement("startTime")]
-        public DateTime startTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [BsonElement("endTime")]
-        public DateTime endTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        [BsonElement("description")]
+        public string Description { get; set; }
 
     }
 }

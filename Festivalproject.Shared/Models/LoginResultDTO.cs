@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Festivalproject.Shared.Models
 {
-    public class LoginResult
+    public class LoginResultDTO
     {
 
         public bool IsValid { get; set; }
+
         public string UserType { get; set; }
 
         public string ObjectId { get; set; }

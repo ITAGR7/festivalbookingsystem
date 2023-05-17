@@ -23,7 +23,7 @@ namespace Festivalproject.Shared.Models
         public bool Status { get; set; }
 
         [BsonElement("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = "";
 
         [BsonElement("capacity")]
         public int Capacity { get; set; }
