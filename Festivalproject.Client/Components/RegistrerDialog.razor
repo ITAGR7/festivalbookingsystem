@@ -114,8 +114,12 @@
 
 @code {
 
-    [Parameter] public string ModalTitle { get; set; }
-    private User newUser { get; set; } = new User();
+    [Parameter] 
+    public string ModalTitle { get; set; }
+
+    [Parameter]
+    public User newUser { get; set; } = new User();
+
     private EditContext aEditContext;
    
 
