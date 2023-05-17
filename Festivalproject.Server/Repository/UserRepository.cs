@@ -63,19 +63,33 @@ namespace Festivalproject.Server.Repository
 
         public User CreateUser(User newUser)
         {
-            Console.WriteLine("Test Create User repo ");
-            collection.InsertOne(newUser);
-            return newUser;
+            
+
+            var userExist = collection.Find(u => u.UserName == newUser.UserName).FirstOrDefault();
+
+            if(userExist!= null) 
+            {
+                throw new Exception("Brugernavn eksisterer allerede");
+            }
+            else
+            {
+             collection.InsertOne(newUser);
+             return newUser;
+
+            }
+           
 
         }
+
+
+
+
 
         // Metode sat til task bool, fordi den er async, fordi den skal returnere resultat af 
         //..updateoneasync metoden (validering)
         public async Task<bool> UpdateUser(User userUpdated)
         {
 
-
-            // Her burde vi måske anvende user.ID fremfor username? I så fald skal det opdateres på client også
             var filter = Builders<User>.Filter.Eq(u => u.Id, userUpdated.Id);
 
             var update = Builders<User>.Update

@@ -18,45 +18,48 @@ namespace Festivalproject.Shared.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = "";
 
-        [Required]
+        [Required(ErrorMessage = "Et fornavn er påkrævet")]
         [BsonElement("firstName")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Et efternavn er påkrævet")]
         [BsonElement("surName")]
         public string SurName { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Et postnummer er påkrævet")]
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "Postnumbber skal være præcis 4 cifre.")]
         [BsonElement("zip")]
          public int Zip{ get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "En by er påkrævet")]
         [BsonElement("city")]
         public string City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "E telefonnummer er påkrævet")]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "Telefonnummeret skal være præcis 8 cifre.")]
         [BsonElement("phone")]
         public int PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En dresse er påkrævet")]
         [BsonElement("address")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En emailadresse er påkrævet")]
+        [EmailAddress]
         [BsonElement("email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Et brugernavn er påkrævet")]
         [BsonElement("userName")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Et kodeord er påkrævet")]
         [BsonElement("password")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = " er påkrævet")]
         [BsonElement("userType")]
         public string UserType { get; set; }
 

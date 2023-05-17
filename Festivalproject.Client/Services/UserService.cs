@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Net;
 using System.Net.Http.Json;
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Components;
@@ -40,16 +41,21 @@ namespace Festivalproject.Client.Services
         public async Task<User> CreateUser(User user)
         {
            var response = await Http.PostAsJsonAsync<User>("https://localhost:7251/api/user", user);
+ 
 
             if (response.IsSuccessStatusCode)
             {
                 var newUser = await response.Content.ReadFromJsonAsync<User>();
-
                 return newUser;
             }
+            else if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorMessage);
+            }
 
-            //Message appears in console 
-            throw new Exception("Oprettelse af ny bruger fejlet");
+            throw new Exception(response.StatusCode.ToString());
+
 
         }
 
