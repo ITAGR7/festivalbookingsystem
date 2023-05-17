@@ -2,9 +2,9 @@
 
 namespace Festivalproject.Server.Interface
 {
-    public interface IShifts
+    public interface IShift
     {
-        List<Shifts> GetAllShifts();
-        List<Shifts> GetShiftsByStatus(bool status);
+        List<Shift> GetAllShifts();
+        List<Shift> GetShiftsByStatus(bool status);
     }
 }

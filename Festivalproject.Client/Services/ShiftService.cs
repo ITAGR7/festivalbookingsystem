@@ -20,24 +20,24 @@ namespace Festivalproject.Client.Services
 
 
 
-        public async Task<List<Shifts>> GetAllShifts()
+        public async Task<List<Shift>> GetAllShifts()
         {
-            return await Http.GetFromJsonAsync<List<Shifts>>("https://localhost:7251/api/shift");
+            return await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/shift");
         }
 
-        public async void CreateShift(Shifts shift)
+        public async void CreateShift(Shift newShift)
             {
-                await Http.PostAsJsonAsync<Shifts>("https://localhost:7251/api/shift", shift);
+                await Http.PostAsJsonAsync<Shift>("https://localhost:7251/api/shift", newShift);
 
             }
 
 
 
 
-            public async Task UpdateShift(Shifts shiftUpdate)
+            public async Task UpdateShift(Shift shiftUpdate)
             {
                 Console.WriteLine(shiftUpdate.Name.ToString());
-                await Http.PutAsJsonAsync<Shifts>("https://localhost:7251/api/shift", shiftUpdate);
+                await Http.PutAsJsonAsync<Shift>("https://localhost:7251/api/shift", shiftUpdate);
             }
 
 
