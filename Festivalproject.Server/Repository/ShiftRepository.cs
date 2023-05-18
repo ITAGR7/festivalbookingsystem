@@ -45,7 +45,10 @@ namespace Festivalproject.Server.Repository
               .Set(u => u.Name, shiftUpdated.Name)
               .Set(u => u.startTime, shiftUpdated.startTime)
               .Set(u => u.endTime, shiftUpdated.endTime)
-              .Set(u => u.Description, shiftUpdated.Description);
+              .Set(u => u.Description, shiftUpdated.Description)
+              .Set(u => u.Capacity, shiftUpdated.Capacity)
+              .Set(u => u.Duration, shiftUpdated.Duration)
+              .Set(u => u.ShiftType, shiftUpdated.ShiftType);
 
             var result = await collection.UpdateOneAsync(filter, update);
 
