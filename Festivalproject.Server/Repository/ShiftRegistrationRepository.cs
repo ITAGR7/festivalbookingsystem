@@ -24,8 +24,26 @@ namespace Festivalproject.Server.Repository
 
         public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
         {
-            //return await collection.Find(i => true).ToListAsync();
-            return collection.Find(new BsonDocument()).ToList();
+
+            var filter = Builders<ShiftRegistration>.Filter.Eq("userId", UserId);
+            var result = collection.Find(filter).ToList();
+            return result;
+
         }
-}
+
+
+
+        // Id anvendes ikke i denne og der manglede et filter 
+
+        //public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+        //{
+        //    //return await collection.Find(i => true).ToListAsync();
+        //   
+
+
+        //    var result = collection.Find(new BsonDocument()).ToList();
+        //    Console.WriteLine("Test Get registered" + result.Count);
+        //    return result; 
+        //}
+    }
 }

@@ -36,4 +36,8 @@
       <None Remove="Pages\AvailableShifts.razor.js" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Shared\Views\" />
+    </ItemGroup>
+
 </Project>

@@ -27,12 +27,12 @@
 <h3>Test</h3>
 
 @code {
-    private List<Shifts> shifts { get; set; } = new List<Shifts>();
+    private List<Shift> shifts { get; set; } = new List<Shift>();
 
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("Get shift from client ");
-        shifts = await Http.GetFromJsonAsync<List<Shifts>>("https://localhost:7226/api/Shifts");
+        shifts = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7226/api/Shifts");
 
 
 

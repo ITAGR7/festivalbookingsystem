@@ -5,18 +5,18 @@ namespace Festivalproject.Server.Interface
     public interface IUser
     {
 
-        public List<User> GetAllUsers();
-        public string CreateUser(User newUser);
+        List<User> GetAllUsers();
+        User CreateUser(User newUser);
 
-        public LoginResult GetLoginResult(string username, string password);
+        LoginResultDTO GetLoginResult(string username, string password);
 
-        public User GetUserByObjectId(string id); 
+        User GetUserByObjectId(string id); 
 
         //int PostUser(User user);
 
         //void DeleteUser(int userid);
 
-        public Task<bool> UpdateUser(User userUpdated);
+        Task<bool> UpdateUser(User userUpdated);
 
     }
 

@@ -16,21 +16,21 @@ namespace Festivalproject.Client.Services
             this.Http = httpClient;
         }
 
-        public async Task<LoginResult> GetLoginResult(string username, string password)
+        //Method that uses a HttpPost to pass the loginData object to the database. By using a post, versus using a get, we make sure sensitive data is not passed 
+        //...uneccesseraly from database to client 
+        public async Task<LoginResultDTO> GetLoginResult(LoginDataDTO loginData)
         {
            
-            var requestBody = new { username, password }; //Når man sender som requestbody, vises ikke parametrene i url = mere sikkert 
-
-            // Vi anvender httPost fremfor httpGet, da dette ikke returnerer unødvendig data, som vi ikke vil have synlig på clienten 
-            var response = await Http.PostAsJsonAsync($"https://localhost:7251/api/user/login", requestBody);
+            var response = await Http.PostAsJsonAsync($"https://localhost:7251/api/user/login", loginData);
 
             if (response.IsSuccessStatusCode)
             {
-                var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
+                var loginResult = await response.Content.ReadFromJsonAsync<LoginResultDTO>();
 
                 return loginResult;
             }
 
+            //Message appears in console 
             throw new Exception("Log ind lykkedes ikke. Passord eller bruger findes ikke ");
 
 

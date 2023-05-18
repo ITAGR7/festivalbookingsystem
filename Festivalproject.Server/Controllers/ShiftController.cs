@@ -4,7 +4,7 @@ using Festivalproject.Shared.Models;
 
 namespace Festivalproject.Server.Controllers
 {
-    [Route("api/Shifts")]
+    [Route("api/shift")]
     [ApiController]
     public class ShiftsController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace Festivalproject.Server.Controllers
         }
 
         [HttpGet]
-        public List<Shifts> GetAllShifts()
+        public List<Shift> GetAllShifts()
         {
             Console.WriteLine("Get all shifts (Controller) ");
 
@@ -25,11 +25,18 @@ namespace Festivalproject.Server.Controllers
         }
 
         [HttpGet("{status}")]
-        public List<Shifts> GetShiftsByStatus(bool status)
+        public List<Shift> GetShiftsByStatus(bool status)
         {
             Console.WriteLine("Get shifts by status (Controller) ");
 
             return ShiftRepository.GetShiftsByStatus(status);
+        }
+
+        [HttpPut]
+        public Shift UpdateShift(Shift shiftUpdated)
+        {
+
+            return ShiftRepository.UpdateShift(shiftUpdated);
         }
     }
 }

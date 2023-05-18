@@ -25,7 +25,7 @@ namespace Festivalproject.Server.Repository
 
 
 
-        public LoginResult GetLoginResult(string username, string password)
+        public LoginResultDTO GetLoginResult(string username, string password)
         {
 
             var filter = Builders<User>.Filter.And(
@@ -36,9 +36,9 @@ namespace Festivalproject.Server.Repository
 
             if (result != null)
             {
-                return new LoginResult { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
+                return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
             }
-            return new LoginResult { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
+            return new LoginResultDTO { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
         }
 
 
@@ -61,21 +61,35 @@ namespace Festivalproject.Server.Repository
             return user;
         }
 
-        public string CreateUser(User newUser)
+        public User CreateUser(User newUser)
         {
+            
 
-            collection.InsertOne(newUser);
-            return newUser.UserName;
+            var userExist = collection.Find(u => u.UserName == newUser.UserName).FirstOrDefault();
+
+            if(userExist!= null) 
+            {
+                throw new Exception("Brugernavn eksisterer allerede");
+            }
+            else
+            {
+             collection.InsertOne(newUser);
+             return newUser;
+
+            }
+           
 
         }
+
+
+
+
 
         // Metode sat til task bool, fordi den er async, fordi den skal returnere resultat af 
         //..updateoneasync metoden (validering)
         public async Task<bool> UpdateUser(User userUpdated)
         {
 
-
-            // Her burde vi måske anvende user.ID fremfor username? I så fald skal det opdateres på client også
             var filter = Builders<User>.Filter.Eq(u => u.Id, userUpdated.Id);
 
             var update = Builders<User>.Update

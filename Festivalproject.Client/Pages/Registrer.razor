@@ -1,0 +1,196 @@
+﻿@page "/registrer"
+
+@using Festivalproject.Shared.Models;
+@using Festivalproject.Client.Services;
+@using System.ComponentModel.DataAnnotations;
+@using Microsoft.AspNetCore.Components.Forms;
+@inject IUserService userService;
+@inject NavigationManager navManager;
+
+
+<div> 
+    <EditForm Model="@newUser" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="index container">
+            <div class="mt-64 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+                <div class="sm:col-span-2">
+                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Fornavn</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="newUser.FirstName" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control form-control" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Efternavn</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="newUser.SurName" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control form-control" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="sm:col-span-2">
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email adresse</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="newUser.Email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                    </div>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900">Telefonnummer</label>
+                    <div class="mt-2">
+                        <InputNumber TValue="int" @bind-Value="newUser.PhoneNumber" id="phoneNumber" name="phoneNumber" type="email" autocomplete="phoneNumber" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                    </div>
+                </div>
+
+
+                <div class="col-span-3">
+                    <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Gade/Vej</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="newUser.Address" type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2 sm:col-start-1 w-2/3 ">
+                    <label for="city" class="block text-sm font-medium leading-6 text-gray-900">By</label>
+                    <div class="mt-2">
+                        <InputText @bind-Value="newUser.City" type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                    </div>
+                </div>
+                <div class="sm:col-span-2 w-2/3 ">
+                    <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Postnummer</label>
+                    <div class="mt-2">
+                        <InputNumber TValue="int" @bind-Value="newUser.Zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                    </div>
+                </div>
+            <div class="sm:col-span-3 w-2/3">
+                <label for="userType" class="block text-sm font-medium leading-6 text-gray-900">BrugerType</label>
+                <div class="mt-2">
+                    <InputSelect @bind-Value="newUser.UserType" id="userType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="">Vælg brugertype</option>
+                        <option value="Volunteer">Frivillig</option>
+                        <option value="Coordinator">Koordinator</option>
+                    </InputSelect>
+                </div>
+            </div>
+
+                <br />
+                <br />
+                   
+                    <div class="sm:col-span-3 w-2/3  ">
+                        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Brugernavn</label>
+                        <div class="mt-2">
+                            <InputText @bind-Value="newUser.UserName" type="text" name="username" id="username" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        <p class="text-rose-500">@resultMessage</p>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3 w-2/3">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Kodeord</label>
+                        <div class="mt-2">
+                            <InputText @bind-Value="newUser.Password" type="text" name="password" id="password" autocomplete="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>
+                
+            <button type="submit"  class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opret bruger</button>
+            <button @onclick="GoToLogin" class="flex  justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tilbage til login</button>
+
+            </div>
+            <br />
+        </div>
+    </EditForm>
+</div>
+
+@if(showValidIcon)
+{
+   
+        <div class="gif-overlay">
+            <img src="/check.gif" alt="Success GIF" class="gif-image" />
+        </div>
+    
+}
+
+
+
+
+
+@code {
+
+    private User newUser = new User(); 
+    private EditContext aEditContext { get; set;}
+    private string resultMessage { get; set; }
+    private bool showValidIcon; 
+    private bool userCreated = false; 
+
+
+
+
+    protected override void OnInitialized()
+    {
+        aEditContext = new EditContext(newUser);
+    }
+
+
+
+
+
+    public async Task HandleValidSubmit()
+    {
+
+        if (aEditContext.Validate())
+        {
+
+            await CreateUser(newUser);
+            if(userCreated == true)
+            {
+
+                newUser = new User();
+
+
+            }
+
+
+        }
+
+    }
+
+
+    private async Task CreateUser(User newUser)
+    {
+
+        try
+        {
+            // Call your UserService or Repository to add the user to your database
+            var createdUser = await userService.CreateUser(newUser);
+
+            if (createdUser != null)
+            {
+
+                showValidIcon = true;
+                StateHasChanged(); // Force a re-render to show the GIF
+
+                await Task.Delay(2100);
+                showValidIcon = false;
+                StateHasChanged(); // Force a re-render to hide the GIF
+
+                Console.WriteLine("User added successfully!");
+                resultMessage = "Bruger oprettet";
+                userCreated = true;
+
+
+
+            }
+        }
+        catch (Exception ex)
+        {
+             resultMessage = ex.Message;
+            Console.WriteLine("Error: " + ex.Message);
+        }
+
+    }
+
+
+
+    public void GoToLogin()
+    {
+        navManager.NavigateTo("/signin");
+    }
+}
