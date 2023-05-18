@@ -46,18 +46,5 @@ namespace Festivalproject.Server.Repository
             return result.ModifiedCount > 0; 
         }
 
-
-        // Id anvendes ikke i denne og der manglede et filter 
-
-        //public List<ShiftRegistration> GetRegisteredShiftsById(Shift shift)
-        //{
-        //    //return await collection.Find(i => true).ToListAsync();
-        //    // check for match between shift.Shiftid and shiftRegistration.ShiftId 
-
-
-        //    var result = collection.Find(new BsonDocument()).ToList();
-        //    Console.WriteLine("Test Get registered" + result.Count);
-        //    return result; 
-        //}
     }
 }
