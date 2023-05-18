@@ -23,14 +23,11 @@ public class ShiftRegistrationRepository : IShiftRegistration
     }
 
 
-        public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
-        {
-
-            var filter = Builders<ShiftRegistration>.Filter.Eq("userId", UserId);
-            var result = collection.Find(filter).ToList();
-            return result;
-
-        }
+    public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+    {
+        //return await collection.Find(i => true).ToListAsync();
+        return collection.Find(new BsonDocument()).ToList();
+    }
 
     public void CreateShiftRegistration(ShiftRegistration shiftregistration)
     {
