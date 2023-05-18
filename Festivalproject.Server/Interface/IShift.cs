@@ -6,6 +6,6 @@ namespace Festivalproject.Server.Interface
     {
         List<Shift> GetAllShifts();
         List<Shift> GetShiftsByStatus(bool status);
-        Shift UpdateShift(Shift shift); 
+        Task<Shift> UpdateShift(Shift shift); 
     }
 }

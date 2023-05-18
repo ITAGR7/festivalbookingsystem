@@ -31,14 +31,28 @@ namespace Festivalproject.Server.Repository
 
         }
 
+        public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
+        {
+            var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
+
+            var update = Builders<ShiftRegistration>.Update
+              .Set(u => u.ShiftName, _shift.Name)
+              .Set(u => u.StartTime, _shift.startTime)
+              .Set(u => u.EndTime, _shift.endTime)
+              .Set(u => u.Description, _shift.Description);
+
+            var result = await collection.UpdateManyAsync(filter, update);
+
+            return result.ModifiedCount > 0; 
+        }
 
 
         // Id anvendes ikke i denne og der manglede et filter 
 
-        //public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+        //public List<ShiftRegistration> GetRegisteredShiftsById(Shift shift)
         //{
         //    //return await collection.Find(i => true).ToListAsync();
-        //   
+        //    // check for match between shift.Shiftid and shiftRegistration.ShiftId 
 
 
         //    var result = collection.Find(new BsonDocument()).ToList();

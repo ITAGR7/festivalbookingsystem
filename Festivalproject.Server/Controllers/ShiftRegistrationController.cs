@@ -23,8 +23,22 @@ namespace Festivalproject.Server.Controllers
         {
             var result = ShiftRegistrationRepo.GetRegisteredShiftsById(UserId);
             Console.WriteLine("Controller: Get shifts : Antal shifts fundet " + result.Count());
-            return result; 
+            return result;
         }
+
+
+        [HttpPut]
+         public Task<bool> UpdateShiftRegistrationbyShiftId(Shift _shift)
+        {
+
+            var result = ShiftRegistrationRepo.UpdateShiftRegistrationByShiftId(_shift);
+            return result;
+        }
+        
+
+                
+
+
 
 
         //    public List<ShiftRegistration> GetRegisteredShiftsById(string UserID) {

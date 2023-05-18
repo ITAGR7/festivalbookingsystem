@@ -9,6 +9,9 @@ namespace Festivalproject.Shared.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = "";
 
+        [BsonElement("shiftId")]
+        public string ShiftId { get; set; }
+
         [BsonElement("userId")]
         public string UserId { get; set; } = "";
 

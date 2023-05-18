@@ -17,8 +17,10 @@ namespace Festivalproject.Client.Services
 
         public async Task<List<Shift>> GetAllShifts()
         {
-            Console.WriteLine("Test: GetAllShifts service ");
-            return await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/shift");
+          
+            var shifts = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/shift");
+            Console.WriteLine("Test getallshifts service " + shifts.ToString());
+            return shifts; 
             
         }
 
@@ -44,7 +46,7 @@ namespace Festivalproject.Client.Services
         {
             Console.WriteLine(shiftUpdated.Name.ToString());
 
-            var response = await Http.PutAsJsonAsync<Shift>("https://localhost:7251/api/shift", shiftUpdated);
+            var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
             if (response.IsSuccessStatusCode)
             {
                 //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
