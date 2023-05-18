@@ -5,117 +5,107 @@
 @using Microsoft.AspNetCore.Components.Forms
 @inject IUserService userService; 
 
-<div>
-    <ModalContent>
-        <h3>@ModalTitle</h3>
-
-
-        <div>
-
-            <h3> Opret dig som bruger</h3>
 
 
 
 
-            <EditForm Model="@newUser" OnValidSubmit="@HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-
-                <div class="index container">
-
-
-                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
-                        <div class="sm:col-span-2">
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.FirstName" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control form-control" />
+                <h3>Opret dig som bruger</h3>
+                @*<EditForm Model="@newUser" OnValidSubmit="@HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />*@
+                    <div class="index container">
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+                            <div class="sm:col-span-2">
+                                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">FirstFF name</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.FirstName" type="text" name="first-name" id="first-name" autocomplete="given-name" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.SurName" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control form-control" />
+                            <div class="sm:col-span-2">
+                                <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.SurName" type="text" name="last-name" id="last-name" autocomplete="family-name" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <br />
 
-                        <div class="sm:col-span-2">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.Email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <div class="sm:col-span-2">
+                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.Email" id="email" name="email" type="email" autocomplete="email" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
-                            <div class="mt-2">
-                                <InputNumber TValue="int" @bind-Value="newUser.PhoneNumber" id="phoneNumber" name="phoneNumber" type="email" autocomplete="phoneNumber" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+
+                            <div class="sm:col-span-2">
+                                <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
+                                <div class="mt-2">
+                                    <InputNumber TValue="int" @bind-Value="newUser.PhoneNumber" id="phoneNumber" name="phoneNumber" type="email" autocomplete="phoneNumber" class="form-control" />
+                                </div>
                             </div>
-                        </div>
 
-
-                        <div class="col-span-3">
-                            <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.Address" type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <div class="col-span-3">
+                                <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.Address" type="text" name="street-address" id="street-address" autocomplete="street-address" class="form-control" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-2 sm:col-start-1 w-2/3 ">
-                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.City" type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <div class="sm:col-span-2 sm:col-start-1 w-2/3">
+                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.City" type="text" name="city" id="city" autocomplete="address-level2" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="sm:col-span-2 w-2/3 ">
-                            <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
-                            <div class="mt-2">
-                                <InputNumber TValue="int" @bind-Value="newUser.Zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+
+                            <div class="sm:col-span-2 w-2/3">
+                                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
+                                <div class="mt-2">
+                                    <InputNumber TValue="int" @bind-Value="newUser.Zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="form-control" />
+                                </div>
                             </div>
-                        </div>
 
-                        <br />
-                        <br />
-
-
-                        <div class="sm:col-span-3 w-2/3  ">
-                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">UserName</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.UserName" type="text" name="username" id="username" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <div class="sm:col-span-3 w-2/3">
+                                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">UserName</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.UserName" type="text" name="username" id="username" autocomplete="postal-code" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="sm:col-span-3 w-2/3">
-                            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                            <div class="mt-2">
-                                <InputText @bind-Value="newUser.Password" type="text" name="password" id="password" autocomplete="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+
+                            <div class="sm:col-span-3 w-2/3">
+                                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                <div class="mt-2">
+                                    <InputText @bind-Value="newUser.Password" type="text" name="password" id="password" autocomplete="password" class="form-control" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <br />
-                </div>
-                <button type="submit" Text="Submit"></button>
-
-            </EditForm>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                @*</EditForm>*@
 
 
-
-
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
-
-    </ModalContent>
+    </div>
 </div>
 
 
 
-
-
-
-
 @code {
-
-    [Parameter] 
-    public string ModalTitle { get; set; }
 
     [Parameter]
     public User newUser { get; set; } = new User();
@@ -125,8 +115,9 @@
 
 
 
-    protected void OnInitalizedAsync()
+    protected void OnInitialized()
     {
+        newUser = new User(); 
         aEditContext = new EditContext(newUser);
     }
 

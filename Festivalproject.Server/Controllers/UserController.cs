@@ -58,13 +58,19 @@ namespace Festivalproject.Server.Controllers
 
 
         [HttpPost]
-        public User CreateUser(User user)
+        public IActionResult CreateUser(User newUser)
         {
-            //Test of CreateUser on Controller
-            UserRepository.CreateUser(user);
-            return user;
+            try
+            {
+                var createdUser = UserRepository.CreateUser(newUser);
+                return Ok(createdUser);
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
 
 
 

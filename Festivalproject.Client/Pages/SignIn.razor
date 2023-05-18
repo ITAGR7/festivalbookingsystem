@@ -3,13 +3,12 @@
 @using Festivalproject.Client.Services;
 @using Microsoft.AspNetCore.Components.Forms;
 @using Festivalproject.Client.Components;
-@using Blazored.Modal.Services;
 
 @inject HttpClient Http;
 @inject NavigationManager navigationManager;
 @inject ILoginService loginService;
 @inject IUserService userService;
-@inject IModalService modalService;
+
 
 
 <!-- Implementing a login form with two inputfields. Styled with tailwind css.
@@ -42,10 +41,8 @@ The form binds inputvalue to local variables, which then are passed to be valida
             </form>
 
             <div>
-
                 <p class=" mb-8 text-center"> eller </p>
-                <button @onclick="RegistrerUser" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opret bruger</button>
-
+                <button @onclick="RegistrerUser" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" data-toggle="modal" data-target="#exampleModalCenter">Opret bruger</button>
             </div>
 
             <div class="mt-6">
@@ -101,8 +98,6 @@ The form binds inputvalue to local variables, which then are passed to be valida
 
 
 
-
-
     //Method that fetches a Loginresult object, and checks result for null value. Based on response method redirects user to 
     //.. new page,based on usertype (coordinator or volunteer), using injected nagivationmanager 
     public async Task Login()
@@ -149,6 +144,7 @@ The form binds inputvalue to local variables, which then are passed to be valida
 
 
 
-   
+ 
+
 
 }
