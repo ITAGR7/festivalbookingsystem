@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festivalproject.Shared.Models
+namespace Festivalproject.Shared.Models;
+
+public class LoginResultDTO
 {
-    public class LoginResultDTO
-    {
+    public bool IsValid { get; set; }
 
-        public bool IsValid { get; set; }
+    public string UserType { get; set; }
 
-        public string UserType { get; set; }
-
-        public string ObjectId { get; set; }
-    }
-
-
+    public string ObjectId { get; set; }
 }

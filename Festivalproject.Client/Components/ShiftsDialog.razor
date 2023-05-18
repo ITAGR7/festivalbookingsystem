@@ -2,21 +2,48 @@
     <ModalContent>
         <h3 class="Header">Vagt information</h3>
         <div class="parent">
-                    <div class="div1"> <h3>@ModalShiftTitle</h3> </div>
-                    <div class="div2"> <h3>@ModalShiftDescription</h3> </div>
-                    <div class="div3"> <h3>@ModalShiftDuration</h3> </div>
-                    <div class="div4"> <h3>@ModalShiftStart</h3> </div>
-                    <div class="div5"> <h3>@ModalShiftEnd</h3> </div>
-                    <div class="div6"> <h3>@ModalShiftCapacity</h3> </div>
-                </div>
-            </ModalContent>
+            <div class="div1">
+                <h3>@ModalShiftTitle</h3>
+            </div>
+            <div class="div2">
+                <h3>@ModalShiftDescription</h3>
+            </div>
+            <div class="div3">
+                <h3>@ModalShiftDuration</h3>
+            </div>
+            <div class="div4">
+                <h3>@ModalShiftStart</h3>
+            </div>
+            <div class="div5">
+                <h3>@ModalShiftEnd</h3>
+            </div>
+            <div class="div6">
+                <h3>@ModalShiftCapacity</h3>
+            </div>
+        </div>
+    </ModalContent>
 </div>
 
 @code {
-    [Parameter] public string ModalShiftTitle { get; set; }
-    [Parameter] public string ModalShiftStart { get; set; }
-    [Parameter] public string ModalShiftEnd { get; set; }
-    [Parameter] public string ModalShiftDuration { get; set; }
-    [Parameter] public string ModalShiftDescription { get; set; }
-    [Parameter] public string ModalShiftCapacity { get; set; }
+
+    [Parameter]
+    public string ModalShiftTitle { get; set; }
+
+    [Parameter]
+    public string ModalShiftStart { get; set; }
+
+    [Parameter]
+    public string ModalShiftEnd { get; set; }
+
+    [Parameter]
+    public string ModalShiftDuration { get; set; }
+
+    [Parameter]
+    public string ModalShiftDescription { get; set; }
+
+    [Parameter]
+    public string ModalShiftCapacity { get; set; }
+
+    //Method for creating a shiftregistration where shiftid is being parsed
+
 }

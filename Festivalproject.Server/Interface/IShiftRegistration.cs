@@ -1,10 +1,10 @@
 ﻿using Festivalproject.Client.Services;
 using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Server.Interface
+namespace Festivalproject.Server.Interface;
+
+public interface IShiftRegistration
 {
-    public interface IShiftRegistration
-    {
-        List<ShiftRegistration> GetRegisteredShiftsById(string UserId); 
-    }
+    List<ShiftRegistration> GetRegisteredShiftsById(string UserId);
+    void CreateShiftRegistration(ShiftRegistration shiftregistration);
 }

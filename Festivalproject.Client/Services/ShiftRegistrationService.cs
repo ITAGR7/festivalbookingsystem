@@ -20,7 +20,6 @@ namespace Festivalproject.Client.Services
 
 
 
-
             public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
             {
                  try

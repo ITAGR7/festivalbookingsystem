@@ -2,41 +2,39 @@
 using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Server.Controllers
+namespace Festivalproject.Server.Controllers;
+
+[Route("api/shift")]
+[ApiController]
+public class ShiftsController : ControllerBase
 {
-    [Route("api/shift")]
-    [ApiController]
-    public class ShiftsController : ControllerBase
+    public readonly IShifts ShiftRepository;
+
+
+    public ShiftsController(IShifts iShifts)
     {
-        public readonly IShifts ShiftRepository;
+        ShiftRepository = iShifts;
+    }
 
+    [HttpGet]
+    public List<Shift> GetAllShifts()
+    {
+        Console.WriteLine("Get all shifts (Controller) ");
 
-        public ShiftsController(IShifts iShifts)
-        {
-            ShiftRepository = iShifts;
-        }
+        return ShiftRepository.GetAllShifts();
+    }
 
-        [HttpGet]
-        public List<Shift> GetAllShifts()
-        {
-            Console.WriteLine("Get all shifts (Controller) ");
+    [HttpGet("{status}")]
+    public List<Shift> GetShiftsByStatus(bool status)
+    {
+        Console.WriteLine("Get shifts by status (Controller) ");
 
-            return ShiftRepository.GetAllShifts();
-        }
+        return ShiftRepository.GetShiftsByStatus(status);
+    }
 
-        [HttpGet("{status}")]
-        public List<Shift> GetShiftsByStatus(bool status)
-        {
-            Console.WriteLine("Get shifts by status (Controller) ");
-
-            return ShiftRepository.GetShiftsByStatus(status);
-        }
-
-        [HttpPut]
-        public Shift UpdateShift(Shift shiftUpdated)
-        {
-
-            return ShiftRepository.UpdateShift(shiftUpdated);
-        }
+    [HttpPut]
+    public Shift UpdateShift(Shift shiftUpdated)
+    {
+        return ShiftRepository.UpdateShift(shiftUpdated);
     }
 }

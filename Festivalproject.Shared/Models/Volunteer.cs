@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festivalproject.Shared.Models
-{
-    internal class Volunteer : User
-    {
-        public Volunteer() { }
+namespace Festivalproject.Shared.Models;
 
-        public string VolunteerId { get; set; } 
+internal class Volunteer : User
+{
+    public Volunteer()
+    {
     }
+
+    public string VolunteerId { get; set; }
 }

@@ -15,13 +15,13 @@
 
 
 @code {
-    
-    private List<Shift> AvailableShift { get; set; } = new List<Shift>();
+
+    private List<Shift> AvailableShift { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/false");
-        
+
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
 
@@ -36,6 +36,7 @@
             capacity = Convert.ToString(s.Capacity),
             _duration = Convert.ToString(s.Duration),
             type = s.Type,
+            id = s.Id
     //to array conversion
         }).ToArray();
 
@@ -43,7 +44,7 @@
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }
-    
+
     [JSInvokable]
     public async Task ShiftsDialog(string shiftName, string shiftDescription, string shiftCapacity, string shiftDuration, string shiftStart, string shiftEnd)
     {
@@ -61,4 +62,5 @@
         var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
         var result = await dialog.Result;
     }
+
 }

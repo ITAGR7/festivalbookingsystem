@@ -40,18 +40,18 @@ export function initializeCalendar(events, dotNetReference) {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek'
         },
-        eventMouseEnter: function( mouseEnterInfo ) {
+        eventMouseEnter: function (mouseEnterInfo) {
             // Store the original color in a data attribute
             mouseEnterInfo.el.dataset.originalColor = mouseEnterInfo.el.style.backgroundColor;
             // Change the color and cursor
             mouseEnterInfo.el.style.backgroundColor = '#FFF2EB';
             mouseEnterInfo.el.style.cursor = 'pointer';
         },
-        eventMouseLeave: function( mouseLeaveInfo ) {
+        eventMouseLeave: function (mouseLeaveInfo) {
             // Restore the original color
             mouseLeaveInfo.el.style.backgroundColor = mouseLeaveInfo.el.dataset.originalColor;
         },
-        eventClick: function(info) {
+        eventClick: function (info) {
             console.log('ShiftsDialog - shiftDuration (JS):', info.event.extendedProps.duration);
 
             // Use the dotNetReference to invoke the C# method

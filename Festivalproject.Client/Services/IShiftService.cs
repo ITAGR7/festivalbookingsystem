@@ -1,15 +1,13 @@
 ﻿using Festivalproject.Shared.Models;
 
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public interface IShiftService
 {
-    public interface IShiftService
-    {
-        Task<List<Shift>> GetAllShifts(); 
+    Task<List<Shift>> GetAllShifts();
 
-        Task<Shift> CreateShift(Shift shift);
+    Task<Shift> CreateShift(Shift shift);
 
-        Task DeleteShift(string id);    
-
-    }
+    Task DeleteShift(string id);
 }

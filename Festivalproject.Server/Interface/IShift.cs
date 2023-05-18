@@ -1,11 +1,10 @@
 ﻿using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Server.Interface
+namespace Festivalproject.Server.Interface;
+
+public interface IShifts
 {
-    public interface IShifts
-    {
-        List<Shift> GetAllShifts();
-        List<Shift> GetShiftsByStatus(bool status);
-        Shift UpdateShift(Shift shift); 
-    }
+    List<Shift> GetAllShifts();
+    List<Shift> GetShiftsByStatus(bool status);
+    Shift UpdateShift(Shift shift);
 }
