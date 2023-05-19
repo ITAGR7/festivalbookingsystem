@@ -58,7 +58,7 @@
         parameters.Add("ModalShiftStart", shiftStart);
         parameters.Add("ModalShiftEnd", shiftEnd);
 
-        var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
+        var dialog = ModalService.Show<ShiftsDialog>("", parameters, options);
         var result = await dialog.Result;
     }
 }
