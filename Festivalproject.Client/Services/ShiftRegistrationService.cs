@@ -4,19 +4,16 @@ using System.Security.Cryptography.X509Certificates;
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public class ShiftRegistrationService : IShiftRegistrationService
 {
-    public class ShiftRegistrationService : IShiftRegistrationService
+    private readonly HttpClient Http;
+
+    public ShiftRegistrationService(HttpClient httpClient)
     {
-
-
-
-
-        private readonly HttpClient Http;
-        public ShiftRegistrationService(HttpClient httpClient)
-        {
-            this.Http = httpClient;
-        }
+        Http = httpClient;
+    }
 
 
 
@@ -57,5 +54,17 @@ namespace Festivalproject.Client.Services
 
         // passing id to controller , http.put<shift> ("/shiftregistration")
 
+    public async Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+    {
+        try
+        {
+            await Http.PostAsJsonAsync<ShiftRegistration>("https://localhost:7251/api/ShiftRegistration",
+                shiftregistration);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 }

@@ -3,19 +3,18 @@ using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
 using Festivalproject.Server.Repository;
 
-namespace Festivalproject.Server.Controllers
+namespace Festivalproject.Server.Controllers;
 
+[Route("api/ShiftRegistration")]
+[ApiController]
+public class ShiftRegistrationController : ControllerBase
 {
-    [Route("api/ShiftRegistration")]
-    [ApiController]
-    public class ShiftRegistrationController : ControllerBase
-    {
-        public readonly IShiftRegistration ShiftRegistrationRepo;
+    public readonly IShiftRegistration ShiftRegistrationRepo;
 
-        public ShiftRegistrationController(IShiftRegistration iShiftRegistrationRepo)
-        {
-            ShiftRegistrationRepo = iShiftRegistrationRepo;
-        }
+    public ShiftRegistrationController(IShiftRegistration iShiftRegistrationRepo)
+    {
+        ShiftRegistrationRepo = iShiftRegistrationRepo;
+    }
 
 
         [HttpGet("{UserId}")]
@@ -43,10 +42,16 @@ namespace Festivalproject.Server.Controllers
 
         //    public List<ShiftRegistration> GetRegisteredShiftsById(string UserID) {
 
-        //        Console.WriteLine("Get all shifts (Controller) ");
+    //        Console.WriteLine("Get all shifts (Controller) ");
 
-        //        return ShiftRegistrationRepo.GetRegisteredShiftsById();
-        //    }
-        //}
+    //        return ShiftRegistrationRepo.GetRegisteredShiftsById();
+    //    }
+    //}
+
+    //create shiftregistrationbyshiftid and userid
+    [HttpPost]
+    public void CreateShiftRegistration(ShiftRegistration shiftregistration)
+    {
+        ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
     }
 }

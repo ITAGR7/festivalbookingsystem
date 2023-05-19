@@ -1,17 +1,16 @@
 ﻿using Festivalproject.Shared.Models;
 using System.Net.Http.Json;
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public class ShiftService : IShiftService
 {
+    private readonly HttpClient Http;
 
-
-    public class ShiftService : IShiftService
+    public ShiftService(HttpClient httpClient)
     {
-        private readonly HttpClient Http;
-        public ShiftService(HttpClient httpClient)
-        {
-            this.Http = httpClient;
-        }
+        Http = httpClient;
+    }
 
 
 
@@ -25,26 +24,24 @@ namespace Festivalproject.Client.Services
         }
 
 
-        public async Task<Shift> CreateShift(Shift shift)
+    public async Task<Shift> CreateShift(Shift shift)
+    {
+        var response = await Http.PostAsJsonAsync<Shift>("https://localhost:7251/api/shift", shift);
+        if (response.IsSuccessStatusCode)
         {
-           var response =  await Http.PostAsJsonAsync<Shift>("https://localhost:7251/api/shift", shift);
-            if (response.IsSuccessStatusCode)
-            {
-                var newShift = await response.Content.ReadFromJsonAsync<Shift>();
-                return newShift;
-            }
-            else
-            {
-                throw new Exception("Oprettelse af vagt fejlede.");
-            }
-           
+            var newShift = await response.Content.ReadFromJsonAsync<Shift>();
+            return newShift;
         }
-
-
-
-        public async Task<Shift> UpdateShift(Shift shiftUpdated)
+        else
         {
-            Console.WriteLine(shiftUpdated.Name.ToString());
+            throw new Exception("Oprettelse af vagt fejlede.");
+        }
+    }
+
+
+    public async Task<Shift> UpdateShift(Shift shiftUpdated)
+    {
+        Console.WriteLine(shiftUpdated.Name.ToString());
 
             var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
             if (response.IsSuccessStatusCode)
@@ -61,12 +58,9 @@ namespace Festivalproject.Client.Services
         }
 
 
-        public Task DeleteShift(string id)
-        {
-            Http.DeleteAsync($"api/shifts?shiftid={id}");
-            return Task.CompletedTask;
-        }
-
-
+    public Task DeleteShift(string id)
+    {
+        Http.DeleteAsync($"api/shifts?shiftid={id}");
+        return Task.CompletedTask;
     }
 }

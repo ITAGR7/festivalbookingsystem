@@ -30,7 +30,7 @@ builder.Services.AddHttpClient<IShiftService, ShiftService>(client =>
 });
 
 
-
-builder.Services.AddBlazoredModal();// tiløjede denne linje for at den kan bruges i program.cs fra dummyShifts og Shifts
+builder.Services
+    .AddBlazoredModal(); // tiløjede denne linje for at den kan bruges i program.cs fra dummyShifts og Shifts
 
 await builder.Build().RunAsync();

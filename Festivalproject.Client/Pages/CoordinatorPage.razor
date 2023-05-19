@@ -222,7 +222,6 @@ else
     // On pageload method that runs async with other methods - fetches the user by id passed from signin and a list of all shifts 
     protected override async Task OnInitializedAsync()
     {
-
         user = await userService.GetUserByObjectId(id);
         shiftList = await shiftService.GetAllShifts();
 

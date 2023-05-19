@@ -1,7 +1,6 @@
 @page "/AvailableShifts"
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Components
-@using Blazored.Modal
 @using Blazored.Modal.Services
 
 
@@ -16,26 +15,28 @@
 
 
 @code {
-    
-    private List<Shift> AvailableShift { get; set; } = new List<Shift>();
+
+    private List<Shift> AvailableShift { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/false");
-        
+
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
 
     // Convert the list of shifts to an array of events thats later passed over to the js function
         var events = AvailableShift.Select(s => new
         {
-    //Setting the properties of the event object -> ex. title = name of the shift...
+    // Setting the properties of the event object
             title = s.Name,
             start = s.startTime.ToString("s"),
             end = s.endTime.ToString("s"),
             description = s.Description,
             capacity = Convert.ToString(s.Capacity),
-            duration = Convert.ToString(s.Duration),
+            _duration = Convert.ToString(s.Duration),
+            type = s.Type,
+            id = s.Id
     //to array conversion
         }).ToArray();
 
@@ -43,20 +44,23 @@
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }
-    
+
     [JSInvokable]
     public async Task ShiftsDialog(string shiftName, string shiftDescription, string shiftCapacity, string shiftDuration, string shiftStart, string shiftEnd)
     {
+        Console.WriteLine($"ShiftsDialog - shiftDuration: {shiftDuration}");
+
         var options = new ModalOptions { Size = ModalSize.Medium };
         var parameters = new ModalParameters();
-        parameters.Add("ModalTitle", shiftName);
-        parameters.Add("ModalDescription", shiftDescription);
-        parameters.Add("ModalCapacity", shiftCapacity);
-        parameters.Add("ModalDuration", shiftDuration);
-        parameters.Add("ModalStart", shiftStart);
-        parameters.Add("ModalEnd", shiftEnd);
+        parameters.Add("ModalShiftTitle", shiftName);
+        parameters.Add("ModalShiftDescription", shiftDescription);
+        parameters.Add("ModalShiftCapacity", shiftCapacity);
+        parameters.Add("ModalShiftDuration", shiftDuration);
+        parameters.Add("ModalShiftStart", shiftStart);
+        parameters.Add("ModalShiftEnd", shiftEnd);
 
         var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
         var result = await dialog.Result;
     }
+
 }
