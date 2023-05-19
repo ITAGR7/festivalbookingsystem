@@ -11,5 +11,7 @@ namespace Festivalproject.Client.Services
 
         Task DeleteShift(string id);    
 
+        Task<Shift> UpdateShift(Shift _shift);
+
     }
 }

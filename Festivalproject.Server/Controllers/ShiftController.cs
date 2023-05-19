@@ -33,10 +33,10 @@ namespace Festivalproject.Server.Controllers
         }
 
         [HttpPut]
-        public Shift UpdateShift(Shift shiftUpdated)
+        public async Task<Shift> UpdateShift(Shift shiftUpdated)
         {
-
-            return ShiftRepository.UpdateShift(shiftUpdated);
+            Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
+            return await  ShiftRepository.UpdateShift(shiftUpdated);
         }
     }
 }

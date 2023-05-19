@@ -17,7 +17,7 @@ namespace Festivalproject.Shared.Models
         public string Name { get; set; }
 
         [BsonElement("type")]
-        public string Area { get; set; }
+        public string ShiftType { get; set; }
 
         [BsonElement("isOccupied")]
         public bool Status { get; set; }

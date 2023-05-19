@@ -20,25 +20,42 @@ namespace Festivalproject.Client.Services
 
 
 
-
-            public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
+        public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
+        {
+            try
             {
-                 try
-                {
-                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"https://localhost:7251/api/ShiftRegistration/{UserId}"); 
+                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"https://localhost:7251/api/ShiftRegistration/{UserId}");
                 Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
-                 }
-                 catch (Exception ex) 
-                 {
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 throw;
-                 }
+            }
 
-             }
+        }
 
 
+        public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
+        {
+            try
+            {
+                var result = await Http.PutAsJsonAsync($"https://localhost:7251/api/ShiftRegistration", _shift);
+                return true;
+               
+            }
+            catch (Exception ex)
+            {
 
+                Console.WriteLine(ex.Message);
+                throw; 
+            }
+        }
+
+        // public bla bla Task<shiftregistration> UpdateShiftregistrationByShiftId(string ShiftId) 
+
+        // passing id to controller , http.put<shift> ("/shiftregistration")
 
     }
 }
