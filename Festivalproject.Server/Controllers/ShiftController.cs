@@ -39,4 +39,4 @@ public class ShiftsController : ControllerBase
             return await  ShiftRepository.UpdateShift(shiftUpdated);
         }
     }
-}
+

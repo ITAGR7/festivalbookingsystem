@@ -46,7 +46,6 @@ public class ShiftRepository : IShifts
               .Set(u => u.startTime, shiftUpdated.startTime)
               .Set(u => u.endTime, shiftUpdated.endTime)
               .Set(u => u.Description, shiftUpdated.Description)
-              .Set(u => u.Capacity, shiftUpdated.Capacity)
               .Set(u => u.Duration, shiftUpdated.Duration)
               .Set(u => u.ShiftType, shiftUpdated.ShiftType);
 
@@ -55,5 +54,4 @@ public class ShiftRepository : IShifts
             return shiftUpdated; 
 
         }
-    }
 }

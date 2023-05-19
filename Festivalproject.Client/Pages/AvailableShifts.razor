@@ -33,9 +33,8 @@
             start = s.startTime.ToString("s"),
             end = s.endTime.ToString("s"),
             description = s.Description,
-            capacity = Convert.ToString(s.Capacity),
             _duration = Convert.ToString(s.Duration),
-            type = s.Type,
+            type = s.ShiftType,
             id = s.Id
     //to array conversion
         }).ToArray();

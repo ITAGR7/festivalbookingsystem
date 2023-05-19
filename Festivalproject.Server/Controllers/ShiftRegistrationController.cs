@@ -17,6 +17,7 @@ public class ShiftRegistrationController : ControllerBase
     }
 
 
+
         [HttpGet("{UserId}")]
         public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
         {
@@ -37,21 +38,12 @@ public class ShiftRegistrationController : ControllerBase
 
                 
 
-
-
-
-        //    public List<ShiftRegistration> GetRegisteredShiftsById(string UserID) {
-
-    //        Console.WriteLine("Get all shifts (Controller) ");
-
-    //        return ShiftRegistrationRepo.GetRegisteredShiftsById();
-    //    }
-    //}
-
     //create shiftregistrationbyshiftid and userid
-    [HttpPost]
-    public void CreateShiftRegistration(ShiftRegistration shiftregistration)
-    {
-        ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
-    }
+
+    //[HttpPost]
+    //public Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+    //{
+    //   var result =  ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
+    //   return result; 
+    //}
 }

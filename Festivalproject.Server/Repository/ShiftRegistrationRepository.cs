@@ -29,10 +29,13 @@ public class ShiftRegistrationRepository : IShiftRegistration
         return collection.Find(new BsonDocument()).ToList();
     }
 
-    public void CreateShiftRegistration(ShiftRegistration shiftregistration)
-    {
-        collection.InsertOne(shiftregistration);
-    }
+    //public Task<bool> CreateShiftRegistration(ShiftRegistration shiftregistration)
+    //{
+    //   var result = collection.InsertOne(shiftregistration);
+    //   return result;
+    //}
+
+
 
         public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
         {
@@ -49,5 +52,5 @@ public class ShiftRegistrationRepository : IShiftRegistration
             return result.ModifiedCount > 0; 
         }
 
-    }
+    
 }

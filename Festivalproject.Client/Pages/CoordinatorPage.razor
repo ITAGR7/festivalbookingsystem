@@ -128,8 +128,7 @@
                                     <td class="@css">@shift.Description</td>
                                     <td class="@css">@shift.startTime</td>
                                     <td class="@css">@shift.endTime</td>
-                                    <td class="@css">@shift.Duration</td>
-                                    <td class="@css">@shift.Capacity</td>
+                                    <td class="@css">@shift.Duration</td>                                   
                                     <td class="@css">@shift.ShiftType</td>
                                     <td><button type="button" @onclick="() => EditShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger</button></td>                            
                                 </tr>
@@ -181,7 +180,6 @@ else
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><input type="text" @bind="shift.startTime" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><input type="text" @bind="shift.endTime" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><input type="text" @bind="shift.Duration" /></td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><input type="text" @bind="shift.Capacity" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.ShiftType" /></td>
                                    
                                     <td><button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem ændringer</button></td>                          

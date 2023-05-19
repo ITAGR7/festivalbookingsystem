@@ -1,10 +1,10 @@
-﻿@using System.Collections.Generic
+﻿@*using System.Collections.Generic
 @using Festivalproject.Shared.Models
 
-@inherits ComponentBase;//Baseclass for components
+@inherits ComponentBase;//Baseclass for components*@
 
 
-@if (!EditMode)
+@*@if (!EditMode)
 {
 
     <div class="px-4 sm:px-6 lg:px-8">
@@ -39,12 +39,11 @@
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.Description</td>
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.startTime</td>
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.endTime</td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.Duration</td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Capacity</td>
+                                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">@shift.Duration</td>                             
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">@shift.ShiftType</td>
                                     <td><button type="button" onclick="(()=>EditShift(shift))" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button> </td>
 
-                                    @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>*@
+                                    @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>
 
                                 </tr>
                             }
@@ -95,7 +94,7 @@ else
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shiftUpdated.ShiftType"/></td>
                                     <td><button type="button" @onClick="UpdateShift" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button> </td>
 
-                                    @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>*@
+                                    @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>
 
                                 </tr>
                             }
@@ -108,10 +107,10 @@ else
 
 
 
-}
+}*@
 
 
-@code {
+@*@code {
 
     //Parameter passed from Volunteerpage
     [Parameter]
@@ -142,4 +141,4 @@ else
     {
         
     }
-}
+}*@
