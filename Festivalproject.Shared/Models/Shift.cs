@@ -16,7 +16,7 @@ namespace Festivalproject.Shared.Models
         [BsonElement("name")]
         public string Name { get; set; }
 
-        [BsonElement("area")]
+        [BsonElement("type")]
         public string Area { get; set; }
 
         [BsonElement("isOccupied")]
