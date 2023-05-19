@@ -37,5 +37,7 @@ namespace Festivalproject.Shared.Models
         [BsonElement("endTime")]
         public DateTime endTime { get; set; }
 
+            public bool IsPriority { get; set; }
+
     }
 }
