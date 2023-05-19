@@ -26,7 +26,8 @@ public class ShiftRepository : IShifts
     public List<Shift> GetAllShifts()
     {
         //return await collection.Find(i => true).ToListAsync();
-        return collection.Find(new BsonDocument()).ToList();
+        var shifts = collection.Find(new BsonDocument()).ToList();
+        return shifts;
     }
 
     public List<Shift> GetShiftsByStatus(bool status)
@@ -41,14 +42,20 @@ public class ShiftRepository : IShifts
 
             var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
 
-            var update = Builders<Shift>.Update
-              .Set(u => u.Name, shiftUpdated.Name)
-              .Set(u => u.startTime, shiftUpdated.startTime)
-              .Set(u => u.endTime, shiftUpdated.endTime)
-              .Set(u => u.Description, shiftUpdated.Description)
-              .Set(u => u.Duration, shiftUpdated.Duration)
-              .Set(u => u.ShiftType, shiftUpdated.ShiftType);
+        //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
+        //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
+        Console.WriteLine("Test af datime repo:" + shiftUpdated.startTime.AddHours(2));
 
+
+        var update = Builders<Shift>.Update
+          .Set(u => u.Name, shiftUpdated.Name)
+          .Set(u => u.startTime, shiftUpdated.startTime)
+          .Set(u => u.endTime, shiftUpdated.endTime)
+          .Set(u => u.Description, shiftUpdated.Description)
+          .Set(u => u.Duration, shiftUpdated.Duration)
+          .Set(u => u.ShiftType, shiftUpdated.ShiftType);
+
+        Console.WriteLine("Test af datime repo:" + shiftUpdated.startTime.ToUniversalTime());
             var result = await collection.UpdateOneAsync(filter, update);
 
             return shiftUpdated; 

@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Festivalproject.Shared.Models;
@@ -36,4 +37,12 @@ public class Shift
 
     [BsonElement("endTime")]
     public DateTime endTime { get; set; }
+
+    
+
+
+
+    
+      
+    
 }

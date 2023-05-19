@@ -13,22 +13,33 @@ public class ShiftRegistration
         public string ShiftId { get; set; }
 
 
-    [BsonElement("area")] public string Area { get; set; } = "";
-    [BsonElement("userId")] public string UserId { get; set; } = "";
+    [BsonElement("shiftArea")]
+    public string Area { get; set; } = "";
+    [BsonElement("userId")]
+    public string UserId { get; set; } = "";
 
-    [BsonElement("registrationDate")] public string RegistrationDate { get; set; } = "";
 
-    [BsonElement("shiftName")] public string ShiftName { get; set; } = "";
+    [BsonElement("registrationDate")]
+    public DateTime RegistrationDate { get; set; }
 
-    [BsonElement("description")] public string Description { get; set; }
+    [BsonElement("shiftName")]
+    public string ShiftName { get; set; } = "";
 
-    [BsonElement("startTime")] public DateTime StartTime { get; set; }
+    [BsonElement("shiftDescription")]
+    public string Description { get; set; }
 
-    [BsonElement("endTime")] public DateTime EndTime { get; set; }
+    [BsonElement("startTime")]
+    public DateTime StartTime { get; set; }
 
-    [BsonElement("type")] public DateTime ShiftType { get; set; }
+    [BsonElement("endTime")]
+    public DateTime EndTime { get; set; }
 
-    [BsonElement("duration")] public DateTime Duration { get; set; }
+    [BsonElement("shiftType")]
+   
+    public string ShiftType { get; set; }
+
+    [BsonElement("shiftDuration")]
+    public int Duration { get; set; }
 
 
 
