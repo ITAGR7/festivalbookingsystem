@@ -33,8 +33,7 @@ public class ShiftRegistrationController : ControllerBase
     //        return ShiftRegistrationRepo.GetRegisteredShiftsById();
     //    }
     //}
-
-    //create shiftregistrationbyshiftid and userid
+    
     [HttpPost]
     public void CreateShiftRegistration(ShiftRegistration shiftregistration)
     {

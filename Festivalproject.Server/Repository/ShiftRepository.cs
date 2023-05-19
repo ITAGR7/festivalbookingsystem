@@ -28,6 +28,11 @@ public class ShiftRepository : IShifts
         //return await collection.Find(i => true).ToListAsync();
         return collection.Find(new BsonDocument()).ToList();
     }
+    
+    public Shift GetShiftById(string id)
+    {
+        return collection.Find(i => i.Id == id).FirstOrDefault();
+    }
 
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -36,7 +41,18 @@ public class ShiftRepository : IShifts
 
     public Shift UpdateShift(Shift newShift)
     {
-        collection.InsertOne(newShift);
+        var filter = Builders<Shift>.Filter.Eq(s => s.Id, newShift.Id);
+        var update = Builders<Shift>.Update
+            .Set(s => s.Name, newShift.Name)
+            .Set(s => s.Type, newShift.Type)
+            .Set(s => s.Status, newShift.Status)
+            .Set(s => s.Area, newShift.Area)
+            .Set(s => s.Description, newShift.Description)
+            .Set(s => s.Duration, newShift.Duration)
+            .Set(s => s.startTime, newShift.startTime)
+            .Set(s => s.endTime, newShift.endTime);
+
+        collection.UpdateOne(filter, update);
         return newShift;
     }
 }

@@ -8,3 +8,26 @@
     background-color: transparent;
     color: #E0E0E0;
 }
+
+/* tailwind button styling by regular css */
+.fc-button {
+    background-color: #6366F1 !important;
+    border: 1px solid transparent !important;
+    text-align: center !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    transition: background-color 0.2s !important;
+
+}
+.fc-button:hover {
+    background-color: #4F46E5 !important;
+}
+.fc-button:focus-visible {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    outline-color: #6366F1 !important;
+}
+
+

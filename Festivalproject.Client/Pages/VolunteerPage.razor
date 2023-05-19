@@ -131,16 +131,18 @@ else
     </div>
 }
 
-<div class="mb-40">
-
-    <h4 class="mt-36 text-2xl">Dine vagter </h4>
+<div class="mb-40 pt-15">
+    <div class="flex items-center justify-between">
+        <h4 class="text-2xl">Dine vagter </h4>
+        <button type="button" @onclick="NavigateToAvailableShifts" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se ledige vagter</button>
+    </div>
 
     <!-- To avoid overabundance of code in this razorpage, we apply use of partial view. See components folder on client  -->
     <ShiftList Shifts="ShiftRegistrations"/>
-
 </div>
 
-<button type="button" @onclick="NavigateToAvailableShifts" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se ledige vagter</button>
+
+
 
 
 @code {

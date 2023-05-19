@@ -3,6 +3,7 @@
 
 //making the function available for import in razor
 export function initializeCalendar(events, dotNetReference) {
+    
     //console logging to check that the shifts are correctly being passed to the function
     console.log(events);
 
@@ -29,17 +30,25 @@ export function initializeCalendar(events, dotNetReference) {
     //creating a new calendar object and assigning it to a variable, giving it the calendar element and the events as parameters
     var calendar = new FullCalendar.Calendar(calendarEl, {
         events: events,
+        initialDate: '2023-06-01',
         timezone: 'local',
+        locale: 'da',
         dayMaxEvents: true,
-        themeSystem: 'bootstrap5',
         initialView: 'dayGridMonth',
         weekNumbers: true,
         eventDisplay: 'block',
         headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek'
+            left: 'title',
+            center: '',
+            right: 'prev,next today'
         },
+        buttonText: {
+            today: 'I dag',
+            month: 'Måned',
+            week: 'Uge',
+            day: 'Dag',
+        },
+        weekText: 'Uge ',
         eventMouseEnter: function (mouseEnterInfo) {
             // Store the original color in a data attribute
             mouseEnterInfo.el.dataset.originalColor = mouseEnterInfo.el.style.backgroundColor;
@@ -52,15 +61,20 @@ export function initializeCalendar(events, dotNetReference) {
             mouseLeaveInfo.el.style.backgroundColor = mouseLeaveInfo.el.dataset.originalColor;
         },
         eventClick: function (info) {
-            console.log('ShiftsDialog - shiftDuration (JS):', info.event.extendedProps.duration);
+            console.log('ShiftsDialog - shiftArea (JS):', info.event.extendedProps.shiftId);
 
             // Use the dotNetReference to invoke the C# method
-            dotNetReference.invokeMethodAsync('ShiftsDialog', info.event.title,
-                info.event.extendedProps.description,
-                info.event.extendedProps.capacity,
-                info.event.extendedProps._duration, // Ensure that the duration is included here
+            dotNetReference.invokeMethodAsync('ShiftsDialog',
+                info.event.extendedProps.type,
+                info.event.extendedProps.shiftId,
+                info.event.title,
                 info.event.start,
-                info.event.end);
+                info.event.end,
+                info.event.extendedProps.description,
+                info.event.extendedProps.area,
+                info.event.extendedProps._duration,
+                info.event.extendedProps._userId,
+                );
         },
 
         eventTimeFormat: { // like '14:30:00'
