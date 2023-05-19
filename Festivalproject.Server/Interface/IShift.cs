@@ -1,4 +1,5 @@
 ﻿using Festivalproject.Shared.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Festivalproject.Server.Interface
 {
@@ -6,6 +7,7 @@ namespace Festivalproject.Server.Interface
     {
         List<Shift> GetAllShifts();
         List<Shift> GetShiftsByStatus(bool status);
-        Task<Shift> UpdateShift(Shift shift); 
+        Task<Shift> UpdateShift(Shift shift);
+        Task<bool> DeleteShift(string id); //Lidt usikker på hvad for en returtype en delete vil have?
     }
 }

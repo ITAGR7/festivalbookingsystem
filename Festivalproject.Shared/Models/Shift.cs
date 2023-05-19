@@ -10,7 +10,6 @@ public class Shift
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-
     public string Id { get; set; } = "";
 
 
@@ -38,7 +37,7 @@ public class Shift
     [BsonElement("endTime")]
     public DateTime endTime { get; set; }
 
-            public bool IsPriority { get; set; }
+    public bool IsPriority { get; set; }
 
-    }
+    
 }

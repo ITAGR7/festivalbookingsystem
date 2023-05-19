@@ -9,7 +9,7 @@ public interface IShiftService
 
     Task<Shift> CreateShift(Shift shift);
 
-    Task DeleteShift(string id);    
+    Task<bool> DeleteShift(string id);    
 
     Task<Shift> UpdateShift(Shift _shift);
 

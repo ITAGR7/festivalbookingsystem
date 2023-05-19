@@ -32,11 +32,18 @@ public class ShiftsController : ControllerBase
         return ShiftRepository.GetShiftsByStatus(status);
     }
 
-        [HttpPut]
-        public async Task<Shift> UpdateShift(Shift shiftUpdated)
-        {
-            Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
-            return await  ShiftRepository.UpdateShift(shiftUpdated);
-        }
+    [HttpPut]
+    public async Task<Shift> UpdateShift(Shift shiftUpdated)
+    {
+        Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
+        return await ShiftRepository.UpdateShift(shiftUpdated);
+
     }
 
+    [HttpDelete("{id}")]
+    public async Task<bool> DeleteShift(string id)
+    {
+        var result = await ShiftRepository.DeleteShift(id);
+        return result;
+    }
+}

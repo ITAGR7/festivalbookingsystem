@@ -43,24 +43,30 @@ public class ShiftService : IShiftService
     {
         Console.WriteLine(shiftUpdated.Name.ToString());
 
-            var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
-            if (response.IsSuccessStatusCode)
-            {
-                //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
-                var _shift = await response.Content.ReadFromJsonAsync<Shift>();
-                return _shift; 
-            }
-            else
-            {
-                throw new Exception("Opatering af vagt fejlede");
-            }
+         var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
+         if (response.IsSuccessStatusCode)
+         {
+               //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
+               var _shift = await response.Content.ReadFromJsonAsync<Shift>();
+               return _shift;  
+         }
+         else
+         {
+               throw new Exception("Opatering af vagt fejlede");
+         }
             
         }
 
 
-    public Task DeleteShift(string id)
+    public async Task<bool> DeleteShift(string id)
     {
-        Http.DeleteAsync($"api/shifts?shiftid={id}");
-        return Task.CompletedTask;
+       var response = await  Http.DeleteAsync($"https://localhost:7251/api/shift/{id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

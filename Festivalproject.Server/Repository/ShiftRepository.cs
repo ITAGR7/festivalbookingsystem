@@ -2,7 +2,8 @@
 using MongoDB.Driver;
 using Festivalproject.Shared.Models;
 using Festivalproject.Server.Interface;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Festivalproject.Server.Repository;
 
@@ -35,6 +36,10 @@ public class ShiftRepository : IShifts
         return collection.Find(i => i.Status == status).ToList();
     }
 
+
+
+
+
         public async Task<Shift> UpdateShift(Shift shiftUpdated)
         {
             Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
@@ -44,7 +49,7 @@ public class ShiftRepository : IShifts
 
         //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
         //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
-        Console.WriteLine("Test af datime repo:" + shiftUpdated.startTime.AddHours(2));
+      
 
 
         var update = Builders<Shift>.Update
@@ -55,10 +60,22 @@ public class ShiftRepository : IShifts
           .Set(u => u.Duration, shiftUpdated.Duration)
           .Set(u => u.ShiftType, shiftUpdated.ShiftType);
 
-        Console.WriteLine("Test af datime repo:" + shiftUpdated.startTime.ToUniversalTime());
+       
             var result = await collection.UpdateOneAsync(filter, update);
 
             return shiftUpdated; 
 
         }
+
+
+
+    public async Task<bool> DeleteShift(string id)
+    {
+        var result = await collection.DeleteOneAsync(s => s.Id == id);
+        if(result.DeletedCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
