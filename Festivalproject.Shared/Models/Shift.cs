@@ -40,5 +40,5 @@ public class Shift
 
             public bool IsPriority { get; set; }
 
-    }
-}
+ }
+
