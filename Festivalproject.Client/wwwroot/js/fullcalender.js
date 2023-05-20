@@ -1,37 +1,36 @@
-// fullcalender.js - export function for import in razor via the OnAfterRenderAsync method
-//https://fullcalendar.io/docs/initialize-globals
+let calendar; // Make the calendar object accessible in all functions
+let events; // Make events globally accessible
 
-//making the function available for import in razor
-export function initializeCalendar(events, dotNetReference) {
-    
-    //console logging to check that the shifts are correctly being passed to the function
-    console.log(events);
+// Define the color mapping globally so it can be accessed in all functions
+const colorMap = {
+    "barvagt": '#6D9EEB',
+    "toiletvagt": '#D4BF77',
+    "indgangvagt": '#7BB661',
+    "parkeringsvagt": '#E67399',
+    "køkkenvagt": '#DB843D',
+    "sikkerhedsvagt": '#A47AE2'
+};
 
-    const toiletvagtColor = '#CFE4C8';
-    const barvagtColor = '#AEBAD6';
-    //modifying the events data to add color based on type
-    events = events.map(event => {
-        if (event.type === "toiletvagt") {
-            return {...event, color: toiletvagtColor};
-        } else if (event.type === "barvagt") {
-            return {...event, color: barvagtColor};
+// Initialize the calendar with the given events
+export function initializeCalendar(inputEvents, dotNetReference) {
+    // Save the input events in the global events variable
+    events = inputEvents.map(event => {
+        const color = colorMap[event.type];
+        if (color) {
+            return {...event, color};
         } else {
             return event;
         }
     });
+    
+    console.log ("Events: ", events); // Log the events to the console
 
-    console.log("Modified events: ", events); // Log the modified events
-    console.log("Sample event: ", events[0]); // Log the first event
-
-    //grabbing the calendar element from the DOM and assigning it to a variable
     var calendarEl = document.getElementById('calendar');
-
-
-    //creating a new calendar object and assigning it to a variable, giving it the calendar element and the events as parameters
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    console.log ("Events: ", events); // Log the events to the console
+    calendar = new FullCalendar.Calendar(calendarEl, {
         events: events,
         initialDate: '2023-06-01',
-        timezone: 'local',
+        timeZone: 'UTC',
         locale: 'da',
         dayMaxEvents: true,
         initialView: 'dayGridMonth',
@@ -52,29 +51,29 @@ export function initializeCalendar(events, dotNetReference) {
         eventMouseEnter: function (mouseEnterInfo) {
             // Store the original color in a data attribute
             mouseEnterInfo.el.dataset.originalColor = mouseEnterInfo.el.style.backgroundColor;
-            // Change the color and cursor
-            mouseEnterInfo.el.style.backgroundColor = '#FFF2EB';
+            // Change the color to something a bit brighter and cursor
+            mouseEnterInfo.el.style.filter = 'brightness(120%)';
             mouseEnterInfo.el.style.cursor = 'pointer';
         },
         eventMouseLeave: function (mouseLeaveInfo) {
             // Restore the original color
-            mouseLeaveInfo.el.style.backgroundColor = mouseLeaveInfo.el.dataset.originalColor;
+            mouseLeaveInfo.el.style.filter = 'none';
         },
         eventClick: function (info) {
-            console.log('ShiftsDialog - shiftArea (JS):', info.event.extendedProps.shiftId);
+            console.log('ShiftsDialog - shiftEnd (JS):', info.event.end);
 
             // Use the dotNetReference to invoke the C# method
             dotNetReference.invokeMethodAsync('ShiftsDialog',
                 info.event.extendedProps.type,
                 info.event.extendedProps.shiftId,
                 info.event.title,
-                info.event.start,
-                info.event.end,
+                info.event.start.toISOString(), // Convert the Date to a string in ISO 8601 format
+                info.event.end.toISOString(),
                 info.event.extendedProps.description,
                 info.event.extendedProps.area,
                 info.event.extendedProps._duration,
                 info.event.extendedProps._userId,
-                );
+            );
         },
 
         eventTimeFormat: { // like '14:30:00'
@@ -85,9 +84,27 @@ export function initializeCalendar(events, dotNetReference) {
         },
     });
 
+    console.log("Calendar initialized"); // Log that the calendar has been initialized
+
     //rendering the calendar
     calendar.render();
+    
+    //funciton to remove all events and add to the calendar with no parameters, should be able to be triggered via c# code
+
 }
+// New function to update the calendar
+export function updateCalendar(dotNetReference) {
+    dotNetReference.invokeMethodAsync('GetAvailableShifts').then(eventsJson => {
+        var events = JSON.parse(eventsJson);
+        // Remove all events from the calendar
+        var existingEvents = calendar.getEvents();
+        existingEvents.forEach(function (event) {
+            event.remove();
+        });
 
-
-
+        // Add the new events
+        events.forEach(event => {
+            calendar.addEvent(event);
+        });
+    });
+}

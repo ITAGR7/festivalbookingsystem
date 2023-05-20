@@ -1,6 +1,8 @@
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Services
 @using Blazored.Modal.Services
+
+@inject IJSRuntime JSRuntime
 @inject IShiftRegistrationService ShiftRegistrationService
 @inject IModalService ModalService
 @inject IShiftService ShiftService
@@ -46,6 +48,7 @@
 </div>
 
 @code {
+    
     private bool ConfirmationVisible { get; set; } = false;
     
     //Injecting the modal service
@@ -54,8 +57,9 @@
     //Method for closing the modal
     private async Task CloseModal() => await BlazoredModal.CloseAsync(ModalResult.Ok(true));
 
+
     [Parameter]
-    public DateTime ModalRegistrationDate { get; set; } = DateTime.UtcNow;
+    public DateTime ModalRegistrationDate { get; set; } = DateTime.Now;
     
     [Parameter]
     public string ModalShiftId { get; set; }
@@ -83,8 +87,8 @@
     
     [Parameter]
     public string ModalShiftType { get; set; }
-    
-    
+
+
     //Method for creating a shiftregistration
     public async Task CreateShiftRegistration()
     {
@@ -124,6 +128,11 @@
 
     //Wait for 5 seconds
         await Task.Delay(5000);
+        
+    // Refresh the calendar
+        var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
+        await module.InvokeVoidAsync("updateCalendar");
+
 
     //Close the modal
         await CloseModal();
