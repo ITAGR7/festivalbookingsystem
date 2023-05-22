@@ -221,7 +221,6 @@ else
     private Shift shiftUpdated { get; set; } = new Shift();
     private List<Shift> shiftList {get; set; } = new List<Shift>(); 
     private List<Shift> filteredShifts { get; set; } = new();
-    private List<Shift> searchFilteredShifts { get; set; } = new List<Shift>();
     public string SearchInput { get; set; } = "";
 
     private List<Shift> prioritySortedShifts { get; set; } = new List<Shift>();
@@ -244,8 +243,6 @@ else
 
 
         filteredShifts = shiftList; 
-        searchFilteredShifts = shiftList;
-
 
     }
 
@@ -281,6 +278,7 @@ else
         else
         {
             // Sort the list by priority.
+            // Order by sorts on a specified key, which is IsPriority true/false where true is prioritzed highest. 
             shiftList = shiftList.OrderBy(shift => shift.IsPriority ? 0 : 1).ToList();
             isSortedByPriority = true;
         }
@@ -309,16 +307,23 @@ else
 
 
     }
+
+    // This method filters a list of shifts based on a search input value
     public void FilterShifts(ChangeEventArgs e)    
     {
+        // Convert the value from the event argument to a string and store it in the SearchInput variable.
         SearchInput = e.Value.ToString();
         
         if (string.IsNullOrWhiteSpace(SearchInput))
         {
+            // If the SearchInput is empty or contains only whitespace, reset the shiftList to contain all filteredShifts
             shiftList = new List<Shift>(filteredShifts);
         }
         else
         {
+            // If the SearchInput is not empty or contains non-whitespace characters,
+            // filter the shiftList to include only shifts whose Name property contains the SearchInput value,
+            // ignoring case sensitivity, and convert the filtered shifts to a new list.
             shiftList = shiftList.Where(s => s.Name.Contains(SearchInput, StringComparison.OrdinalIgnoreCase)).ToList();
         }    
     }
