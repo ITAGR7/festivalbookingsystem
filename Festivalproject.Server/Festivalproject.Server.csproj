@@ -20,4 +20,8 @@
         <ProjectReference Include="..\Festivalproject.Shared\Festivalproject.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Properties\ServiceDependencies\FestivalprojectServer20230522152700 - Web Deploy\" />
+    </ItemGroup>
+
 </Project>
