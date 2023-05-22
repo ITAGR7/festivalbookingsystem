@@ -34,16 +34,16 @@ public class ShiftRegistrationController : ControllerBase
             var result = ShiftRegistrationRepo.UpdateShiftRegistrationByShiftId(_shift);
             return result;
         }
-        
 
-                
 
-    //create shiftregistrationbyshiftid and userid
 
-    //[HttpPost]
-    //public Task CreateShiftRegistration(ShiftRegistration shiftregistration)
-    //{
-    //   var result =  ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
-    //   return result; 
-    //}
+
+       
+
+        //[HttpPost]
+        //public Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+        //{
+        //    var result = ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
+        //    return result;
+        //}
 }

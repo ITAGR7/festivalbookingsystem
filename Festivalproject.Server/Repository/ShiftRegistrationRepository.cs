@@ -31,13 +31,13 @@ public class ShiftRegistrationRepository : IShiftRegistration
 
     //public Task<bool> CreateShiftRegistration(ShiftRegistration shiftregistration)
     //{
-    //   var result = collection.InsertOne(shiftregistration);
-    //   return result;
+    //    var result = collection.InsertOne(shiftregistration);
+    //    return result;
     //}
 
 
 
-        public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
+    public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
         {
             var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
 

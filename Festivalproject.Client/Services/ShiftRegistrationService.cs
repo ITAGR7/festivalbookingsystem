@@ -54,17 +54,17 @@ public class ShiftRegistrationService : IShiftRegistrationService
 
         // passing id to controller , http.put<shift> ("/shiftregistration")
 
-    public async Task CreateShiftRegistration(ShiftRegistration shiftregistration)
-    {
-        try
-        {
-            await Http.PostAsJsonAsync<ShiftRegistration>("https://localhost:7251/api/ShiftRegistration",
-                shiftregistration);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
-    }
+    //public async Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+    //{
+    //    try
+    //    {
+    //        await Http.PostAsJsonAsync<ShiftRegistration>("https://localhost:7251/api/ShiftRegistration",
+    //            shiftregistration);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine(ex.Message);
+    //        throw;
+    //    }
+    //}
 }

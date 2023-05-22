@@ -14,19 +14,20 @@ public class ShiftService : IShiftService
 
 
 
-        public async Task<List<Shift>> GetAllShifts()
-        {
+    public async Task<List<Shift>> GetAllShifts()
+    {
           
             var shifts = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/shift");
             Console.WriteLine("Test getallshifts service " + shifts.ToString());
             return shifts; 
             
-        }
+    }
+
 
 
     public async Task<Shift> CreateShift(Shift shift)
     {
-        var response = await Http.PostAsJsonAsync<Shift>("https://localhost:7251/api/shift", shift);
+        var response = await Http.PostAsJsonAsync("https://localhost:7251/api/shift", shift);
         if (response.IsSuccessStatusCode)
         {
             var newShift = await response.Content.ReadFromJsonAsync<Shift>();
@@ -37,6 +38,7 @@ public class ShiftService : IShiftService
             throw new Exception("Oprettelse af vagt fejlede.");
         }
     }
+
 
 
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
@@ -102,7 +104,6 @@ public class ShiftService : IShiftService
         
         var result = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
         return result; 
-        
         
         
     }

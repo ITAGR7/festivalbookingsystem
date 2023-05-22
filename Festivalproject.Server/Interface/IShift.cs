@@ -8,7 +8,8 @@ namespace Festivalproject.Server.Interface
         List<Shift> GetAllShifts();
         List<Shift> GetShiftsByStatus(bool status);
         Task<Shift> UpdateShift(Shift shift);
-        Task<bool> DeleteShift(string id); //Lidt usikker på hvad for en returtype en delete vil have?
+        Task<bool> DeleteShift(string id); //Lidt usikker på hvad for en returtype en delete vil have? Skal denne være task?
         Shift GetShiftById(string id);
+        Shift  CreateShift(Shift shift);
     }
 }

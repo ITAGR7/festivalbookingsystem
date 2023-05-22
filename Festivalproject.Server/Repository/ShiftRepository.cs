@@ -42,6 +42,13 @@ public class ShiftRepository : IShifts
     }
 
 
+    public Shift CreateShift(Shift newShift)
+    {
+         collection.InsertOne(newShift);
+        return newShift;
+        
+    }
+
 
 
 
@@ -51,9 +58,6 @@ public class ShiftRepository : IShifts
 
 
             var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
-
-        //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
-        //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
 
 
 

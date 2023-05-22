@@ -9,7 +9,7 @@ namespace Festivalproject.Client.Services
 
         public Task<bool> UpdateShiftRegistrationByShiftId(Shift shift);
 
-        public Task CreateShiftRegistration(ShiftRegistration shiftregistration);
+        //public Task CreateShiftRegistration(ShiftRegistration shiftregistration);
 
     }
 }
