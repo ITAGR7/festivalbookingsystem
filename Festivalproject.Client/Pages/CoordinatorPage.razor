@@ -9,8 +9,9 @@
 @inject NavigationManager navManager; 
 
 
-<!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing->
+<!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing-->
 <!-- Implementing header with image at top of userprofile page  -->
+
 <div>
   <div>
     <img class="h-48 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
@@ -123,7 +124,7 @@
                                 <th scope="col" class="@css2">Sluttidspunkt</th>
                                 <th scope="col" class="@css2">Varighed</th>
                                 <th scope="col" class="@css2">Område</th>
-                                <td scope="col" class="@css2" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet</td>
+                                <td scope="col" class="@css2" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet ↑↓ </td>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
                             </tr>
                         </thead>
