@@ -101,4 +101,8 @@ a, .btn-link {
 .loading-progress-text:after {
     content: var(--blazor-load-percentage-text, "Loading");
 }
-    
+
+/* Blazored modal moving x close to the corner of the modal */
+.bm-close {
+    margin: -3rem -2.2rem -6rem auto !important;
+}

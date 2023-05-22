@@ -9,5 +9,6 @@ namespace Festivalproject.Server.Interface
         List<Shift> GetShiftsByStatus(bool status);
         Task<Shift> UpdateShift(Shift shift);
         Task<bool> DeleteShift(string id); //Lidt usikker på hvad for en returtype en delete vil have?
+        Shift GetShiftById(string id);
     }
 }

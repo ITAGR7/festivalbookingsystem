@@ -30,6 +30,11 @@ public class ShiftRepository : IShifts
         var shifts = collection.Find(new BsonDocument()).ToList();
         return shifts;
     }
+    
+    public Shift GetShiftById(string id)
+    {
+        return collection.Find(i => i.Id == id).FirstOrDefault();
+    }
 
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -49,7 +54,7 @@ public class ShiftRepository : IShifts
 
         //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
         //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
-      
+
 
 
         var update = Builders<Shift>.Update
@@ -58,9 +63,12 @@ public class ShiftRepository : IShifts
           .Set(u => u.endTime, shiftUpdated.endTime)
           .Set(u => u.Description, shiftUpdated.Description)
           .Set(u => u.Duration, shiftUpdated.Duration)
-          .Set(u => u.ShiftType, shiftUpdated.ShiftType);
+          .Set(u => u.ShiftType, shiftUpdated.ShiftType)
+          .Set(s => s.Status, newShift.Status)
+          .Set(s => s.Area, newShift.Area);
 
-       
+
+
             var result = await collection.UpdateOneAsync(filter, update);
 
             return shiftUpdated; 
