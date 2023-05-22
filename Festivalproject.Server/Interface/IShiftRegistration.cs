@@ -8,5 +8,7 @@ namespace Festivalproject.Server.Interface
         List<ShiftRegistration> GetRegisteredShiftsById(string UserId); 
 
         Task<bool> UpdateShiftRegistrationByShiftId(Shift shift);
+
+        //Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration);
     }
 }

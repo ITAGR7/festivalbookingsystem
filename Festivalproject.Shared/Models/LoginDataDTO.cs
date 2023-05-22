@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festivalproject.Shared.Models
+namespace Festivalproject.Shared.Models;
+
+public class LoginDataDTO
 {
-   
-        public class LoginDataDTO
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-    
+    public string Username { get; set; }
+    public string Password { get; set; }
 }

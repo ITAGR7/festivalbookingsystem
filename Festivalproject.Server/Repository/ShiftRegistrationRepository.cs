@@ -4,32 +4,38 @@ using Festivalproject.Shared.Models;
 using Festivalproject.Server.Interface;
 
 
+namespace Festivalproject.Server.Repository;
 
-namespace Festivalproject.Server.Repository
+public class ShiftRegistrationRepository : IShiftRegistration
 {
-    public class ShiftRegistrationRepository : IShiftRegistration
+    private const string connectionString =
+        @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
+
+    private const string databaseName = "festivalData";
+    private const string collectionName = "ShiftRegistration";
+    private IMongoCollection<ShiftRegistration> collection;
+
+    public ShiftRegistrationRepository()
     {
-        private const string connectionString = @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
-        private const string databaseName = "festivalData";
-        private const string collectionName = "ShiftRegistration";
-        private IMongoCollection<ShiftRegistration> collection;
-
-        public ShiftRegistrationRepository()
-        {
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase(databaseName);
-            collection = database.GetCollection<ShiftRegistration>(collectionName);
-        }
+        var client = new MongoClient(connectionString);
+        var database = client.GetDatabase(databaseName);
+        collection = database.GetCollection<ShiftRegistration>(collectionName);
+    }
 
 
-        public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
-        {
+    public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+    {
+        //return await collection.Find(i => true).ToListAsync();
+        return collection.Find(new BsonDocument()).ToList();
+    }
 
-            var filter = Builders<ShiftRegistration>.Filter.Eq("userId", UserId);
-            var result = collection.Find(filter).ToList();
-            return result;
+    //public Task<bool> CreateShiftRegistration(ShiftRegistration shiftregistration)
+    //{
+    //   var result = collection.InsertOne(shiftregistration);
+    //   return result;
+    //}
 
-        }
+
 
         public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
         {
@@ -46,5 +52,5 @@ namespace Festivalproject.Server.Repository
             return result.ModifiedCount > 0; 
         }
 
-    }
+    
 }

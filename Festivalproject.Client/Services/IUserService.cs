@@ -1,15 +1,13 @@
-﻿using Festivalproject.Shared.Models; 
+﻿using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        public Task<User> GetUserByObjectId(string id);
-        public Task<User> CreateUser(User user);
-        public Task UpdateUser(User user);
-        public Task DeleteUser(string id);
+    public Task<User> GetUserByObjectId(string id);
+    public Task<User> CreateUser(User user);
+    public Task UpdateUser(User user);
+    public Task DeleteUser(string id);
 
-        //public Task<LoginResult> IsValidLogin(string username, string password);
-    }
+    //public Task<LoginResult> IsValidLogin(string username, string password);
 }
-

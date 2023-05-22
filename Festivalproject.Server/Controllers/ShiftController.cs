@@ -2,41 +2,48 @@
 using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Server.Controllers
+namespace Festivalproject.Server.Controllers;
+
+[Route("api/shift")]
+[ApiController]
+public class ShiftsController : ControllerBase
 {
-    [Route("api/shift")]
-    [ApiController]
-    public class ShiftsController : ControllerBase
+    public readonly IShifts ShiftRepository;
+
+
+    public ShiftsController(IShifts iShifts)
     {
-        public readonly IShifts ShiftRepository;
+        ShiftRepository = iShifts;
+    }
 
+    [HttpGet]
+    public List<Shift> GetAllShifts()
+    {
+        Console.WriteLine("Get all shifts (Controller) ");
 
-        public ShiftsController(IShifts iShifts)
-        {
-            ShiftRepository = iShifts;
-        }
+        return ShiftRepository.GetAllShifts();
+    }
 
-        [HttpGet]
-        public List<Shift> GetAllShifts()
-        {
-            Console.WriteLine("Get all shifts (Controller) ");
+    [HttpGet("{status}")]
+    public List<Shift> GetShiftsByStatus(bool status)
+    {
+        Console.WriteLine("Get shifts by status (Controller) ");
 
-            return ShiftRepository.GetAllShifts();
-        }
+        return ShiftRepository.GetShiftsByStatus(status);
+    }
 
-        [HttpGet("{status}")]
-        public List<Shift> GetShiftsByStatus(bool status)
-        {
-            Console.WriteLine("Get shifts by status (Controller) ");
+    [HttpPut]
+    public async Task<Shift> UpdateShift(Shift shiftUpdated)
+    {
+        Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
+        return await ShiftRepository.UpdateShift(shiftUpdated);
 
-            return ShiftRepository.GetShiftsByStatus(status);
-        }
+    }
 
-        [HttpPut]
-        public async Task<Shift> UpdateShift(Shift shiftUpdated)
-        {
-            Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
-            return await  ShiftRepository.UpdateShift(shiftUpdated);
-        }
+    [HttpDelete("{id}")]
+    public async Task<bool> DeleteShift(string id)
+    {
+        var result = await ShiftRepository.DeleteShift(id);
+        return result;
     }
 }
