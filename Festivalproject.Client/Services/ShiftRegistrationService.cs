@@ -21,7 +21,7 @@ public class ShiftRegistrationService : IShiftRegistrationService
         {
             try
             {
-                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>("/api/ShiftRegistration/{UserId}");
+                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"/api/ShiftRegistration/{UserId}");
                 Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
             }
