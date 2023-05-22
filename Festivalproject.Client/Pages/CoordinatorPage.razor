@@ -309,13 +309,13 @@ else
 
 
     }
-    public void FilterShifts(ChangeEventArgs e)
+    public void FilterShifts(ChangeEventArgs e)    
     {
         SearchInput = e.Value.ToString();
         
         if (string.IsNullOrWhiteSpace(SearchInput))
         {
-            shiftList = new List<Shift>(shiftList);
+            shiftList = new List<Shift>(filteredShifts);
         }
         else
         {
