@@ -21,7 +21,7 @@ public class ShiftRegistrationService : IShiftRegistrationService
         {
             try
             {
-                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"https://localhost:7251/api/ShiftRegistration/{UserId}");
+                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>("/api/ShiftRegistration/{UserId}");
                 Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
             }
@@ -38,7 +38,7 @@ public class ShiftRegistrationService : IShiftRegistrationService
         {
             try
             {
-                var result = await Http.PutAsJsonAsync($"https://localhost:7251/api/ShiftRegistration", _shift);
+                var result = await Http.PutAsJsonAsync("/api/ShiftRegistration", _shift);
                 return true;
                
             }
@@ -58,7 +58,7 @@ public class ShiftRegistrationService : IShiftRegistrationService
     //{
     //    try
     //    {
-    //        await Http.PostAsJsonAsync<ShiftRegistration>("https://localhost:7251/api/ShiftRegistration",
+    //        await Http.PostAsJsonAsync<ShiftRegistration>("/api/ShiftRegistration",
     //            shiftregistration);
     //    }
     //    catch (Exception ex)

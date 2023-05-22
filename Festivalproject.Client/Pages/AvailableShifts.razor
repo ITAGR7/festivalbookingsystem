@@ -71,7 +71,7 @@
         UserId = query["id"];
 
         // Your initialization code here
-        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
+        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/false");
 
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);

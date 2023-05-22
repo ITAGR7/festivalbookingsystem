@@ -30,7 +30,7 @@
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("Get shift from client ");
-        shifts = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7226/api/Shifts");
+        shifts = await Http.GetFromJsonAsync<List<Shift>>("/api/Shifts");
     }
 
 }
