@@ -63,9 +63,9 @@ public class ShiftRepository : IShifts
           .Set(u => u.endTime, shiftUpdated.endTime)
           .Set(u => u.Description, shiftUpdated.Description)
           .Set(u => u.Duration, shiftUpdated.Duration)
-          .Set(u => u.ShiftType, shiftUpdated.ShiftType)
-          .Set(s => s.Status, newShift.Status)
-          .Set(s => s.Area, newShift.Area);
+          .Set(u => u.Type, shiftUpdated.Type)
+          .Set(u => u.Status, shiftUpdated.Status)
+          .Set(u => u.Area, shiftUpdated.Area);
 
 
 

@@ -136,7 +136,7 @@
                                         <td class="@css">@shift.startTime</td>
                                         <td class="@css">@shift.endTime</td>
                                         <td class="@css">@shift.Duration</td>
-                                        <td class="@css">@shift.ShiftType</td>
+                                        <td class="@css">@shift.Type</td>
                                         <td class="@css">
                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                         </td>
@@ -193,7 +193,7 @@ else
                                     <td class="@css"><input type="text" @bind="shift.startTime" /></td>
                                     <td class="@css"><input type="text" @bind="shift.endTime" /></td>
                                     <td class="@css"><input type="text" @bind="shift.Duration" /></td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.ShiftType" /></td>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.Type" /></td>
                                         <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                         </td>
@@ -243,20 +243,20 @@ else
         user = await userService.GetUserByObjectId(id);
         shiftList = await shiftService.GetAllShifts();
 
-    }
-
         filteredShifts = shiftList; 
-        searchFilteredShifts = shiftList;
-
 
     }
+
+
+
+    
 
     //Method setting the bool: "EditMode" to true, so the form with inputfield shows on page
     public void EditShift(Shift shift)
     {
 
         Console.WriteLine(shift.Name);
-        EditMode = true;
+        EditMode = true;    
 
     }
 

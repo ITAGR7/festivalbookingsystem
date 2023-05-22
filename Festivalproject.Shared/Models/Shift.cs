@@ -26,16 +26,7 @@ public class Shift
     
     [BsonElement("area")] 
     public string Area { get; set; }
-    
 
-    [BsonElement("type")]
-    public string ShiftType { get; set; }
-
-    [BsonElement("area")]
-    public string Area { get; set; }
-
-    [BsonElement("isOccupied")] 
-    public bool Status { get; set; }
 
     [BsonElement("description")]
     public string Description { get; set; } = "";
