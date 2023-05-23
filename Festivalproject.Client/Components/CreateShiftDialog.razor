@@ -1,1 +1,185 @@
-﻿
+﻿@using Festivalproject.Shared.Models
+@using Festivalproject.Client.Services
+@using Blazored.Modal.Services
+
+@inject IJSRuntime JSRuntime
+@inject IShiftRegistrationService ShiftRegistrationService
+@inject IModalService modalService
+@inject IShiftService shiftService
+
+
+<div>
+    <ModalContent>
+       <p class="text-xl leading-6 text-black-600"> Opret en ny vagt!  </p>
+        <EditForm Model="@newShift" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="index container">
+                <div class="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+                    <div class="sm:col-span-2">
+                        <label for="shiftType" class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+                        <div class="mt-2">
+                            <InputSelect @bind-Value="newShift.Type" id="shiftType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Vælg vagt type</option>
+                                <option value="Barvagt">Barvagt</option>
+                                <option value="Toiletvagt">Toiletvagt</option>
+                                <option value="Indgangvagt">Indgang</option>
+                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
+                                <option value="Køkkenvagt">Køkkenvagt</option>
+                                <option value="Parkeringsvagt">Parkerings</option>
+                            </InputSelect>
+                         
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="shiftName" class="block text-sm font-medium leading-6 text-gray-900">Funktion/navn</label>
+                        <div class="mt-2">
+                            <InputSelect @bind-Value="newShift.Name" id="shiftName" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Vælg funktion</option>
+                                <option value="Barvagt">Bar</option>
+                                <option value="Toiletvagt">Toiletvagt</option>
+                                <option value="Indgangvagt">Indgang</option>
+                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
+                                <option value="Køkkenvagt">Køkkenvagt</option>
+                                <option value="Parkeringsvagt">Parkerings</option>
+                            </InputSelect>
+
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vagtområde</label>
+                        <div class="mt-2">
+                 
+                            <InputSelect @bind-Value="newShift.Area" id="area" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Vælg område</option>
+                                <option value="Barvagt">The Crazy bar</option>
+                                <option value="Toiletvagt">Toiletvagt</option>
+                                <option value="Indgangvagt">Indgang</option>
+                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
+                                <option value="Køkkenvagt">Køkkenvagt</option>
+                                <option value="Parkeringsvagt">Parkerings</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="sm:col-span-3">
+                        <label for="startTime" class="block text-sm font-medium leading-6 text-gray-900">Starttidspunkt</label>
+                        <div class="mt-2">
+                            <InputDate @bind-Value="@newShift.startTime" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="endTime" class="block text-sm font-medium leading-6 text-gray-900">Sluttidspunkt</label>
+                        <div class="mt-2">
+                            <InputDate @bind-Value="newShift.endTime"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>
+
+
+                    <div class="col-span-4">
+                        <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Beskrivelse</label>
+                        <div class="mt-2">
+                            <InputText @bind-Value="newShift.Description" type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>
+
+              
+                 @*   <div class="sm:col-span-2 w-2/3 ">
+                        <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Postnummer</label>
+                        <div class="mt-2">
+                            <InputNumber TValue="int" @bind-Value="" name="duration" id="duration" autocomplete="duration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>*@
+                  
+
+                    <br />
+                    <br />
+                </div>
+                <br />
+            </div>
+        </EditForm>
+        
+
+    </ModalContent>
+</div>
+
+@if (showValidIcon)
+{
+    <div class="gif-overlay">
+        <img src="/check.gif" alt="Success GIF" class="gif-image" />
+    </div>
+}
+
+@code{
+
+    [CascadingParameter] 
+    public IModalService Modal { get; set; } = default!;
+    private Shift newShift { get; set; } = new Shift();
+    private EditContext editContext; 
+    private string resultMessage { get; set; }
+    private bool showValidIcon;
+    private bool shiftCreated = false;
+
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitialized in dialog");
+        editContext = new EditContext(newShift);
+
+        // Setting default value for start and endtime in calendar 
+        newShift.startTime = DateTime.UtcNow;
+        newShift.endTime = DateTime.UtcNow;
+    }
+
+
+    public async Task HandleValidSubmit()
+    {
+        if (editContext.Validate())
+        {
+            await CreateShift(newShift);
+            if (shiftCreated == true)
+            {
+                newShift = new Shift();
+            }
+        }
+    }
+
+
+
+
+    private async Task CreateShift(Shift newShift)
+    {
+        try
+        {
+            // Call the shiftService to use createshift method 
+            var createdShift = await shiftService.CreateShift(newShift);
+
+            // If result is not null (success) the showValidIcon bool is set to true, and the gif is loaded 
+            if (createdShift != null)
+            {
+                showValidIcon = true;
+                StateHasChanged(); // Force a re-render to show the GIF
+
+                await Task.Delay(2100);
+                showValidIcon = false;
+                StateHasChanged(); // Force a re-render to hide the GIF
+
+                Console.WriteLine("User added successfully!");
+                resultMessage = "";
+                shiftCreated = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            resultMessage = ex.Message;
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+
+}
