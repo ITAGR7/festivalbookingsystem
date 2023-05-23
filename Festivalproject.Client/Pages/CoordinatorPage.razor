@@ -136,7 +136,7 @@
                                         <td class="@css">@shift.startTime</td>
                                         <td class="@css">@shift.endTime</td>
                                         <td class="@css">@shift.Duration</td>
-                                        <td class="@css">@shift.ShiftType</td>
+                                        <td class="@css">@shift.Type</td>
                                         <td class="@css">
                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                         </td>
@@ -181,7 +181,7 @@ else
                                 <th scope="col" class="@css2">Type</th>
                                     <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
-
+                                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -193,11 +193,12 @@ else
                                     <td class="@css"><input type="text" @bind="shift.startTime" /></td>
                                     <td class="@css"><input type="text" @bind="shift.endTime" /></td>
                                     <td class="@css"><input type="text" @bind="shift.Duration" /></td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.ShiftType" /></td>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.Type" /></td>
                                         <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                         </td>
-                                    <td><button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem ændringer</button></td>                          
+                                    <td><button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem</button></td>                          
+                                    <td><button type="button" @onclick="() => DeleteShift(shift.Id)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Slet</button></td>                          
                                 </tr>
                             }
                         </tbody>
@@ -241,19 +242,31 @@ else
         user = await userService.GetUserByObjectId(id);
         shiftList = await shiftService.GetAllShifts();
 
-
         filteredShifts = shiftList; 
 
     }
+
+
+
+    
 
     //Method setting the bool: "EditMode" to true, so the form with inputfield shows on page
     public void EditShift(Shift shift)
     {
 
         Console.WriteLine(shift.Name);
-        EditMode = true;
+        EditMode = true;    
 
     }
+
+
+    public void EditInfo()
+    {
+        //Here we put the method to edit user info (coordinator)
+
+    }
+
+
 
 
     // Method that passes an updated shift to both shiftrepository and shiftregistationrepository
@@ -263,6 +276,15 @@ else
         EditMode = false;
         var result = await shiftService.UpdateShift(shift);
         var result2 = await shiftRegistrationService.UpdateShiftRegistrationByShiftId(shift);
+    }
+
+
+    public async Task DeleteShift(string id)
+    {
+
+        var response =  await shiftService.DeleteShift(id);
+        List<Shift> newList = await shiftService.GetAllShifts(); 
+        shiftList = newList; 
     }
 
     private bool isSortedByPriority = false;
@@ -284,12 +306,7 @@ else
         }
     }
 
-
-    public void EditInfo()
-    {
-        //Here we put the method to edit user info (coordinator)
-
-    }
+ 
 
     public void UpdatePriority(string Id)
     {

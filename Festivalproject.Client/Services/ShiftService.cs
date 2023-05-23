@@ -43,24 +43,68 @@ public class ShiftService : IShiftService
     {
         Console.WriteLine(shiftUpdated.Name.ToString());
 
-            var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
-            if (response.IsSuccessStatusCode)
-            {
-                //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
-                var _shift = await response.Content.ReadFromJsonAsync<Shift>();
-                return _shift; 
-            }
-            else
-            {
-                throw new Exception("Opatering af vagt fejlede");
-            }
+         var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
+         if (response.IsSuccessStatusCode)
+         {
+               //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
+               var _shift = await response.Content.ReadFromJsonAsync<Shift>();
+               return _shift;  
+         }
+         else
+         {
+               throw new Exception("Opatering af vagt fejlede");
+         }
             
         }
 
 
-    public Task DeleteShift(string id)
+    public async Task<bool> DeleteShift(string id)
     {
-        Http.DeleteAsync($"api/shifts?shiftid={id}");
-        return Task.CompletedTask;
+       var response = await  Http.DeleteAsync($"https://localhost:7251/api/shift/{id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+
+        return false;
     }
+    
+    public async Task<Shift> GetShiftById(string id)
+    {
+        try
+        {
+            var response = await Http.GetAsync($"https://localhost:7251/api/shift/id/{id}");
+        
+            if (response.IsSuccessStatusCode)
+            {
+                var shift = await response.Content.ReadFromJsonAsync<Shift>();
+                return shift;
+            }
+            else
+            {
+                // Log or handle the error based on the status code
+                Console.WriteLine($"Error retrieving shift: {response.StatusCode}");
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log or handle the exception
+            Console.WriteLine($"Exception thrown while retrieving shift: {ex.Message}");
+            return null;
+        }
+    }
+
+
+    public async Task<List<Shift>> GetShiftsByStatus()
+    {
+        
+        var result = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
+        return result; 
+        
+        
+        
+    }
+
 }

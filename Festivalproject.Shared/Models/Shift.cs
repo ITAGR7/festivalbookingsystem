@@ -10,21 +10,23 @@ public class Shift
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-
     public string Id { get; set; } = "";
-
-
+    
+    
     [BsonElement("name")] 
     public string Name { get; set; }
+    
 
-    [BsonElement("type")]
-    public string ShiftType { get; set; }
-
-    [BsonElement("area")]
-    public string Area { get; set; }
+    [BsonElement("type")] 
+    public string Type { get; set; }
+    
 
     [BsonElement("isOccupied")] 
     public bool Status { get; set; }
+    
+    [BsonElement("area")] 
+    public string Area { get; set; }
+
 
     [BsonElement("description")]
     public string Description { get; set; } = "";
@@ -38,7 +40,7 @@ public class Shift
     [BsonElement("endTime")]
     public DateTime endTime { get; set; }
 
-            public bool IsPriority { get; set; }
+    public bool IsPriority { get; set; }
 
- }
-
+    
+}

@@ -1,30 +1,68 @@
+@using Festivalproject.Shared.Models
+@using Festivalproject.Client.Services
+@using Blazored.Modal.Services
+
+@inject IJSRuntime JSRuntime
+@inject IShiftRegistrationService ShiftRegistrationService
+@inject IModalService ModalService
+@inject IShiftService ShiftService
+
+
 <div>
     <ModalContent>
-        <h3 class="Header">Vagt information</h3>
-        <div class="parent">
-            <div class="div1">
-                <h3>@ModalShiftTitle</h3>
+        @if (ConfirmationVisible)
+        {
+            <div class="HeaderContainer">
+                <h3 class="Header">You have successfully registered for @ModalShiftTitle</h3>
             </div>
-            <div class="div2">
-                <h3>@ModalShiftDescription</h3>
+            <div class="parent">
+                <div class="infoDiv">
+                    <div>Shift ID: @ModalShiftId</div>
+                    <div>Bruger ID: @ModalUserId</div>
+                    <div>Shift Type: @ModalShiftType</div>
+                </div>
             </div>
-            <div class="div3">
-                <h3>@ModalShiftDuration</h3>
+        }
+        else
+        {
+            <div class="HeaderContainer">
+                <h3 class="Header">Information om @ModalShiftTitle</h3>
             </div>
-            <div class="div4">
-                <h3>@ModalShiftStart</h3>
+            <div class="parent">
+                <div class="infoDiv">
+                    <div>Beskrivelse: @ModalShiftDescription</div>
+                    <div>Varighed: @ModalShiftDuration timer</div>
+                    <div>Starttidspunkt: @ModalShiftStart</div>
+                    <div>Sluttidspunkt: @ModalShiftEnd</div>
+                    <div>Område: @ModalShiftArea</div>
+                    <div>Shift ID: @ModalShiftId</div>
+                    <div>Bruger ID: @ModalUserId</div>
+                    <div>Shift Type: @ModalShiftType</div>
+                </div>
+                <div class="buttonDiv">
+                    <button @onclick="CreateShiftRegistration" class="submit-button">Tilmeld Vagt</button>
+                </div>
             </div>
-            <div class="div5">
-                <h3>@ModalShiftEnd</h3>
-            </div>
-            <div class="div6">
-                <h3>@ModalShiftCapacity</h3>
-            </div>
-        </div>
+        }
     </ModalContent>
 </div>
 
 @code {
+    
+    private bool ConfirmationVisible { get; set; } = false;
+    
+    //Injecting the modal service
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    //Method for closing the modal
+    private async Task CloseModal() => await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+
+
+    [Parameter]
+    public DateTime ModalRegistrationDate { get; set; } = DateTime.Now;
+    
+    [Parameter]
+    public string ModalShiftId { get; set; }
 
     [Parameter]
     public string ModalShiftTitle { get; set; }
@@ -36,14 +74,67 @@
     public string ModalShiftEnd { get; set; }
 
     [Parameter]
+    public string ModalShiftDescription { get; set; }
+    
+    [Parameter]
+    public string ModalShiftArea { get; set; }
+
+    [Parameter]
     public string ModalShiftDuration { get; set; }
 
     [Parameter]
-    public string ModalShiftDescription { get; set; }
-
+    public string ModalUserId { get; set; }
+    
     [Parameter]
-    public string ModalShiftCapacity { get; set; }
+    public string ModalShiftType { get; set; }
 
-    //Method for creating a shiftregistration where shiftid is being parsed
 
+    //Method for creating a shiftregistration
+    public async Task CreateShiftRegistration()
+    {
+    //Create a new shiftregistration object and assigning parameters that are being parsed in the modal to the post
+        ShiftRegistration shiftRegistration = new ShiftRegistration();
+        
+
+        //Set the properties of the shiftregistration object
+        shiftRegistration.ShiftId = ModalShiftId;
+        shiftRegistration.UserId = ModalUserId;
+        shiftRegistration.RegistrationDate = ModalRegistrationDate;
+        shiftRegistration.ShiftName = ModalShiftTitle;
+        shiftRegistration.StartTime = DateTime.Parse(ModalShiftStart);
+        shiftRegistration.EndTime = DateTime.Parse(ModalShiftEnd);
+        shiftRegistration.ShiftDuration = int.Parse(ModalShiftDuration);
+        shiftRegistration.Description = ModalShiftDescription;
+        shiftRegistration.ShiftArea = ModalShiftArea;
+        shiftRegistration.ShiftType = ModalShiftType;
+        
+
+
+    //Create a new shiftregistration in the database
+        await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
+
+    // Get the current shift
+        Shift currentShift = await ShiftService.GetShiftById(ModalShiftId);
+
+    // Update the current shift's isOccupied property to true
+        currentShift.Status = true;
+        
+    // Update the shift in the database
+        await ShiftService.UpdateShift(currentShift);
+        
+    //Show confirmation
+        ConfirmationVisible = true;
+        StateHasChanged();
+
+    //Wait for 5 seconds
+        await Task.Delay(5000);
+        
+    // Refresh the calendar
+        var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
+        await module.InvokeVoidAsync("updateCalendar");
+
+
+    //Close the modal
+        await CloseModal();
+    }
 }

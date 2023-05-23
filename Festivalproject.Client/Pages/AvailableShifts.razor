@@ -2,63 +2,121 @@
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Components
 @using Blazored.Modal.Services
-
+@using Festivalproject.Client.Services
 
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
 @inject IModalService ModalService
+@inject NavigationManager NavManager
+@inject IUserService userService; 
 
+<div class="HeaderContainer">
+    <div class="Header">
+        <h3>Hej @user.FirstName. Nedenfor ser du alle tilgængeligevagter, du er velkommen til at melde dig på de vagter du ønsker. </h3>
+    </div>
+</div>
+<div class="ContentContainer">
+<div id="shifts-container">
+    <div class="shift-types">
+                <div class="shift-type">
+                    <h3 class="Vagtheader">Vagt typer</h3>
+                </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #6D9EEB"></span>
+            <span>Parkeringsvagt</span>
+        </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #D4BF77"></span>
+            <span>Toiletvagt</span>
+        </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #7BB661"></span>
+            <span>Indgangvagt</span>
+        </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #E67399"></span>
+            <span>Parkeringsvagt</span>
+        </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #DB843D"></span>
+            <span>Køkkenvagt</span>
+        </div>
+        <div class="shift-type">
+            <span class="shift-dot" style="background-color: #A47AE2"></span>
+            <span>Sikkerhedsvagt</span>
+        </div>
+    </div>
 
-<h3>AvailableShifts</h3>
-
-<div id="calendar"></div>
-
+    <div id="calendar"></div>
+</div>
+</div>
 
 @code {
+    // User id parameter
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? id { get; set; }
+    public string UserId { get; set; }
+    private User user { get; set; } = new();
 
     private List<Shift> AvailableShift { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/false");
+        user = await userService.GetUserByObjectId(id);
+
+    // Parse the query string to get the user id
+        var uri = new Uri(NavManager.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        UserId = query["id"];
+
+        // Your initialization code here
+        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
 
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
 
-    // Convert the list of shifts to an array of events thats later passed over to the js function
+        // Convert the list of shifts to an array of events that's later passed over to the JS function
         var events = AvailableShift.Select(s => new
         {
-    // Setting the properties of the event object
+            // Setting the properties of the event object
+            shiftId = s.Id,
             title = s.Name,
-            start = s.startTime.ToString("s"),
-            end = s.endTime.ToString("s"),
+            start = s.startTime.ToString("o"),
+            end = s.endTime.ToString("o"),
             description = s.Description,
+            area = s.Area,
             _duration = Convert.ToString(s.Duration),
-            type = s.ShiftType,
-            id = s.Id
-    //to array conversion
+            type = s.Type,
+            _userId = UserId
         }).ToArray();
 
-    //importing the js file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
+        // Importing the JS file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }
 
     [JSInvokable]
-    public async Task ShiftsDialog(string shiftName, string shiftDescription, string shiftCapacity, string shiftDuration, string shiftStart, string shiftEnd)
+    public async Task ShiftsDialog(string shiftType, string shiftId, string shiftName, string shiftStart, string shiftEnd, string shiftDescription, string shiftArea, string shiftDuration, string shiftUserId)
     {
-        Console.WriteLine($"ShiftsDialog - shiftDuration: {shiftDuration}");
-
-        var options = new ModalOptions { Size = ModalSize.Medium };
+        Console.WriteLine(shiftEnd);
+        var options = new ModalOptions
+        {
+            OverlayCustomClass = "custom-modal-overlay",
+            Size = ModalSize.Medium
+        };
         var parameters = new ModalParameters();
+        parameters.Add("ModalShiftType", shiftType);
+        parameters.Add("ModalShiftId", shiftId);
         parameters.Add("ModalShiftTitle", shiftName);
-        parameters.Add("ModalShiftDescription", shiftDescription);
-        parameters.Add("ModalShiftCapacity", shiftCapacity);
-        parameters.Add("ModalShiftDuration", shiftDuration);
         parameters.Add("ModalShiftStart", shiftStart);
         parameters.Add("ModalShiftEnd", shiftEnd);
+        parameters.Add("ModalShiftDescription", shiftDescription);
+        parameters.Add("ModalShiftArea", shiftArea);
+        parameters.Add("ModalShiftDuration", shiftDuration);
+        parameters.Add("ModalUserId", shiftUserId);
 
-        var dialog = ModalService.Show<ShiftsDialog>("Shift Dialog", parameters, options);
+        var dialog = ModalService.Show<ShiftsDialog>("", parameters, options);
         var result = await dialog.Result;
     }
 

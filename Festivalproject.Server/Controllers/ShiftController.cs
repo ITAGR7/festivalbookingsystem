@@ -10,7 +10,6 @@ public class ShiftsController : ControllerBase
 {
     public readonly IShifts ShiftRepository;
 
-
     public ShiftsController(IShifts iShifts)
     {
         ShiftRepository = iShifts;
@@ -23,8 +22,16 @@ public class ShiftsController : ControllerBase
 
         return ShiftRepository.GetAllShifts();
     }
+    
+    [HttpGet("id/{id}")]
+    public Shift GetShiftById(string id)
+    {
+        Console.WriteLine("Get shift by id (Controller) ");
 
-    [HttpGet("{status}")]
+        return ShiftRepository.GetShiftById(id);
+    }
+
+    [HttpGet("status/{status}")]
     public List<Shift> GetShiftsByStatus(bool status)
     {
         Console.WriteLine("Get shifts by status (Controller) ");
@@ -32,11 +39,18 @@ public class ShiftsController : ControllerBase
         return ShiftRepository.GetShiftsByStatus(status);
     }
 
-        [HttpPut]
-        public async Task<Shift> UpdateShift(Shift shiftUpdated)
-        {
-            Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
-            return await  ShiftRepository.UpdateShift(shiftUpdated);
-        }
+    [HttpPut]
+    public async Task<Shift> UpdateShift(Shift shiftUpdated)
+    {
+        Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
+        return await ShiftRepository.UpdateShift(shiftUpdated);
+
     }
 
+    [HttpDelete("{id}")]
+    public async Task<bool> DeleteShift(string id)
+    {
+        var result = await ShiftRepository.DeleteShift(id);
+        return result;
+    }
+}
