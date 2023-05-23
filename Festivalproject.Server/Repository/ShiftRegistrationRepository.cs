@@ -30,6 +30,7 @@ public class ShiftRegistrationRepository : IShiftRegistration
     }
 
 
+    
     public async Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration)
     {
         await collection.InsertOneAsync(shiftRegistration);

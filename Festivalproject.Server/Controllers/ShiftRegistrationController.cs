@@ -43,13 +43,4 @@ public class ShiftRegistrationController : ControllerBase
             return StatusCode(500, "Internal server error. Update failed.");
     }
 
-
-    //create shiftregistrationbyshiftid and userid
-
-    //[HttpPost]
-    //public Task CreateShiftRegistration(ShiftRegistration shiftregistration)
-    //{
-    //   var result =  ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
-    //   return result; 
-    //}
 }

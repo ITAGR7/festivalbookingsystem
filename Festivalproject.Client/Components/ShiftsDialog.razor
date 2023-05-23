@@ -114,7 +114,7 @@
 
 
     //Create a new shiftregistration in the database
-        //await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
+        await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
 
     //Update the shift status by shift id to isOccupied true
         await ShiftService.UpdateShiftStatusByShiftId(ModalShiftId, true);
