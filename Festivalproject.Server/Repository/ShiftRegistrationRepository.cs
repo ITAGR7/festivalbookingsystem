@@ -29,28 +29,26 @@ public class ShiftRegistrationRepository : IShiftRegistration
         return collection.Find(new BsonDocument()).ToList();
     }
 
-    //public Task<bool> CreateShiftRegistration(ShiftRegistration shiftregistration)
-    //{
-    //   var result = collection.InsertOne(shiftregistration);
-    //   return result;
-    //}
+
+    public async Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration)
+    {
+        await collection.InsertOneAsync(shiftRegistration);
+        return true;
+    }
 
 
+    public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
+    {
+        var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
 
-        public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
-        {
-            var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
+        var update = Builders<ShiftRegistration>.Update
+            .Set(u => u.ShiftName, _shift.Name)
+            .Set(u => u.StartTime, _shift.startTime)
+            .Set(u => u.EndTime, _shift.endTime)
+            .Set(u => u.Description, _shift.Description);
 
-            var update = Builders<ShiftRegistration>.Update
-              .Set(u => u.ShiftName, _shift.Name)
-              .Set(u => u.StartTime, _shift.startTime)
-              .Set(u => u.EndTime, _shift.endTime)
-              .Set(u => u.Description, _shift.Description);
+        var result = await collection.UpdateManyAsync(filter, update);
 
-            var result = await collection.UpdateManyAsync(filter, update);
-
-            return result.ModifiedCount > 0; 
-        }
-
-    
+        return result.ModifiedCount > 0;
+    }
 }

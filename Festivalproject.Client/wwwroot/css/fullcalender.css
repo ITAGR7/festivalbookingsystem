@@ -21,9 +21,11 @@
     transition: background-color 0.2s !important;
 
 }
+
 .fc-button:hover {
     background-color: #4F46E5 !important;
 }
+
 .fc-button:focus-visible {
     outline: 2px solid transparent !important;
     outline-offset: 2px !important;

@@ -48,19 +48,23 @@
 </div>
 
 @code {
-    
+
     private bool ConfirmationVisible { get; set; } = false;
-    
+
     //Injecting the modal service
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; }
 
     //Method for closing the modal
-    private async Task CloseModal() => await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+    private async Task CloseModal()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+    }
 
 
     [Parameter]
     public DateTime ModalRegistrationDate { get; set; } = DateTime.Now;
-    
+
     [Parameter]
     public string ModalShiftId { get; set; }
 
@@ -75,7 +79,7 @@
 
     [Parameter]
     public string ModalShiftDescription { get; set; }
-    
+
     [Parameter]
     public string ModalShiftArea { get; set; }
 
@@ -84,7 +88,7 @@
 
     [Parameter]
     public string ModalUserId { get; set; }
-    
+
     [Parameter]
     public string ModalShiftType { get; set; }
 
@@ -93,10 +97,10 @@
     public async Task CreateShiftRegistration()
     {
     //Create a new shiftregistration object and assigning parameters that are being parsed in the modal to the post
-        ShiftRegistration shiftRegistration = new ShiftRegistration();
-        
+        var shiftRegistration = new ShiftRegistration();
 
-        //Set the properties of the shiftregistration object
+
+    //Set the properties of the shiftregistration object
         shiftRegistration.ShiftId = ModalShiftId;
         shiftRegistration.UserId = ModalUserId;
         shiftRegistration.RegistrationDate = ModalRegistrationDate;
@@ -107,34 +111,28 @@
         shiftRegistration.Description = ModalShiftDescription;
         shiftRegistration.ShiftArea = ModalShiftArea;
         shiftRegistration.ShiftType = ModalShiftType;
-        
 
 
     //Create a new shiftregistration in the database
         await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
 
-    // Get the current shift
-        Shift currentShift = await ShiftService.GetShiftById(ModalShiftId);
+    //Update the shift status by shift id to isOccupied true
+        await ShiftService.UpdateShiftStatusByShiftId(ModalShiftId, true);
 
-    // Update the current shift's isOccupied property to true
-        currentShift.Status = true;
-        
-    // Update the shift in the database
-        await ShiftService.UpdateShift(currentShift);
-        
     //Show confirmation
         ConfirmationVisible = true;
         StateHasChanged();
 
     //Wait for 5 seconds
         await Task.Delay(5000);
-        
-    // Refresh the calendar
+
+    /*// Refresh the calendar
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
-        await module.InvokeVoidAsync("updateCalendar");
+        await module.InvokeVoidAsync("updateCalendar");*/
 
 
     //Close the modal
         await CloseModal();
     }
+
 }
