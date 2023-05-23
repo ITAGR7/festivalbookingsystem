@@ -3,35 +3,47 @@ using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
 using Festivalproject.Server.Repository;
 
-namespace Festivalproject.Server.Controllers
+namespace Festivalproject.Server.Controllers;
 
+[Route("api/ShiftRegistration")]
+[ApiController]
+public class ShiftRegistrationController : ControllerBase
 {
-    [Route("api/ShiftRegistration")]
-    [ApiController]
-    public class ShiftRegistrationController : ControllerBase
-    {
-        public readonly IShiftRegistration ShiftRegistrationRepo;
+    public readonly IShiftRegistration ShiftRegistrationRepo;
 
-        public ShiftRegistrationController(IShiftRegistration iShiftRegistrationRepo)
-        {
-            ShiftRegistrationRepo = iShiftRegistrationRepo;
-        }
+    public ShiftRegistrationController(IShiftRegistration iShiftRegistrationRepo)
+    {
+        ShiftRegistrationRepo = iShiftRegistrationRepo;
+    }
+
 
 
         [HttpGet("{UserId}")]
         public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
         {
-            List<ShiftRegistration> shiftregistration = ShiftRegistrationRepo.GetRegisteredShiftsById(UserId);
-            return shiftregistration;
+            var result = ShiftRegistrationRepo.GetRegisteredShiftsById(UserId);
+            Console.WriteLine("Controller: Get shifts : Antal shifts fundet " + result.Count());
+            return result;
         }
 
 
-        //    public List<ShiftRegistration> GetRegisteredShiftsById(string UserID) {
+        [HttpPut]
+         public Task<bool> UpdateShiftRegistrationbyShiftId(Shift _shift)
+        {
 
-        //        Console.WriteLine("Get all shifts (Controller) ");
+            var result = ShiftRegistrationRepo.UpdateShiftRegistrationByShiftId(_shift);
+            return result;
+        }
 
-        //        return ShiftRegistrationRepo.GetRegisteredShiftsById();
-        //    }
+
+
+
+       
+
+        //[HttpPost]
+        //public Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+        //{
+        //    var result = ShiftRegistrationRepo.CreateShiftRegistration(shiftregistration);
+        //    return result;
         //}
-    }
 }

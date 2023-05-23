@@ -1,23 +1,19 @@
 ﻿using Festivalproject.Shared.Models;
 
-namespace Festivalproject.Server.Interface
+namespace Festivalproject.Server.Interface;
+
+public interface IUser
 {
-    public interface IUser
-    {
+    List<User> GetAllUsers();
+    User CreateUser(User newUser);
 
-        public List<User> GetAllUsers();
-        public string CreateUser(User newUser);
+    LoginResultDTO GetLoginResult(string username, string password);
 
-        public LoginResult GetLoginResult(string username, string password);
+    User GetUserByObjectId(string id);
 
-        public User GetUserByObjectId(string id); 
+    //int PostUser(User user);
 
-        //int PostUser(User user);
+    //void DeleteUser(int userid);
 
-        //void DeleteUser(int userid);
-
-        public Task<bool> UpdateUser(User userUpdated);
-
-    }
-
+    Task<bool> UpdateUser(User userUpdated);
 }

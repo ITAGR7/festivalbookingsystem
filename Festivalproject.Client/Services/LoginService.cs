@@ -5,36 +5,31 @@ using System.Net.Http.Json;
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public class LoginService : ILoginService
 {
-    public class LoginService : ILoginService
+    private readonly HttpClient Http;
+
+    public LoginService(HttpClient httpClient)
     {
+        Http = httpClient;
+    }
 
-        private readonly HttpClient Http;
-        public LoginService(HttpClient httpClient)
+    //Method that uses a HttpPost to pass the loginData object to the database. By using a post, versus using a get, we make sure sensitive data is not passed 
+    //...uneccesseraly from database to client 
+    public async Task<LoginResultDTO> GetLoginResult(LoginDataDTO loginData)
+    {
+        var response = await Http.PostAsJsonAsync("/api/user/login", loginData);
+
+        if (response.IsSuccessStatusCode)
         {
-            this.Http = httpClient;
+            var loginResult = await response.Content.ReadFromJsonAsync<LoginResultDTO>();
+
+            return loginResult;
         }
 
-        public async Task<LoginResult> GetLoginResult(string username, string password)
-        {
-           
-            var requestBody = new { username, password }; //Når man sender som requestbody, vises ikke parametrene i url = mere sikkert 
-
-            // Vi anvender httPost fremfor httpGet, da dette ikke returnerer unødvendig data, som vi ikke vil have synlig på clienten 
-            var response = await Http.PostAsJsonAsync($"https://localhost:7251/api/user/login", requestBody);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
-
-                return loginResult;
-            }
-
-            throw new Exception("Log ind lykkedes ikke. Passord eller bruger findes ikke ");
-
-
-        }
+        //Message appears in console 
+        throw new Exception("Log ind lykkedes ikke. Passord eller bruger findes ikke ");
     }
 }
-

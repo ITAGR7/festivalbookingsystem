@@ -1,10 +1,15 @@
 ﻿using Festivalproject.Shared.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Festivalproject.Server.Interface
 {
     public interface IShifts
     {
-        List<Shifts> GetAllShifts();
-        List<Shifts> GetShiftsByStatus(bool status);
+        List<Shift> GetAllShifts();
+        List<Shift> GetShiftsByStatus(bool status);
+        Task<Shift> UpdateShift(Shift shift);
+        Task<bool> DeleteShift(string id); //Lidt usikker på hvad for en returtype en delete vil have? Skal denne være task?
+        Shift GetShiftById(string id);
+        Shift  CreateShift(Shift shift);
     }
 }

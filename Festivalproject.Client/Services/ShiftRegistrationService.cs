@@ -4,20 +4,25 @@ using System.Security.Cryptography.X509Certificates;
 using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Festivalproject.Client.Services
+namespace Festivalproject.Client.Services;
+
+public class ShiftRegistrationService : IShiftRegistrationService
 {
-    public class ShiftRegistrationService : IShiftRegistrationService
+    private readonly HttpClient Http;
+
+    public ShiftRegistrationService(HttpClient httpClient)
     {
-        private readonly HttpClient Http;
-        public ShiftRegistrationService(HttpClient httpClient)
-        {
-            this.Http = httpClient;
-        }
-            public async Task<ShiftRegistration> GetRegisteredShiftsById(string UserId)
+        Http = httpClient;
+    }
+
+
+
+        public async Task<List<ShiftRegistration>> GetRegisteredShiftsById(string UserId)
         {
             try
             {
-                var result = await Http.GetFromJsonAsync<ShiftRegistration>($"https://localhost:7251/api/ShiftRegistration/{UserId}");
+                var result = await Http.GetFromJsonAsync<List<ShiftRegistration>>($"/api/ShiftRegistration/{UserId}");
+                Console.WriteLine("Test på getregistred Service : " + result.Count);
                 return result;
             }
             catch (Exception ex)
@@ -25,6 +30,41 @@ namespace Festivalproject.Client.Services
                 Console.WriteLine(ex.Message);
                 throw;
             }
+
         }
-    }
+
+
+        public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
+        {
+            try
+            {
+                var result = await Http.PutAsJsonAsync("/api/ShiftRegistration", _shift);
+                return true;
+               
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                throw; 
+            }
+        }
+
+        // public bla bla Task<shiftregistration> UpdateShiftregistrationByShiftId(string ShiftId) 
+
+        // passing id to controller , http.put<shift> ("/shiftregistration")
+
+    //public async Task CreateShiftRegistration(ShiftRegistration shiftregistration)
+    //{
+    //    try
+    //    {
+    //        await Http.PostAsJsonAsync<ShiftRegistration>("/api/ShiftRegistration",
+    //            shiftregistration);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine(ex.Message);
+    //        throw;
+    //    }
+    //}
 }

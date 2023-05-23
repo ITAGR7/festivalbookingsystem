@@ -20,20 +20,24 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Festivalproject.Shared\Festivalproject.Shared.csproj" />
+        <ProjectReference Include="..\Festivalproject.Shared\Festivalproject.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\js\index.global.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\script.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\main.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\main.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\jquery.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\js\moment.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\index.global.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\script.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\main.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\main.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\jquery.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\moment.js" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Pages\AvailableShifts.razor.js" />
+        <None Remove="Pages\AvailableShifts.razor.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Shared\Views\" />
     </ItemGroup>
 
 </Project>
