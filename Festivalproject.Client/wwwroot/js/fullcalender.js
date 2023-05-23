@@ -88,24 +88,25 @@ export function initializeCalendar(inputEvents, dotNetReference) {
 
     //rendering the calendar
     calendar.render();
+    
+}
+// Update the events
+export function updateEvents(inputEvents) {
+    events = inputEvents.map(event => {
+        const color = colorMap[event.type];
+        if (color) {
+            return {...event, color};
+        } else {
+            return event;
+        }
+    });
 
-    //funciton to remove all events and add to the calendar with no parameters, should be able to be triggered via c# code
-
+    console.log("Updated Events After Tilmeldvagt: ", events); // Log the events to the console
 }
 
-// New function to update the calendar
-export function updateCalendar(dotNetReference) {
-    dotNetReference.invokeMethodAsync('GetAvailableShifts').then(eventsJson => {
-        var events = JSON.parse(eventsJson);
-        // Remove all events from the calendar
-        var existingEvents = calendar.getEvents();
-        existingEvents.forEach(function (event) {
-            event.remove();
-        });
-
-        // Add the new events
-        events.forEach(event => {
-            calendar.addEvent(event);
-        });
-    });
+// Refresh the calendar
+export function refreshCalender () {
+    calendar.removeAllEvents();
+    calendar.addEventSource(events);
+    calendar.render();
 }

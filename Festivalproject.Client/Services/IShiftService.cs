@@ -14,4 +14,6 @@ public interface IShiftService
     Task<Shift> UpdateShift(Shift _shift);
 
     Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status);
+    
+    Task<List<Shift>> GetShiftsByStatus();
 }

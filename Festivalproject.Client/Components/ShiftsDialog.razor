@@ -1,10 +1,10 @@
 @using Festivalproject.Shared.Models
 @using Festivalproject.Client.Services
 @using Blazored.Modal.Services
+@using Festivalproject.Client.Pages
 
 @inject IJSRuntime JSRuntime
 @inject IShiftRegistrationService ShiftRegistrationService
-@inject IModalService ModalService
 @inject IShiftService ShiftService
 
 
@@ -91,7 +91,34 @@
 
     [Parameter]
     public string ModalShiftType { get; set; }
+    
 
+    private List<Shift> AvailableShift { get; set; } = new();
+    
+    //method for refreshing the calender
+    public async Task RefreshCalenderEvents()
+    {
+        AvailableShift = await ShiftService.GetShiftsByStatus();
+        
+    // Convert the list of shifts to an array of events
+        var events = AvailableShift.Select(s => new
+        {
+            shiftId = s.Id,
+            title = s.Name,
+            start = s.startTime.ToString("o"),
+            end = s.endTime.ToString("o"),
+            description = s.Description,
+            area = s.Area,
+            _duration = Convert.ToString(s.Duration),
+            type = s.Type,
+            _userId = ModalUserId
+        }).ToArray();
+
+    // Call the JS function to re-initialize the calendar with the updated events
+        var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
+        await module.InvokeVoidAsync("initializeCalendar", new object[] { events, DotNetObjectReference.Create(this) });
+    }
+    
 
     //Method for creating a shiftregistration
     public async Task CreateShiftRegistration()
@@ -119,16 +146,16 @@
     //Update the shift status by shift id to isOccupied true
         await ShiftService.UpdateShiftStatusByShiftId(ModalShiftId, true);
 
+        
+    // Refresh the calendar events
+        await RefreshCalenderEvents();
+        
     //Show confirmation
         ConfirmationVisible = true;
         StateHasChanged();
 
     //Wait for 5 seconds
         await Task.Delay(5000);
-
-    /*// Refresh the calendar
-        var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
-        await module.InvokeVoidAsync("updateCalendar");*/
 
 
     //Close the modal
