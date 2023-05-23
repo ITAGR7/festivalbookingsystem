@@ -16,39 +16,39 @@
     </div>
 </div>
 <div class="ContentContainer">
-<div id="shifts-container">
-    <div class="shift-types">
-                <div class="shift-type">
-                    <h3 class="Vagtheader">Vagt typer</h3>
-                </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #6D9EEB"></span>
-            <span>Parkeringsvagt</span>
+    <div id="shifts-container">
+        <div class="shift-types">
+            <div class="shift-type">
+                <h3 class="Vagtheader">Vagt typer</h3>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #6D9EEB"></span>
+                <span>Parkeringsvagt</span>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #D4BF77"></span>
+                <span>Toiletvagt</span>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #7BB661"></span>
+                <span>Indgangvagt</span>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #E67399"></span>
+                <span>Parkeringsvagt</span>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #DB843D"></span>
+                <span>Køkkenvagt</span>
+            </div>
+            <div class="shift-type">
+                <span class="shift-dot" style="background-color: #A47AE2"></span>
+                <span>Sikkerhedsvagt</span>
+            </div>
         </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #D4BF77"></span>
-            <span>Toiletvagt</span>
-        </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #7BB661"></span>
-            <span>Indgangvagt</span>
-        </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #E67399"></span>
-            <span>Parkeringsvagt</span>
-        </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #DB843D"></span>
-            <span>Køkkenvagt</span>
-        </div>
-        <div class="shift-type">
-            <span class="shift-dot" style="background-color: #A47AE2"></span>
-            <span>Sikkerhedsvagt</span>
-        </div>
-    </div>
 
-    <div id="calendar"></div>
-</div>
+        <div id="calendar"></div>
+    </div>
 </div>
 
 @code {
@@ -56,6 +56,7 @@
     [Parameter]
     [SupplyParameterFromQuery]
     public string? id { get; set; }
+
     public string UserId { get; set; }
     private User user { get; set; } = new();
 
@@ -70,16 +71,16 @@
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
         UserId = query["id"];
 
-        // Your initialization code here
-        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/false");
+    // Your initialization code here
+        AvailableShift = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
 
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
 
-        // Convert the list of shifts to an array of events that's later passed over to the JS function
+    // Convert the list of shifts to an array of events that's later passed over to the JS function
         var events = AvailableShift.Select(s => new
         {
-            // Setting the properties of the event object
+    // Setting the properties of the event object
             shiftId = s.Id,
             title = s.Name,
             start = s.startTime.ToString("o"),
@@ -91,7 +92,7 @@
             _userId = UserId
         }).ToArray();
 
-        // Importing the JS file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
+    // Importing the JS file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }

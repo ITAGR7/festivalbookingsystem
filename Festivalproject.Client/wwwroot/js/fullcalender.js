@@ -22,11 +22,11 @@ export function initializeCalendar(inputEvents, dotNetReference) {
             return event;
         }
     });
-    
-    console.log ("Events: ", events); // Log the events to the console
+
+    console.log("Events: ", events); // Log the events to the console
 
     var calendarEl = document.getElementById('calendar');
-    console.log ("Events: ", events); // Log the events to the console
+    console.log("Events: ", events); // Log the events to the console
     calendar = new FullCalendar.Calendar(calendarEl, {
         events: events,
         initialDate: '2023-06-01',
@@ -88,10 +88,11 @@ export function initializeCalendar(inputEvents, dotNetReference) {
 
     //rendering the calendar
     calendar.render();
-    
+
     //funciton to remove all events and add to the calendar with no parameters, should be able to be triggered via c# code
 
 }
+
 // New function to update the calendar
 export function updateCalendar(dotNetReference) {
     dotNetReference.invokeMethodAsync('GetAvailableShifts').then(eventsJson => {

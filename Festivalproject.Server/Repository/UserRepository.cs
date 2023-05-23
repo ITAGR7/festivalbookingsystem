@@ -88,7 +88,7 @@ public class UserRepository : IUser
             .Set(u => u.Id, userUpdated.Id);
 
 
-            var result = await collection.UpdateOneAsync(filter, update);
+        var result = await collection.UpdateOneAsync(filter, update);
 
         return result.ModifiedCount > 0;
     }

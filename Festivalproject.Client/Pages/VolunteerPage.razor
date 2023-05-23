@@ -9,22 +9,21 @@
 @using Blazored.Modal.Services;
 
 
-
 <!-- Implementing header with image at top of userprofile page  -->
 <div>
-  <div>
-    <img class="h-32 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
-  </div>
-  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-    <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-      <div class="flex">
-        <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="/ProfileHead.png" alt="">
-      </div>
-      <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-        <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
-          <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
-        </div>
-     @*   <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <div>
+        <img class="h-32 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
+    </div>
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+            <div class="flex">
+                <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="/ProfileHead.png" alt="">
+            </div>
+            <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+                <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
+                    <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
+                </div>
+                @*   <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
           <button type="button" class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
             <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
@@ -37,12 +36,12 @@
             </svg>
           </button>
         </div>*@
-      </div>
+            </div>
+        </div>
+        <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
+            <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
+        </div>
     </div>
-    <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
-      <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
-    </div>
-  </div>
 </div>
 
 <div class="sm:container sm:mx-auto">
@@ -50,7 +49,7 @@
     <h3 class="mt-8  text-lg text-gray-700">Her kan du se og ændre dine oplysninger, tilmelde dig frivillige-vagter og se de vagter du allerede er tilmeldt!</h3>
 
     <h4 class="mt-24  mb-8 text-2xl"> Dine oplysninger </h4>
-    
+
 
     <!-- Adding a table for displyaing userinformation. We are using an If statement as a switch to display either 1) static data  or 2) dynamic editable data using inputfields -->
     @if (!EditMode)
@@ -68,33 +67,33 @@
                     <div class="inline-block min-w-full py-2 align-middle">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
-                                <tr>
-                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
 
-                                    </th>
-                                </tr>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                <tr>
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
-                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -104,7 +103,6 @@
     }
     else
     {
-
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
@@ -118,33 +116,49 @@
                     <div class="inline-block min-w-full py-2 align-middle">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
-                                <tr>
-                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
 
-                                    </th>
-                                </tr>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                <tr>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.FirstName" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.SurName" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.Address" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.City" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.Zip" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.PhoneNumber" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.UserName" /></td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><input type="text" @bind="@userUpdated.Email" /></td>
-                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.FirstName"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.SurName"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.Address"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.City"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.Zip"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.PhoneNumber"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.UserName"/>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <input type="text" @bind="@userUpdated.Email"/>
+                                </td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                                </td>
+                            </tr>
 
                             </tbody>
                         </table>
@@ -152,9 +166,7 @@
                 </div>
             </div>
         </div>
-
     }
-
 
 
     <div class="flex items-center justify-between">
@@ -163,15 +175,12 @@
 
     <p class="mt-36 text-2xl">Dine vagter </p>
     <!-- To avoid overabundance of code in this razorpage, we apply use of partial view. See components folder on client  -->
-    <ShiftList Shifts=ShiftRegistrations />
+    <ShiftList Shifts="ShiftRegistrations"/>
 
 
- </div>
+</div>
 
 
-    
-
-  
 @code {
 
     // Passing the userobjects ObjectId(BSON) from loginpage to be able to fetch userinformation and shiftregistrations by userId
@@ -179,18 +188,15 @@
     [SupplyParameterFromQuery]
     public string? id { get; set; }
 
-    private List<User> userList { get; set; } = new List<User>();
-    private User user { get; set; } = new User();
-    private User userUpdated { get; set; } = new User();
+    private List<User> userList { get; set; } = new();
+    private User user { get; set; } = new();
+    private User userUpdated { get; set; } = new();
     private bool EditMode { get; set; } = false;
-    private List<ShiftRegistration> ShiftRegistrations { get; set; } = new List<ShiftRegistration>();
-
-
+    private List<ShiftRegistration> ShiftRegistrations { get; set; } = new();
 
 
     protected override async Task OnInitializedAsync()
     {
-
         user = await userService.GetUserByObjectId(id);
         ShiftRegistrations = await ShiftRegistrationService.GetRegisteredShiftsById(id);
         Console.WriteLine(ShiftRegistrations.Count());
@@ -200,7 +206,6 @@
     //Method that sets the binded inputvalues for userUpdated to user, which is passed to service in "Save" method
     private void Edit()
     {
-
         EditMode = true;
         userUpdated.FirstName = user.FirstName;
         userUpdated.SurName = user.SurName;
@@ -213,8 +218,6 @@
         userUpdated.Password = user.Password;
         userUpdated.UserType = user.UserType;
         userUpdated.Id = user.Id;
-
-
     }
 
     //Method that calls the HttpPut method which updates the changed fields in user-document in the database
@@ -224,10 +227,9 @@
         await userService.UpdateUser(userUpdated);
         user = await userService.GetUserByObjectId(id);
         EditMode = false;
-
     }
 
-      //method that navigates to availableshifts page with userobjectid as parameter
+    //method that navigates to availableshifts page with userobjectid as parameter
     private void NavigateToAvailableShifts()
     {
         navigationManager.NavigateTo($"/availableshifts?id={id}");
