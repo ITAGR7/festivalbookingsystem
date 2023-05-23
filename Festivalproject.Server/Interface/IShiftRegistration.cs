@@ -1,4 +1,5 @@
-﻿using Festivalproject.Shared.Models;
+﻿
+using Festivalproject.Shared.Models;
 
 namespace Festivalproject.Server.Interface;
 

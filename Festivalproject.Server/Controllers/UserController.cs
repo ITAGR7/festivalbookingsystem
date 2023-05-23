@@ -62,11 +62,6 @@ public class UserController : ControllerBase
     }
 
 
-    //[HttpPut]
-    //public void UpdateUser(User userUpdated)
-    //{
-    //    UserRepository.UpdateUser(userUpdated);
-    //}
 
     [HttpPut]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -77,9 +72,5 @@ public class UserController : ControllerBase
     }
 
 
-    //[HttpDelete]
-    //public void DeleteUser(int userid)
-    //{
-    //    Repository.DeleteUser(userid);
-    //}
+    
 }

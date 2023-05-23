@@ -8,6 +8,14 @@
 @inject IShiftRegistrationService shiftRegistrationService; 
 @inject NavigationManager navManager; 
 
+@*@using Blazored.Modal;
+@using Blazored.Modal.Services;
+
+
+*@
+
+
+
 
 <!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing->
 <!-- Implementing header with image at top of userprofile page  -->
@@ -223,6 +231,13 @@
     }
 </div>
 
+
+@*
+<!-- Test_ Applying modal -->
+<BlazorApp1.Components.Modal @ref="Modal"></BlazorApp1.Components.Modal>
+
+<button @onclick="() => Modal.Open()">Open Modal</button>
+*@
 
 @code {
 

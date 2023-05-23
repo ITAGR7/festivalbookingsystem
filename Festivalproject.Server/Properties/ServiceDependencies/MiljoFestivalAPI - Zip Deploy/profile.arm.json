@@ -7,7 +7,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "DefaultResourceGroup-EUS",
+      "defaultValue": "Gruppe7Resources",
       "metadata": {
         "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
       }
@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "Miljoefestival2023server",
+      "defaultValue": "MiljoFestivalAPI",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

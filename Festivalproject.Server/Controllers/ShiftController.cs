@@ -54,4 +54,12 @@ public class ShiftsController : ControllerBase
         var result = await ShiftRepository.DeleteShift(id);
         return result;
     }
+
+
+    //[HttpPost]
+    //public async Task<Shift> CreateShift(Shift newShift)
+    //{
+    //    var result = await ShiftRepository.CreateShift(newShift);
+    //    return result;
+    //}
 }
