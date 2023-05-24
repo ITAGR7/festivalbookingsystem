@@ -18,7 +18,7 @@
 
 
 <!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing->
-<!-- Implementing header with image at top of userprofile page  -->
+!-- Implementing header with image at top of userprofile page  -->
 <div>
     <div>
         <img class="h-48 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
@@ -101,6 +101,11 @@
 
 
     <h4 class="mt-16 text-2xl"> Alle vagter </h4>
+    <!--Algoritme knap-->
+        <p>Antal vagter: @shiftCount</p>
+            <p>Antal optagne vagter: @occupiedShiftCount</p>
+        <button @onclick="FilterOccupiedShifts">Vis optagne vagter</button>
+    
     <div class="row">
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
@@ -249,7 +254,7 @@
     private User user { get; set; } = new();
     private bool EditMode { get; set; }
     private Shift shiftUpdated { get; set; } = new();
-    private List<Shift> shiftList { get; set; } = new();
+    private static List<Shift> shiftList { get; set; } = new();
     private List<Shift> filteredShifts { get; set; } = new();
     private List<Shift> searchFilteredShifts { get; set; } = new();
     public string SearchInput { get; set; } = "";
@@ -271,6 +276,8 @@
         shiftList = await shiftService.GetAllShifts();
 
         filteredShifts = shiftList;
+        
+        shiftCount = shiftList.Count;
     }
 
 
@@ -352,4 +359,34 @@
         }
     }
 
+    // tester alogirytme til at tælle vagter
+
+    private int shiftCount;
+    
+    private async Task CountShifts()
+    {
+    // Hent vagter fra databasen
+        var shifts = await shiftService.GetAllShifts();
+        await Http.GetFromJsonAsync<List<Shift>>("/api/Shifts");
+        
+
+    // Opdater shiftCount-variablen
+        shiftCount = shifts.Count;
+    }
+    
+
+    // Step 2: Tæl optagede vagter
+    int occupiedShiftCount = shiftList.Count(shift => shift.Status);
+
+    // Step 3: Implementer metode til at filtrere vagter baseret på "Status"
+    void FilterOccupiedShifts()
+    {
+        shiftList = shiftList.Where(shift => shift.Status).ToList();
+    }
+    
+    
+    
+    
+    
+    
 }
