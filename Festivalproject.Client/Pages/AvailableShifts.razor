@@ -12,17 +12,17 @@
 @inject NavigationManager NavigationManager
 
 <div class="Wrapper">
-  <div class="HeaderContainer">
-        <h3>Hej @user.FirstName. Nedenfor ser du alle tilgængeligevagter, du er velkommen til at melde dig på de vagter du ønsker. </h3>
+    <div class="HeaderContainer">
+        <h3>Hej @user.FirstName. Nedenfor ser du alle tilgængeligevagter, du er velkommen til at melde dig på de vagter du ønsker.</h3>
     </div>
 
-<div class="BackContainer">
-    <div class="BackBtnContainer">
-        <button @onclick="NavigateToProfile" class="Back">Tilbage til din profil</button>
+    <div class="BackContainer">
+        <div class="BackBtnContainer">
+            <button @onclick="NavigateToProfile" class="Back">Tilbage til din profil</button>
+        </div>
     </div>
-</div>
 
-    <div class="ContentContainer">
+    <div class="GridContainer">
         <div id="shifts-container">
             <div class="shift-types">
                 <div class="shift-type">
@@ -54,14 +54,14 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="MainContentContainer">
-        <div id="main-content">
-            <div id="calendar"></div>
+        <div class="MainContentContainer">
+            <div id="main-content">
+                <div id="calendar"></div>
+            </div>
         </div>
     </div>
 </div>
+
 
 @code {
     // User id parameter

@@ -1,23 +1,31 @@
 .Wrapper {
-    position: relative; /* Make Wrapper the reference for absolute positioning */
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
-.HeaderContainer,
-.BackBtnContainer,
-.MainContentContainer {
-    max-width: 1200px;
+.GridContainer {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
     width: 100%;
-    margin: 0 auto;  /* Center these blocks */
+    margin: 0 auto;
+}
+
+
+.HeaderContainer,
+.BackContainer {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .HeaderContainer {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 20px;
     border-radius: 10px;
     background-color: #f2f2f2;
@@ -26,31 +34,22 @@
 .BackContainer {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .BackBtnContainer {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    max-width: 1200px;
-    margin-bottom: 5px;
-}
-
-.ContentContainer {
-    position: absolute;  /* Make ContentContainer float */
-    left: 0;  /* Align ContentContainer to the left of Wrapper */
-    display: flex;
-    justify-content: space-between;
-    width: auto; /* Adjust this to desired width */
-    margin-top: 250px;
-    margin-left: 150px;
+    margin-bottom: 15px;
 }
 
 #shifts-container {
     display: flex;
     flex-direction: column;
-    width: auto; /* Adjust this to desired width */
+    width: auto;
     height: 500px;
+    margin-top: 150%;
 }
 
 .Vagtheader {
@@ -80,27 +79,17 @@
     margin-right: 5px;
 }
 
-.MainContentContainer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 1200px;
-}
-
 #main-content {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    width: 100%;
-    max-width: 1200px;
 }
 
 #calendar {
     width: 100%;
 }
 
-/* tailwind button styling by regular css */
 .Back {
     width: 145px;
     border-radius: .25em !important;
@@ -122,4 +111,16 @@
     outline: 2px solid transparent !important;
     outline-offset: 2px !important;
     outline-color: #6366F1 !important;
+}
+
+@media (max-width: 767px) {
+    .GridContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #shifts-container,
+    .MainContentContainer {
+        width: 100%;
+    }
 }
