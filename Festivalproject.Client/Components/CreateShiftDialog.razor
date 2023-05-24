@@ -82,14 +82,14 @@
                     <div class="sm:col-span-2">
                         <label for="endTime" class="block text-sm font-medium leading-6 text-gray-900">Sluttidspunkt</label>
                         <div class="mt-2">
-                            <input type="datetime-local" @bind-value:event="onchange" @bind-value="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local"  @bind="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
                     <div class="sm:col-span-">
 
                         <div class="mt-2">
                            <p> Duration: @totalHours </p>
-                           <input type="text" @bind-value="newShift.Duration">Duration </input>
+                           <input type="text" @bind="newShift.Duration">Duration </input>
                         </div>
                     </div>
                     <div class="col-span-4">
@@ -119,7 +119,6 @@
     private Shift newShift { get; set; } = new Shift();
     private EditContext editContext; 
     private string resultMessage { get; set; }
-    private bool showValidIcon;
     private bool shiftCreated = false;
     private double totalHours { get; set; } 
     private DateTime startTime;
@@ -135,7 +134,7 @@
         // Setting default value for start and endtime in calendar 
         newShift.startTime = DateTime.UtcNow;
         newShift.endTime = DateTime.UtcNow;
-      
+
     }
 
 
@@ -154,9 +153,9 @@
 
     public void CalculateDuration()
     {
-        
-        TimeSpan duration = newShift.endTime - newShift.startTime;
 
+        TimeSpan duration = newShift.endTime - newShift.startTime;
+        duration.ToString();
         Console.WriteLine("Test calculateduration " + totalHours);
         StateHasChanged();
     }
@@ -173,11 +172,11 @@
             // If result is not null (success) the showValidIcon bool is set to true, and the gif is loaded 
             if (createdShift != null)
             {
-                showValidIcon = true;
-                StateHasChanged(); // Force a re-render to show the GIF
+                //showValidIcon = true;
+                //StateHasChanged(); // Force a re-render to show the GIF
 
-                await Task.Delay(2100);
-                showValidIcon = false;
+                //await Task.Delay(2100);
+                //showValidIcon = false; 
                 StateHasChanged(); // Force a re-render to hide the GIF
 
                 Console.WriteLine("Shift addedd Successfully");
