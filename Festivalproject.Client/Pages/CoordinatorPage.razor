@@ -20,38 +20,37 @@
 <!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing->
 <!-- Implementing header with image at top of userprofile page  -->
 <div>
-  <div>
-    <img class="h-48 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
-  </div>
-  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-    <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-      <div class="flex">
-        <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="/ProfileHead.png" alt="">
-      </div>
-      <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-        <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
-          <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
-        </div>
-        <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <button type="button" class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          @*  <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <div>
+        <img class="h-48 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
+    </div>
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+            <div class="flex">
+                <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="/ProfileHead.png" alt="">
+            </div>
+            <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+                <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
+                    <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName @user.SurName</h1>
+                </div>
+                <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+                    <button type="button" class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        @*  <svg class="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             </svg>*@
-          </button>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
+            @*      <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName</h1>*@
+        </div>
     </div>
-    <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
-@*      <h1 class="truncate text-2xl font-bold text-gray-900">@user.FirstName</h1>*@
-    </div>
-  </div>
 </div>
 
 <!-- Adding a containter that centers everything inside the this div -->
 <div class="sm:container sm:mx-auto">
-   <h4 class="mt-24 text-3xl"> Velkommen @user.FirstName! </h4>
-   <h3 class="mt-8  text-lg text-gray-700">Her kan du se dine oplysninger, se alle vagter og deres status, samt oprette nye vagter!</h3> 
-   <h4 class="mt-24  mb-8 text-2xl"> Dine oplysninger </h4>
-
+    <h4 class="mt-24 text-3xl"> Velkommen @user.FirstName! </h4>
+    <h3 class="mt-8  text-lg text-gray-700">Her kan du se dine oplysninger, se alle vagter og deres status, samt oprette nye vagter!</h3>
+    <h4 class="mt-24  mb-8 text-2xl"> Dine oplysninger </h4>
 
 
     <div class="px-4 sm:px-6 lg:px-8">
@@ -67,63 +66,61 @@
                 <div class="inline-block min-w-full py-2 align-middle">
                     <table class="min-w-full divide-y divide-gray-300">
                         <thead>
-                            <tr>
-                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
-                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
-                                </th>
-                            </tr>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
+                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
+                            </th>
+                        </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
-                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
+                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 
-
-    
-<h4 class="mt-16 text-2xl"> Alle vagter </h4>
+    <h4 class="mt-16 text-2xl"> Alle vagter </h4>
     <div class="row">
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
         </div>
     </div>
 
-@if (!EditMode)
-{
-    <div class="px-4 sm:px-6 lg:px-8">
-        <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto">
+    @if (!EditMode)
+    {
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                </div>
+                <div class="mt-2 sm:ml-16 sm:mt-0 sm:flex-none">
+                </div>
             </div>
-            <div class="mt-2 sm:ml-16 sm:mt-0 sm:flex-none">
-            </div>
-        </div>
-        <div class="mt-4 flow-root">
-            <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle">
-                    <table class="min-w-full border-separate border-spacing-0">
-                        <thead>
+            <div class="mt-4 flow-root">
+                <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle">
+                        <table class="min-w-full border-separate border-spacing-0">
+                            <thead>
                             <tr>
                                 <th scope="col" class="@css2">Vagtnavn</th>
                                 <th scope="col" class="@css2">Beskrivelse</th>
@@ -132,90 +129,106 @@
                                 <th scope="col" class="@css2">Varighed</th>
                                 <th scope="col" class="@css2">Område</th>
                                 <td scope="col" class="@css2" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet</td>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
+                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"/>
                             </tr>
-                        </thead>
-                        <tbody>
-                                @foreach (var shift in shiftList)
-                            {                             
+                            </thead>
+                            <tbody>
+                            @foreach (var shift in shiftList)
+                            {
                                 <tr>
-                                        <td class="@css">@shift.Name</td>
-                                        <td class="@css">@shift.Description</td>
-                                        <td class="@css">@shift.startTime</td>
-                                        <td class="@css">@shift.endTime</td>
-                                        <td class="@css">@shift.Duration</td>
-                                        <td class="@css">@shift.Type</td>
-                                        <td class="@css">
-                                            <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
-                                        </td>
-                                        <td><button type="button" @onclick="(()=>EditShift(shift))" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button> </td>
+                                    <td class="@css">@shift.Name</td>
+                                    <td class="@css">@shift.Description</td>
+                                    <td class="@css">@shift.startTime</td>
+                                    <td class="@css">@shift.endTime</td>
+                                    <td class="@css">@shift.Duration</td>
+                                    <td class="@css">@shift.Type</td>
+                                    <td class="@css">
+                                        <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
+                                    </td>
+                                    <td>
+                                        <button type="button" @onclick="() => EditShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button>
+                                    </td>
 
-                                        @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>*@
+                                    @* <a href="#" class="text-indigo-600 hover:text-indigo-900"><span class="sr-only"></span></a>*@
 
-                                    </tr>
+                                </tr>
                             }
-   
-                                 
-                            
-                        </tbody> 
-                    </table>
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-}
-else
-{
-
-    <div class="px-4 sm:px-6 lg:px-8">
-        <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto">
+    }
+    else
+    {
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                </div>
+                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                </div>
             </div>
-            <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            </div>
-        </div>
-        <div class="mt-8 flow-root">
-            <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle">
-                    <table class="min-w-full border-separate border-spacing-0">
-                        <thead>
-                            <tr> 
+            <div class="mt-8 flow-root">
+                <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle">
+                        <table class="min-w-full border-separate border-spacing-0">
+                            <thead>
+                            <tr>
                                 <th scope="col" class="@css2">Vagtnavn</th>
                                 <th scope="col" class="@css2">Beskrivelse</th>
                                 <th scope="col" class="@css2">Starttidspunkt</th>
                                 <th scope="col" class="@css2">Sluttidspunkt</th>
                                 <th scope="col" class="s@css2">Varighed</th>
                                 <th scope="col" class="@css2">Type</th>
-                                    <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
+                                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
+                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"/>
                                 <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"></th>
                             </tr>
-                        </thead>
-                        <tbody>
-                                @foreach (var shift in shiftList)
-                            {                      
+                            </thead>
+                            <tbody>
+                            @foreach (var shift in shiftList)
+                            {
                                 <tr>
-                                    <td class="@css"><input type="text" @bind="shift.Name" /></td>
-                                    <td class="@css"><input type="text" @bind="shift.Description" /></td>
-                                    <td class="@css"><input type="text" @bind="shift.startTime" /></td>
-                                    <td class="@css"><input type="text" @bind="shift.endTime" /></td>
-                                    <td class="@css"><input type="text" @bind="shift.Duration" /></td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.Type" /></td>
-                                        <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                            <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
-                                        </td>
-                                    <td><button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem</button></td>                          
-                                    <td><button type="button" @onclick="() => DeleteShift(shift.Id)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Slet</button></td>                          
+                                    <td class="@css">
+                                        <input type="text" @bind="shift.Name"/>
+                                    </td>
+                                    <td class="@css">
+                                        <input type="text" @bind="shift.Description"/>
+                                    </td>
+                                    <td class="@css">
+                                        <input type="text" @bind="shift.startTime"/>
+                                    </td>
+                                    <td class="@css">
+                                        <input type="text" @bind="shift.endTime"/>
+                                    </td>
+                                    <td class="@css">
+                                        <input type="text" @bind="shift.Duration"/>
+                                    </td>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
+                                        <input type="text" @bind="shift.Type"/>
+                                    </td>
+                                    <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                                        <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
+                                    </td>
+                                    <td>
+                                        <button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" @onclick="() => DeleteShift(shift.Id)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Slet</button>
+                                    </td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
 </div>
 
 
@@ -231,25 +244,24 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public string? id { get; set; }
-    private List<User> userList { get; set; } = new List<User>();
-    private User user { get; set; } = new User();
+
+    private List<User> userList { get; set; } = new();
+    private User user { get; set; } = new();
     private bool EditMode { get; set; }
-    private Shift shiftUpdated { get; set; } = new Shift();
-    private List<Shift> shiftList {get; set; } = new List<Shift>(); 
+    private Shift shiftUpdated { get; set; } = new();
+    private List<Shift> shiftList { get; set; } = new();
     private List<Shift> filteredShifts { get; set; } = new();
-    private List<Shift> searchFilteredShifts { get; set; } = new List<Shift>();
+    private List<Shift> searchFilteredShifts { get; set; } = new();
     public string SearchInput { get; set; } = "";
 
-    private List<Shift> prioritySortedShifts { get; set; } = new List<Shift>();
+    private List<Shift> prioritySortedShifts { get; set; } = new();
 
     public string? PriorityColour = "bi bi-star";
-
 
 
     //Css classes 
     private string css = "whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell";
     private string css2 = "sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8";
-
 
 
     // On pageload method that runs async with other methods - fetches the user by id passed from signin and a list of all shifts 
@@ -258,31 +270,22 @@ else
         user = await userService.GetUserByObjectId(id);
         shiftList = await shiftService.GetAllShifts();
 
-        filteredShifts = shiftList; 
-
+        filteredShifts = shiftList;
     }
 
-
-
-    
 
     //Method setting the bool: "EditMode" to true, so the form with inputfield shows on page
     public void EditShift(Shift shift)
     {
-
         Console.WriteLine(shift.Name);
-        EditMode = true;    
-
+        EditMode = true;
     }
 
 
     public void EditInfo()
     {
-        //Here we put the method to edit user info (coordinator)
-
+    //Here we put the method to edit user info (coordinator)
     }
-
-
 
 
     // Method that passes an updated shift to both shiftrepository and shiftregistationrepository
@@ -297,52 +300,48 @@ else
 
     public async Task DeleteShift(string id)
     {
-
-        var response =  await shiftService.DeleteShift(id);
-        List<Shift> newList = await shiftService.GetAllShifts(); 
-        shiftList = newList; 
+        var response = await shiftService.DeleteShift(id);
+        List<Shift> newList = await shiftService.GetAllShifts();
+        shiftList = newList;
     }
 
     private bool isSortedByPriority = false;
+
     public void PrioritySort()
     {
-
         if (isSortedByPriority)
         {
-            // If the list is currently sorted by priority, restore the original unsorted order.
+    // If the list is currently sorted by priority, restore the original unsorted order.
             shiftList = new List<Shift>(filteredShifts);
             isSortedByPriority = false;
         }
         else
         {
-            // Sort the list by priority.
+    // Sort the list by priority.
             shiftList = shiftList.OrderBy(shift => shift.IsPriority ? 0 : 1).ToList();
             isSortedByPriority = true;
         }
     }
 
- 
 
     public void UpdatePriority(string Id)
     {
-        // Find the shift with the given ID in the shiftList.
-        // If a matching shift is found, its priority status is updated.
+    // Find the shift with the given ID in the shiftList.
+    // If a matching shift is found, its priority status is updated.
         var shift = shiftList.FirstOrDefault(s => s.Id == Id);
 
-        // If the shift is currently marked as priority, it will be unmarked.
-        // If the shift is not marked as priority, it will be marked as priority.
+    // If the shift is currently marked as priority, it will be unmarked.
+    // If the shift is not marked as priority, it will be marked as priority.
         if (shift != null)
         {
             shift.IsPriority = !shift.IsPriority;
         }
-
-
-
     }
-    public void FilterShifts(ChangeEventArgs e)    
+
+    public void FilterShifts(ChangeEventArgs e)
     {
         SearchInput = e.Value.ToString();
-        
+
         if (string.IsNullOrWhiteSpace(SearchInput))
         {
             shiftList = new List<Shift>(filteredShifts);
@@ -350,6 +349,7 @@ else
         else
         {
             shiftList = shiftList.Where(s => s.Name.Contains(SearchInput, StringComparison.OrdinalIgnoreCase)).ToList();
-        }    
+        }
     }
+
 }

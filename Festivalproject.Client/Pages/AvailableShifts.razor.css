@@ -1,11 +1,19 @@
-
-.HeaderContainer {
+.Wrapper {
+    position: relative; /* Make Wrapper the reference for absolute positioning */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
-.Header {
+.HeaderContainer,
+.BackBtnContainer,
+.MainContentContainer {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;  /* Center these blocks */
+}
+
+.HeaderContainer {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -13,21 +21,36 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #f2f2f2;
-    width: 1200px;
+}
+
+.BackContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.BackBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 5px;
 }
 
 .ContentContainer {
+    position: absolute;  /* Make ContentContainer float */
+    left: 0;  /* Align ContentContainer to the left of Wrapper */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    width: auto; /* Adjust this to desired width */
+    margin-top: 250px;
+    margin-left: 150px;
 }
 
 #shifts-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 1200px;
+    flex-direction: column;
+    width: auto; /* Adjust this to desired width */
+    height: 500px;
 }
 
 .Vagtheader {
@@ -57,10 +80,46 @@
     margin-right: 5px;
 }
 
-#calendar {
+.MainContentContainer {
+    display: flex;
+    justify-content: center;
     width: 100%;
     max-width: 1200px;
-    margin-top: 20px;
-    margin-right: 50px;
-    margin-left: 50px;
+}
+
+#main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+}
+
+#calendar {
+    width: 100%;
+}
+
+/* tailwind button styling by regular css */
+.Back {
+    width: 145px;
+    border-radius: .25em !important;
+    background-color: #6366F1 !important;
+    border: 1px solid transparent !important;
+    text-align: center !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    transition: background-color 0.2s !important;
+}
+
+.Back:hover {
+    background-color: #4F46E5 !important;
+}
+
+.Back:focus-visible {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    outline-color: #6366F1 !important;
 }
