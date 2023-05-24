@@ -113,7 +113,6 @@
 
 
 @code{
-
     [CascadingParameter] 
     public IModalService Modal { get; set; } = default!;
     private Shift newShift { get; set; } = new Shift();
@@ -126,21 +125,21 @@
     private DateTime endTime;
 
 
-
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("OnInitialized in dialog");
         editContext = new EditContext(newShift);
 
-        // Setting default value for start and endtime in calendar 
-        newShift.startTime = DateTime.UtcNow;
-        newShift.endTime = DateTime.UtcNow;
-      
+    // Setting default value for start and endtime in calendar 
+        newShift.startTime = DateTime.UtcNow.ToLocalTime();
+        newShift.endTime = DateTime.UtcNow.ToLocalTime();
     }
+
 
 
     public async Task HandleValidSubmit()
     {
+        Console.WriteLine("Handling valid submit");
         if (editContext.Validate())
         {
             await CreateShift(newShift);
@@ -154,17 +153,32 @@
 
     public void CalculateDuration()
     {
-        
-        TimeSpan duration = newShift.endTime - newShift.startTime;
+        JSRuntime.InvokeVoidAsync("console.log", $"Raw input - Start time: {newShift.startTime}, End time: {newShift.endTime}");
 
-        Console.WriteLine("Test calculateduration " + totalHours);
-        StateHasChanged();
+        if(newShift.endTime > newShift.startTime)
+        {
+            TimeSpan duration = newShift.endTime - newShift.startTime;
+            totalHours = duration.TotalHours;
+            newShift.Duration = (int)totalHours;
+
+            JSRuntime.InvokeVoidAsync("console.log", $"Calculated duration: {totalHours}");
+            StateHasChanged();
+        }
+        else
+        {
+            JSRuntime.InvokeVoidAsync("console.error", "End time must be after start time");
+        }
     }
+
+
+
+
 
 
 
     private async Task CreateShift(Shift newShift)
     {
+        Console.WriteLine("Creating shift");
         try
         {
             // Call the shiftService to use createshift method 
@@ -191,5 +205,4 @@
             Console.WriteLine("Error: " + ex.Message);
         }
     }
-
 }
