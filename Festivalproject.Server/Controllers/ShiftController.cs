@@ -31,6 +31,9 @@ public class ShiftsController : ControllerBase
         return ShiftRepository.GetShiftById(id);
     }
 
+
+
+
     [HttpGet("status/{status}")]
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -38,6 +41,9 @@ public class ShiftsController : ControllerBase
 
         return ShiftRepository.GetShiftsByStatus(status);
     }
+
+
+
 
     [HttpPut]
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
@@ -55,10 +61,11 @@ public class ShiftsController : ControllerBase
     }
 
 
-    //[HttpPost]
-    //public async Task<Shift> CreateShift(Shift newShift)
-    //{
-    //    var result = await ShiftRepository.CreateShift(newShift);
-    //    return result;
-    //}
+    [HttpPost]
+    public async Task<Shift> CreateShift(Shift newShift)
+    {
+        Console.WriteLine("CreateShift på controller");
+        var result = await ShiftRepository.CreateShift(newShift);
+        return result;
+    }
 }

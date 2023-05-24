@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Festivalproject.Shared.Models;
 
@@ -13,30 +14,40 @@ public class Shift
     public string Id { get; set; } = "";
     
     
-    [BsonElement("name")] 
+    [BsonElement("name")]
+    [Required]
     public string Name { get; set; }
-    
 
+    [Required]
     [BsonElement("type")] 
+
     public string Type { get; set; }
     
 
     [BsonElement("isOccupied")] 
     public bool Status { get; set; }
-    
+
+
+    [Required]
     [BsonElement("area")] 
     public string Area { get; set; }
 
 
+    [Required]
     [BsonElement("description")]
     public string Description { get; set; } = "";
 
+    [Required]
     [BsonElement("duration")]
     public int Duration { get; set; }
 
+
+    [Required]
     [BsonElement("startTime")]
     public DateTime startTime { get; set; }
 
+
+    [Required]
     [BsonElement("endTime")]
     public DateTime endTime { get; set; }
 

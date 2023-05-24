@@ -16,11 +16,10 @@ public class ShiftService : IShiftService
 
     public async Task<List<Shift>> GetAllShifts()
     {
-          
-            var shifts = await Http.GetFromJsonAsync<List<Shift>>("/api/shift");
-            Console.WriteLine("Test getallshifts service " + shifts.ToString());
-            return shifts; 
-            
+        
+         var shifts = await Http.GetFromJsonAsync<List<Shift>>("/api/shift");
+         Console.WriteLine("Test getallshifts service " + shifts.ToString());
+         return shifts;          
     }
 
 
@@ -28,6 +27,7 @@ public class ShiftService : IShiftService
     public async Task<Shift> CreateShift(Shift shift)
     {
         var response = await Http.PostAsJsonAsync("/api/shift", shift);
+        Console.WriteLine("CreateShift på service(client) " + shift.Name);
         if (response.IsSuccessStatusCode)
         {
             var newShift = await response.Content.ReadFromJsonAsync<Shift>();
@@ -37,6 +37,7 @@ public class ShiftService : IShiftService
         {
             throw new Exception("Oprettelse af vagt fejlede.");
         }
+
     }
 
 
@@ -46,6 +47,7 @@ public class ShiftService : IShiftService
         Console.WriteLine(shiftUpdated.Name.ToString());
 
          var response = await Http.PutAsJsonAsync("/api/shift", shiftUpdated);
+
          if (response.IsSuccessStatusCode)
          {
                //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
@@ -57,7 +59,8 @@ public class ShiftService : IShiftService
                throw new Exception("Opatering af vagt fejlede");
          }
             
-        }
+    }
+
 
 
     public async Task<bool> DeleteShift(string id)

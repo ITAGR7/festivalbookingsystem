@@ -36,7 +36,7 @@ public class UserController : ControllerBase
 
 
     // Using a extension to our endpoint, to distinguish this from other HttpPost calls in the controller. 
-    //
+    // 
     [HttpPost("login")]
     public LoginResultDTO GetLoginResult([FromBody] LoginDataDTO loginData)
     {
@@ -62,6 +62,7 @@ public class UserController : ControllerBase
     }
 
 
+    // Considering changing this to something "easier" 
 
     [HttpPut]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]

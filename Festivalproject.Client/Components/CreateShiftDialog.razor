@@ -11,15 +11,15 @@
 <div>
     <ModalContent>
        <p class="text-xl leading-6 text-black-600"> Opret en ny vagt!  </p>
-        <EditForm Model="@newShift" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@newShift">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="index container">
-                <div class="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+                <div class="mt-16 grid grid-cols-4 gap-x-6 gap-y-12">
                     <div class="sm:col-span-2">
-                        <label for="shiftType" class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+                        <label  class="block text-sm font-medium leading-6 text-gray-900">Type</label>
                         <div class="mt-2">
-                            <InputSelect @bind-Value="newShift.Type" id="shiftType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <InputSelect @bind-Value="newShift.Type" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Vælg vagt type</option>
                                 <option value="Barvagt">Barvagt</option>
                                 <option value="Toiletvagt">Toiletvagt</option>
@@ -27,14 +27,13 @@
                                 <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
                                 <option value="Køkkenvagt">Køkkenvagt</option>
                                 <option value="Parkeringsvagt">Parkerings</option>
-                            </InputSelect>
-                         
+                            </InputSelect>                       
                         </div>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="shiftName" class="block text-sm font-medium leading-6 text-gray-900">Funktion/navn</label>
                         <div class="mt-2">
-                            <InputSelect @bind-Value="newShift.Name" id="shiftName" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <InputSelect @bind-Value="newShift.Name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Vælg funktion</option>
                                 <option value="Barvagt">Bar</option>
                                 <option value="Toiletvagt">Toiletvagt</option>
@@ -43,74 +42,75 @@
                                 <option value="Køkkenvagt">Køkkenvagt</option>
                                 <option value="Parkeringsvagt">Parkerings</option>
                             </InputSelect>
-
                         </div>
-                    </div>
-
+                    </div>            
                     <div class="sm:col-span-2">
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vagtområde</label>
-                        <div class="mt-2">
-                 
+                        <div class="mt-2">                
                             <InputSelect @bind-Value="newShift.Area" id="area" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Vælg område</option>
-                                <option value="Barvagt">The Crazy bar</option>
-                                <option value="Toiletvagt">Toiletvagt</option>
-                                <option value="Indgangvagt">Indgang</option>
-                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
-                                <option value="Køkkenvagt">Køkkenvagt</option>
-                                <option value="Parkeringsvagt">Parkerings</option>
+                                <option style ="font-weight:bolder" value="Køkkenvagt">Bar</option>
+                                <option value="Mad/drikke">&nbsp;&nbsp;The Crazy bar</option>
+                                <option value="Mad/drikke">&nbsp;&nbsp;The Slow but fast bar</option>
+                                <option value="Køkkenvagt">&nbsp;&nbsp;Fontenen</option>
+                                <option style="font-weight:bolder" value="Mad/Drikke">Mad/drikke</option>
+                                <option value="Mad/drikke">&nbsp;&nbsp;Snackbar</option>
+                                <option value="Mad/Drikke">&nbsp;&nbsp;Foodcourt</option>
+                                <option style="font-weight:bolder" value="Scene">Sceneområde</option>
+                                <option value="Scene">&nbsp;&nbsp;Store scene</option>
+                                <option value="Scene">&nbsp;&nbsp;Lille scene</option>
+                                <option style ="font-weight:bolder" value="Indgang">Indgang</option>
+                                <option value="Indgang">&nbsp;&nbsp;Indgang Vest</option>
+                                <option style="font-weight:bolder" value="Toilet">Toiletter</option>
+                                <option value="Toilet">&nbsp;&nbsp;Toilet øst</option>
+                                <option value="Toilet">&nbsp;&nbsp;Toilet vest</option>
+                                <option style ="font-weight:bolder" value="Parkering">Parkering</option>
+                                <option value="Parkering"> &nbsp;&nbsp;Parkering 1</option>
+                                <option value="Parkering">&nbsp;&nbsp;Parkering 2</option>
+                                <option style="font-weight:bolder" value="Andet">Andet</option>
+                                <option value="Andet">&nbsp;&nbsp;Samaritan nord</option>                                                           
                             </InputSelect>
                         </div>
                     </div>
                     <br />
-
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
                         <label for="startTime" class="block text-sm font-medium leading-6 text-gray-900">Starttidspunkt</label>
                         <div class="mt-2">
-                            <InputDate @bind-Value="@newShift.startTime" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value="@newShift.startTime" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
                         <label for="endTime" class="block text-sm font-medium leading-6 text-gray-900">Sluttidspunkt</label>
                         <div class="mt-2">
-                            <InputDate @bind-Value="newShift.endTime"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value:event="onchange" @bind-value="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
+                    <div class="sm:col-span-">
 
-
+                        <div class="mt-2">
+                           <p> Duration: @totalHours </p>
+                           <input type="text" @bind-value="newShift.Duration">Duration </input>
+                        </div>
+                    </div>
                     <div class="col-span-4">
+                        <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Beskrivelse</label>
+                        <div class="mt-2">
+                            <InputTextArea @bind-Value="newShift.Description" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                        </div>
+                    </div>
+                    <div class="col-span-1">
                         <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Beskrivelse</label>
                         <div class="mt-2">
-                            <InputText @bind-Value="newShift.Description" type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                          <td><button type="submit" @onclick="() => HandleValidSubmit()"  class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Opret vagt!</button></td>
                         </div>
                     </div>
-
-              
-                 @*   <div class="sm:col-span-2 w-2/3 ">
-                        <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Postnummer</label>
-                        <div class="mt-2">
-                            <InputNumber TValue="int" @bind-Value="" name="duration" id="duration" autocomplete="duration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
-                        </div>
-                    </div>*@
-                  
-
-                    <br />
-                    <br />
-                </div>
-                <br />
+                 </div>
+                                 
             </div>
         </EditForm>
-        
-
     </ModalContent>
 </div>
 
-@if (showValidIcon)
-{
-    <div class="gif-overlay">
-        <img src="/check.gif" alt="Success GIF" class="gif-image" />
-    </div>
-}
 
 @code{
 
@@ -121,9 +121,9 @@
     private string resultMessage { get; set; }
     private bool showValidIcon;
     private bool shiftCreated = false;
-
-
-
+    private double totalHours { get; set; } 
+    private DateTime startTime;
+    private DateTime endTime;
 
 
 
@@ -135,6 +135,7 @@
         // Setting default value for start and endtime in calendar 
         newShift.startTime = DateTime.UtcNow;
         newShift.endTime = DateTime.UtcNow;
+      
     }
 
 
@@ -150,6 +151,15 @@
         }
     }
 
+
+    public void CalculateDuration()
+    {
+        
+        TimeSpan duration = newShift.endTime - newShift.startTime;
+
+        Console.WriteLine("Test calculateduration " + totalHours);
+        StateHasChanged();
+    }
 
 
 
@@ -170,8 +180,8 @@
                 showValidIcon = false;
                 StateHasChanged(); // Force a re-render to hide the GIF
 
-                Console.WriteLine("User added successfully!");
-                resultMessage = "";
+                Console.WriteLine("Shift addedd Successfully");
+                resultMessage = "Vellykket oprættelse af vagt";
                 shiftCreated = true;
             }
         }

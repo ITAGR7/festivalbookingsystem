@@ -89,7 +89,7 @@ public class UserRepository : IUser
 
 
             var result = await collection.UpdateOneAsync(filter, update);
-
+        // A way of checking if the count of changed objects is above 0 
         return result.ModifiedCount > 0;
     }
 }

@@ -17,8 +17,6 @@
 
 
 
-
-
 <!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing-->
 <!-- Implementing header with image at top of userprofile page  -->
 
@@ -106,12 +104,36 @@
 
 
     
-<h4 class="mt-16 text-2xl"> Alle vagter </h4>
+@*<h4 class="mt-16 text-2xl"> Alle vagter </h4>
     <div class="row">
         <div class="col-md-3">
             <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
         </div>
     </div>
+*@
+
+
+<h4 class="mt-16 text-2xl">Alle vagter</h4>
+<div class="row mt-4">
+<div class="col-md-3">
+<input type="text" class="form-control" placeholder="Søg efter vagtnavn" @bind="SearchInput" @oninput="FilterShifts">
+</div>
+<div class="col-md-3">
+<select id="dropdown" @oninput="FilterStatusList"
+                    name="dropdown" class="form-select">
+                @foreach (var option in DropdownOptions)
+                {
+<option value="@option"> @option</option>
+                }
+</select>
+</div>
+</div>
+
+
+
+
+
+
 
 @if (!EditMode)
 {
@@ -241,11 +263,13 @@ else
     private List<Shift> shiftList {get; set; } = new List<Shift>(); 
     private List<Shift> filteredShifts { get; set; } = new();
     private List<Shift> searchFilteredShifts { get; set; } = new List<Shift>();
-    public string SearchInput { get; set; } = "";
-
+    private string SearchInput { get; set; } = "";
+    private string StatusShift { get; set; } = "";
     private List<Shift> prioritySortedShifts { get; set; } = new List<Shift>();
-
     public string? PriorityColour = "bi bi-star";
+    private List<string> DropdownOptions = new List<string> { "Alle vagter", "Med frivillig", "Uden frivillig" };
+    private bool? dropDownStatus { get; set; } = true;
+    private bool isSortedByPriority = false;
 
     //Css classes 
     private string css = "whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell";
@@ -311,7 +335,7 @@ else
         shiftList = newList; 
     }
 
-    private bool isSortedByPriority = false;
+  
     public void PrioritySort()
     {
 
@@ -359,5 +383,26 @@ else
         {
             shiftList = shiftList.Where(s => s.Name.Contains(SearchInput, StringComparison.OrdinalIgnoreCase)).ToList();
         }    
+    }
+
+
+
+
+    private void FilterStatusList(ChangeEventArgs e)
+    {
+        Console.WriteLine(e.Value.ToString());
+        StatusShift = e.Value.ToString();
+        if (StatusShift == "Uden frivillig")
+        {
+            shiftList = filteredShifts.Where(s => s.Status == false).ToList();
+        }
+        else if (StatusShift == "Med frivillig")
+        {
+            shiftList = filteredShifts.Where(s => s.Status == true).ToList();
+        }
+        else
+        {
+            shiftList = filteredShifts;
+        }
     }
 }
