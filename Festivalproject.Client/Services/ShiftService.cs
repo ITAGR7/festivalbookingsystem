@@ -15,7 +15,7 @@ public class ShiftService : IShiftService
 
     public async Task<List<Shift>> GetAllShifts()
     {
-        var shifts = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/shift");
+        var shifts = await Http.GetFromJsonAsync<List<Shift>>("/api/shift");
         Console.WriteLine("Test getallshifts service " + shifts.ToString());
         return shifts;
     }
@@ -23,7 +23,7 @@ public class ShiftService : IShiftService
 
     public async Task<Shift> CreateShift(Shift shift)
     {
-        var response = await Http.PostAsJsonAsync<Shift>("https://localhost:7251/api/shift", shift);
+        var response = await Http.PostAsJsonAsync<Shift>("/api/shift", shift);
         if (response.IsSuccessStatusCode)
         {
             var newShift = await response.Content.ReadFromJsonAsync<Shift>();
@@ -40,7 +40,7 @@ public class ShiftService : IShiftService
     {
         Console.WriteLine(shiftUpdated.Name.ToString());
 
-        var response = await Http.PutAsJsonAsync("https://localhost:7251/api/shift", shiftUpdated);
+        var response = await Http.PutAsJsonAsync("/api/shift", shiftUpdated);
         if (response.IsSuccessStatusCode)
         {
             //If the httpcall is successfull, we user reafromjsonasync to fetch the newly updated shift to be returned to client
@@ -55,7 +55,7 @@ public class ShiftService : IShiftService
 
     public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
     {
-        var response = await Http.PutAsJsonAsync($"https://localhost:7251/api/shift/update/{Id}/{Status}", Id);
+        var response = await Http.PutAsJsonAsync($"/api/shift/update/{Id}/{Status}", Id);
         if (!response.IsSuccessStatusCode) throw new Exception("Updating of shift failed");
 
         return true;
@@ -64,7 +64,7 @@ public class ShiftService : IShiftService
 
     public async Task<bool> DeleteShift(string id)
     {
-        var response = await Http.DeleteAsync($"https://localhost:7251/api/shift/{id}");
+        var response = await Http.DeleteAsync($"/api/shift/{id}");
 
         if (response.IsSuccessStatusCode) return true;
 
@@ -74,7 +74,7 @@ public class ShiftService : IShiftService
 
     public async Task<List<Shift>> GetShiftsByStatus()
     {
-        var result = await Http.GetFromJsonAsync<List<Shift>>("https://localhost:7251/api/Shift/status/false");
+        var result = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/false");
         return result;
     }
 }
