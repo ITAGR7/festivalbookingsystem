@@ -7,6 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Shared\Views\**" />
+      <Content Remove="Shared\Views\**" />
+      <EmbeddedResource Remove="Shared\Views\**" />
+      <None Remove="Shared\Views\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
         <PackageReference Include="Blazorise" Version="1.2.3" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
@@ -34,10 +41,6 @@
 
     <ItemGroup>
         <None Remove="Pages\AvailableShifts.razor.js" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Shared\Views\" />
     </ItemGroup>
 
 </Project>
