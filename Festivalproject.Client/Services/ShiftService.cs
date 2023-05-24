@@ -72,9 +72,9 @@ public class ShiftService : IShiftService
     }
 
 
-    public async Task<List<Shift>> GetShiftsByStatus()
+    public async Task<List<Shift>> GetShiftsByStatus(bool Status)
     {
-        var result = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/false");
+        var result = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/" + Status);
         return result;
     }
 }

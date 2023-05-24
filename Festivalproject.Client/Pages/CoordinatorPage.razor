@@ -2,6 +2,7 @@
 @using Festivalproject.Shared.Models;
 @using Festivalproject.Client.Services;
 @using Festivalproject.Client.Components;
+@using MongoDB.Driver
 @inject HttpClient Http;
 @inject IUserService userService;
 @inject IShiftService shiftService;
@@ -100,11 +101,13 @@
     </div>
 
 
-    <h4 class="mt-16 text-2xl"> Alle vagter </h4>
-    <!--Algoritme knap-->
-        <p>Antal vagter: @shiftCount</p>
-            <p>Antal optagne vagter: @occupiedShiftCount</p>
-        <button @onclick="FilterOccupiedShifts">Vis optagne vagter</button>
+<h4 class="mt-16 text-2xl"> Alle vagter </h4>
+<!--Algoritme knap-->
+<p>Ledige frivillig: @availableShifts</p> 
+<br/>
+<p>Optaget vagter: @occupiedShifts </p>
+          
+        
     
     <div class="row">
         <div class="col-md-3">
@@ -258,8 +261,15 @@
     private List<Shift> filteredShifts { get; set; } = new();
     private List<Shift> searchFilteredShifts { get; set; } = new();
     public string SearchInput { get; set; } = "";
+    
+    
+    public int occupiedShifts { get; set; }
+    public int availableShifts{ get; set; }
 
     private List<Shift> prioritySortedShifts { get; set; } = new();
+   
+    private List<Shift> occupiedList { get; set; } = new();
+    private List<Shift> availableList { get; set; } = new();
 
     public string? PriorityColour = "bi bi-star";
 
@@ -277,7 +287,14 @@
 
         filteredShifts = shiftList;
         
-        shiftCount = shiftList.Count;
+       //fetching required lists to count volunteers on shifts
+        occupiedList = await shiftService.GetShiftsByStatus(true);
+        availableList = await shiftService.GetShiftsByStatus(false);
+        
+        occupiedShifts = occupiedList.Count();
+        availableShifts = availableList.Count();
+    
+        
     }
 
 
@@ -369,21 +386,20 @@
         var shifts = await shiftService.GetAllShifts();
         await Http.GetFromJsonAsync<List<Shift>>("/api/Shifts");
         
-
-    // Opdater shiftCount-variablen
-        shiftCount = shifts.Count;
+        
     }
     
 
-    // Step 2: Tæl optagede vagter
-    int occupiedShiftCount = shiftList.Count(shift => shift.Status);
 
-    // Step 3: Implementer metode til at filtrere vagter baseret på "Status"
-    void FilterOccupiedShifts()
-    {
-        shiftList = shiftList.Where(shift => shift.Status).ToList();
-    }
     
+   
+    
+    
+
+
+}
+
+
     
     
     
