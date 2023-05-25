@@ -61,7 +61,8 @@ public class ShiftService : IShiftService
     public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
     {
         var response = await Http.PutAsJsonAsync($"/api/shift/update/{Id}/{Status}", Id);
-        if (!response.IsSuccessStatusCode) throw new Exception("Updating of shift failed");
+        if (!response.IsSuccessStatusCode)
+            throw new Exception("Updating of shift failed");
 
         return true;
     }
@@ -79,7 +80,7 @@ public class ShiftService : IShiftService
 
     public async Task<List<Shift>> GetShiftsByStatus(bool Status)
     {
-        var result = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/" + Status);
+        var result = await Http.GetFromJsonAsync<List<Shift>>("/api/shift/status/" + Status);
         return result;
     }
 }

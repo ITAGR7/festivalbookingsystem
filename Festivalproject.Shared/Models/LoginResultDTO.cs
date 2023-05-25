@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Festivalproject.Shared.Models;
-
+// A class user for transporting data on the user in the login proces 
 public class LoginResultDTO
 {
     public bool IsValid { get; set; }

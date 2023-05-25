@@ -28,7 +28,7 @@ public class User
 
 
     [Required(ErrorMessage = "Et postnummer er påkrævet")]
-    [RegularExpression(@"^\d{4}$", ErrorMessage = "Postnumbber skal være præcis 4 cifre.")]
+    [RegularExpression(@"^\d{4}$", ErrorMessage = "Postnumer skal være præcis 4 cifre.")]
     [BsonElement("zip")]
     public int Zip { get; set; }
 
@@ -37,12 +37,12 @@ public class User
     [BsonElement("city")]
     public string City { get; set; }
 
-    [Required(ErrorMessage = "E telefonnummer er påkrævet")]
+    [Required(ErrorMessage = "Et telefonnummer er påkrævet")]
     [RegularExpression(@"^\d{8}$", ErrorMessage = "Telefonnummeret skal være præcis 8 cifre.")]
     [BsonElement("phone")]
     public int PhoneNumber { get; set; }
 
-    [Required(ErrorMessage = "En dresse er påkrævet")]
+    [Required(ErrorMessage = "En adresse er påkrævet")]
     [BsonElement("address")]
     public string Address { get; set; }
 

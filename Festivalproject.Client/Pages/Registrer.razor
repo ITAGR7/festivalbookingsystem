@@ -12,8 +12,10 @@
     <EditForm Model="@newUser" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator/>
         <ValidationSummary/>
+        
         <div class="index container">
-            <div class="mt-64 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+            <div class="mt-64 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-1">
+              
                 <div class="sm:col-span-2">
                     <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Fornavn</label>
                     <div class="mt-2">
@@ -91,7 +93,7 @@
                 </div>
 
                 <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opret bruger</button>
-                <button @onclick="GoToLogin" class="flex  justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tilbage til login</button>
+                @*<button @onclick="GoToLogin" class="flex  justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tilbage til login</button>*@
 
             </div>
             <br/>
@@ -118,13 +120,15 @@
     private bool showValidIcon;
     private bool userCreated = false;
 
+    //Method on page load setting a new instance of editcontext for the newUser object 
 
     protected override void OnInitialized()
     {
         aEditContext = new EditContext(newUser);
     }
 
-
+    //Method that validates the forminput, and if valid, calls the createuser method
+    //..and finally instanciating a new user object 
     public async Task HandleValidSubmit()
     {
         if (aEditContext.Validate())
@@ -142,21 +146,23 @@
     {
         try
         {
-    // Call your UserService or Repository to add the user to your database
+
+            // Call your UserService or Repository to add the user to your database
             var createdUser = await userService.CreateUser(newUser);
 
             if (createdUser != null)
             {
                 showValidIcon = true;
-                StateHasChanged(); // Force a re-render to show the GIF
+                StateHasChanged(); // Forcing a re-render to show the GIF
 
                 await Task.Delay(2100);
                 showValidIcon = false;
-                StateHasChanged(); // Force a re-render to hide the GIF
+                StateHasChanged(); // Forcing a re-render to hide the GIF
 
                 Console.WriteLine("User added successfully!");
                 resultMessage = "";
                 userCreated = true;
+                GoToLogin();
             }
         }
         catch (Exception ex)
@@ -166,7 +172,7 @@
         }
     }
 
-
+    //Method navigationg to loginpage via navigationmanager 
     public void GoToLogin()
     {
         navManager.NavigateTo("/signin");
