@@ -59,9 +59,6 @@ public class ShiftService : IShiftService
     }
 
     public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
-
-
-    public async Task<bool> DeleteShift(string id)
     {
         var response = await Http.PutAsJsonAsync($"/api/shift/update/{Id}/{Status}", Id);
         if (!response.IsSuccessStatusCode) throw new Exception("Updating of shift failed");

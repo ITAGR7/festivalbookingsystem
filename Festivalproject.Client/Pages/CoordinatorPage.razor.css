@@ -1,10 +1,19 @@
+.tableHeadInfo {
+    margin-bottom: 25px;
+}
+
+.ButtonsBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .vagtBox {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    height: 50px;
-    display: inline-block;
+    display: flex;
     text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 5px;
     background-color: #f2f2f2;
 }
@@ -19,7 +28,7 @@
 
 .LedigeSkrift,
 .OptagetSkrift {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: rgb(79, 70, 229);
 }
