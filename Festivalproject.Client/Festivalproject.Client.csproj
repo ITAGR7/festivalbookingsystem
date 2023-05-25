@@ -7,40 +7,33 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Shared\Views\**" />
-      <Content Remove="Shared\Views\**" />
-      <EmbeddedResource Remove="Shared\Views\**" />
-      <None Remove="Shared\Views\**" />
+        <PackageReference Include="Blazored.Modal" Version="7.1.0"/>
+        <PackageReference Include="Blazorise" Version="1.2.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.JSInterop" Version="7.0.5"/>
+        <PackageReference Include="MongoDB.Bson" Version="2.19.1"/>
+        <PackageReference Include="MongoDB.Driver" Version="2.19.1"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazored.Modal" Version="7.1.0" />
-        <PackageReference Include="Blazorise" Version="1.2.3" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-        <PackageReference Include="Microsoft.JSInterop" Version="7.0.5" />
-        <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
-        <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <ProjectReference Include="..\Festivalproject.Shared\Festivalproject.Shared.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Festivalproject.Shared\Festivalproject.Shared.csproj" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\index.global.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\script.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\main.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\main.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\jquery.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\moment.js"/>
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\js\index.global.js" />
-        <_ContentIncludedByDefault Remove="wwwroot\js\script.js" />
-        <_ContentIncludedByDefault Remove="wwwroot\js\main.css" />
-        <_ContentIncludedByDefault Remove="wwwroot\js\main.js" />
-        <_ContentIncludedByDefault Remove="wwwroot\js\jquery.js" />
-        <_ContentIncludedByDefault Remove="wwwroot\js\moment.js" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Remove="Pages\AvailableShifts.razor.js" />
+        <None Remove="Pages\AvailableShifts.razor.js"/>
     </ItemGroup>
 
 </Project>

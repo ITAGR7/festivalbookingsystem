@@ -22,14 +22,6 @@ public class ShiftsController : ControllerBase
 
         return ShiftRepository.GetAllShifts();
     }
-    
-    [HttpGet("id/{id}")]
-    public Shift GetShiftById(string id)
-    {
-        Console.WriteLine("Get shift by id (Controller) ");
-
-        return ShiftRepository.GetShiftById(id);
-    }
 
 
 
@@ -50,7 +42,16 @@ public class ShiftsController : ControllerBase
     {
         Console.WriteLine("Updateshift test, controller" + shiftUpdated.Id);
         return await ShiftRepository.UpdateShift(shiftUpdated);
+    }
 
+    [HttpPut("update/{Id}/{Status}")]
+    public async Task<IActionResult> UpdateShiftStatusByShiftId(string Id, bool Status)
+    {
+        var result = await ShiftRepository.UpdateShiftStatusByShiftId(Id, Status);
+        if (result != null)
+            return Ok();
+        else
+            return StatusCode(500, "Internal server error. Update failed.");
     }
 
     [HttpDelete("{id}")]

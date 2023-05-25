@@ -13,7 +13,6 @@ public class ShiftService : IShiftService
     }
 
 
-
     public async Task<List<Shift>> GetAllShifts()
     {
         
@@ -21,7 +20,6 @@ public class ShiftService : IShiftService
          Console.WriteLine("Test getallshifts service " + shifts.ToString());
          return shifts;          
     }
-
 
 
     public async Task<Shift> CreateShift(Shift shift)
@@ -39,7 +37,6 @@ public class ShiftService : IShiftService
         }
 
     }
-
 
 
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
@@ -61,54 +58,31 @@ public class ShiftService : IShiftService
             
     }
 
+    public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
 
 
     public async Task<bool> DeleteShift(string id)
     {
-       var response = await  Http.DeleteAsync($"/api/shift/{id}");
+        var response = await Http.PutAsJsonAsync($"/api/shift/update/{Id}/{Status}", Id);
+        if (!response.IsSuccessStatusCode) throw new Exception("Updating of shift failed");
 
-        if (response.IsSuccessStatusCode)
-        {
-            return true;
-        }
+        return true;
+    }
+
+
+    public async Task<bool> DeleteShift(string id)
+    {
+        var response = await Http.DeleteAsync($"/api/shift/{id}");
+
+        if (response.IsSuccessStatusCode) return true;
 
         return false;
-    }
-    
-    public async Task<Shift> GetShiftById(string id)
-    {
-        try
-        {
-            var response = await Http.GetAsync($"/api/shift/id/{id}");
-        
-            if (response.IsSuccessStatusCode)
-            {
-                var shift = await response.Content.ReadFromJsonAsync<Shift>();
-                return shift;
-            }
-            else
-            {
-                // Log or handle the error based on the status code
-                Console.WriteLine($"Error retrieving shift: {response.StatusCode}");
-                return null;
-            }
-        }
-        catch (Exception ex)
-        {
-            // Log or handle the exception
-            Console.WriteLine($"Exception thrown while retrieving shift: {ex.Message}");
-            return null;
-        }
     }
 
 
     public async Task<List<Shift>> GetShiftsByStatus()
     {
-        
         var result = await Http.GetFromJsonAsync<List<Shift>>("/api/Shift/status/false");
-        return result; 
-        
-        
+        return result;
     }
-
 }

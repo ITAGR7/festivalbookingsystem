@@ -1,33 +1,55 @@
-
-.HeaderContainer {
+.Wrapper {
+    position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
-.Header {
+.GridContainer {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.HeaderContainer,
+.BackContainer {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.HeaderContainer {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 20px;
     border-radius: 10px;
     background-color: #f2f2f2;
-    width: 1200px;
 }
 
-.ContentContainer {
+.BackContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+}
+
+.BackBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 #shifts-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 1200px;
+    flex-direction: column;
+    width: auto;
+    height: 500px;
+    margin-top: 150%;
 }
 
 .Vagtheader {
@@ -57,10 +79,48 @@
     margin-right: 5px;
 }
 
+#main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
 #calendar {
     width: 100%;
-    max-width: 1200px;
-    margin-top: 20px;
-    margin-right: 50px;
-    margin-left: 50px;
+}
+
+.Back {
+    width: 145px;
+    border-radius: .25em !important;
+    background-color: #6366F1 !important;
+    border: 1px solid transparent !important;
+    text-align: center !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    transition: background-color 0.2s !important;
+}
+
+.Back:hover {
+    background-color: #4F46E5 !important;
+}
+
+.Back:focus-visible {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    outline-color: #6366F1 !important;
+}
+
+@media (max-width: 767px) {
+    .GridContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #shifts-container,
+    .MainContentContainer {
+        width: 100%;
+    }
 }

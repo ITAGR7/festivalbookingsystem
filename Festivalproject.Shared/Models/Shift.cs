@@ -52,6 +52,4 @@ public class Shift
     public DateTime endTime { get; set; }
 
     public bool IsPriority { get; set; }
-
-    
 }
