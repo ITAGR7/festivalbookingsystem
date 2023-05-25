@@ -102,18 +102,15 @@
 
 
 <h4 class="mt-16 text-2xl"> Alle vagter </h4>
-<!--Algoritme knap-->
-<p>Ledige frivillig: @availableShifts</p> 
-<br/>
-<p>Optaget vagter: @occupiedShifts </p>
-          
-        
-    
     <div class="row">
-        <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
-        </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
     </div>
+    <div class="vagtBox">
+        <p class="LedigeSkrift white-text">Ledige vagter: @availableShifts</p>
+        <p class="OptagetSkrift white-text">Optagede vagter: @occupiedShifts</p>
+    </div>
+</div>
 
     @if (!EditMode)
     {

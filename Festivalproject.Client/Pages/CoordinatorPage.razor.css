@@ -1,0 +1,25 @@
+.vagtBox {
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.white-text {
+    font-weight: bold;
+}
+
+.row {
+    justify-content: space-between;
+}
+
+.LedigeSkrift,
+.OptagetSkrift {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(79, 70, 229);
+}
