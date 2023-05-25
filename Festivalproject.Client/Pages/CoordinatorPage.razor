@@ -2,6 +2,7 @@
 @using Festivalproject.Shared.Models;
 @using Festivalproject.Client.Services;
 @using Festivalproject.Client.Components;
+@using MongoDB.Driver
 @inject HttpClient Http;
 @inject IUserService userService;
 @inject IShiftService shiftService;
@@ -18,7 +19,7 @@
 
 
 <!-- Using Tailwind.css library with utility classes, rather than css-behind-file for easier editing->
-<!-- Implementing header with image at top of userprofile page  -->
+!-- Implementing header with image at top of userprofile page  -->
 <div>
     <div>
         <img class="h-48 w-full object-cover lg:h-48" src="/confettiHeader.jpg" alt="">
@@ -101,12 +102,16 @@
     </div>
 
 
-    <h4 class="mt-16 text-2xl"> Alle vagter </h4>
+<h4 class="mt-16 text-2xl"> Alle vagter </h4>
     <div class="row">
-        <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
-        </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Search by shift name" @bind="SearchInput" @oninput="FilterShifts">
     </div>
+    <div class="vagtBox">
+        <p class="LedigeSkrift white-text">Ledige vagter: @availableShifts</p>
+        <p class="OptagetSkrift white-text">Optagede vagter: @occupiedShifts</p>
+    </div>
+</div>
 
     @if (!EditMode)
     {
@@ -238,7 +243,17 @@ else
     private List<Shift> filteredShifts { get; set; } = new();
     private List<Shift> searchFilteredShifts { get; set; } = new();
     public string SearchInput { get; set; } = "";
+    
+    
+    public int occupiedShifts { get; set; }
+    public int availableShifts{ get; set; }
 
+    private List<Shift> prioritySortedShifts { get; set; } = new();
+   
+    private List<Shift> occupiedList { get; set; } = new();
+    private List<Shift> availableList { get; set; } = new();
+
+    public string? PriorityColour = "bi bi-star";
   
 
     // On pageload method that runs async with other methods - fetches the user by id passed from signin and a list of all shifts 
@@ -248,6 +263,15 @@ else
         shiftList = await shiftService.GetAllShifts();
 
         filteredShifts = shiftList;
+        
+       //fetching required lists to count volunteers on shifts
+        occupiedList = await shiftService.GetShiftsByStatus(true);
+        availableList = await shiftService.GetShiftsByStatus(false);
+        
+        occupiedShifts = occupiedList.Count();
+        availableShifts = availableList.Count();
+    
+        
     }
 
 

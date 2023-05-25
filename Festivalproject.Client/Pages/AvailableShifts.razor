@@ -84,7 +84,7 @@
         UserId = query["id"];
 
     // Your initialization code here
-        AvailableShift = await shiftService.GetShiftsByStatus();
+        AvailableShift = await shiftService.GetShiftsByStatus(false);
 
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);

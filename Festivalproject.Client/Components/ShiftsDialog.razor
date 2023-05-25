@@ -97,7 +97,7 @@
     //method for refreshing the calender
     public async Task RefreshCalenderEvents()
     {
-        AvailableShift = await ShiftService.GetShiftsByStatus();
+        AvailableShift = await ShiftService.GetShiftsByStatus(false);
         
     // Convert the list of shifts to an array of events
         var events = AvailableShift.Select(s => new
