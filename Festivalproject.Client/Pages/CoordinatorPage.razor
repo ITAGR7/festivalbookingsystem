@@ -170,17 +170,17 @@
 <div class="row">
     <div class="row mt-4 tableHeadInfo">
         <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="Søg efter vagtnavn" @bind="SearchInput" @oninput="FilterShifts">
+           <div class="mb-3"> <input type="text" class="form-control" placeholder="Søg efter vagtnavn" @bind="SearchInput" @oninput="FilterShifts">
+          </div>
+                <select id="dropdown" @oninput="FilterStatusList"
+                        name="dropdown" class="form-select">
+                    @foreach (var option in DropdownOptions)
+                    {
+                        <option value="@option"> @option</option>
+                    }
+                </select>
         </div>
-        <div class="col-md-3">
-            <select id="dropdown" @oninput="FilterStatusList"
-                    name="dropdown" class="form-select">
-                @foreach (var option in DropdownOptions)
-                {
-                    <option value="@option"> @option</option>
-                }
-            </select>
-        </div>
+
         <div class="col-md-3 vagtBox">
             <div>
                 <p class="LedigeSkrift white-text">Ledige vagter: @availableShifts</p>
