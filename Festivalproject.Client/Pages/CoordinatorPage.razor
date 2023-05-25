@@ -208,15 +208,15 @@
                         <table class="min-w-full border-separate border-spacing-0">
                             <thead>
                             <tr>
-                                <th scope="col" class=" sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Vagtnavn</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Beskrivelse</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Starttidspunkt</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Sluttidspunkt</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Varighed</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Type</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Område</th>
-                                <td scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet ↑↓ </td>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5  pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"/>
+                                <th scope="col" class=" sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Vagtnavn</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-0">Beskrivelse</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Starttidspunkt</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Sluttidspunkt</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Varighed</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Type</th>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Område</th>
+                                <td scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet ↑↓ </td>
+                                <th scope="col" class="sticky  z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5  pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"/>
                             </tr>
                             </thead>
                             <tbody>
@@ -224,7 +224,7 @@
                             {
                                 <tr>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Name</td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Description</td>
+                                    <td class="max-w-xs whitespace-normal border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Description</td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.startTime</td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.endTime</td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Duration</td>
@@ -255,19 +255,19 @@
             <div class="mt-8 flow-root">
                 <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle">
-                        <table class="min-w-full border-separate border-spacing-0">
+                        <table class="min-w-full border-separate border-spacing-0 table-auto">
                             <thead>
                             <tr>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Vagtnavn</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Beskrivelse</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Starttidspunkt</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Sluttidspunkt</th>
-                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Varighed</th>
+                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Varighed</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Type</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Område</th>
-                                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
+                                <th scope="col" class="sticky top-0 z-10  border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"/>
-                                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"></th>
+                                <th scope="col" class="sticky top-0 z-10  border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -277,17 +277,17 @@
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
                                         <input type="text" @bind="shift.Name"/>
                                     </td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
-                                        <input type="text" @bind="shift.Description"/>
+                                    <td class=" max-w-xs whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
+                                        <textarea @bind="shift.Description"/>
                                     </td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
-                                        <input type="text" @bind="shift.startTime"/>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                                        <input type="text" size="10" @bind="shift.startTime"/>
                                     </td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
-                                        <input type="text" @bind="shift.endTime"/>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                                        <input type="text" size="10" @bind="shift.endTime"/>
                                     </td>
-                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell">
-                                        <input type="text" @bind="shift.Duration"/>
+                                    <td class="whitespace-nowrap border-b border-gray-200 px-3 py-1 text-sm text-center text-gray-500 lg:table-cell">
+                                        <input type="text" size="2" @bind="shift.Duration"/>
                                     </td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
                                         <input type="text" @bind="shift.Type"/>
@@ -299,10 +299,10 @@
                                         <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                     </td>
                                     <td>
-                                        <button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem</button>
+                                        <button type="button" @onclick="() => UpdateShift(shift)" class="block rounded-md bg-indigo-600 px-2 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Gem</button>
                                     </td>
                                     <td>
-                                        <button type="button" @onclick="() => DeleteShift(shift.Id)" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Slet</button>
+                                        <button type="button" @onclick="() => DeleteShift(shift.Id)" class="block rounded-md bg-indigo-600 px-2 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Slet</button>
                                     </td>
                                 </tr>
                             }
