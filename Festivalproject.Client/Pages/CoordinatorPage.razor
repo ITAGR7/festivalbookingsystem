@@ -166,8 +166,8 @@ else
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto sm:ml-16 sm:mt-0"></div>
-                <button type="button" @onclick="(()=>EnableShiftEditMode())" class="block rounded-md bg-indigo-600 px-3 py-2 mr-0 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button>
-                <button type="button" @onclick="(()=>ShowCreateShiftDialog())" class="block rounded-md bg-indigo-600 px-6 py-2 ml-12 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opret vagt</button>
+                <button type="button" @onclick="(()=>EnableShiftEditMode())" class="block rounded-md bg-indigo-600 px-3 py-2 mr-0 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagter</button>
+                <button type="button" @onclick="(()=>ShowCreateShiftDialog())" class="block rounded-md bg-indigo-600 px-6 py-2 ml-12 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opret ny vagt</button>
         </div>
         <div class="mt-4 flow-root">
             <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
@@ -180,27 +180,28 @@ else
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Starttidspunkt</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Sluttidspunkt</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter  lg:pl-8">Varighed</th>
+                                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Type</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8">Område</th>
                                 <td scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5   text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:pl-8" @onclick="() => PrioritySort()" style="cursor: pointer">Prioritet ↑↓ </td>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5  pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach (var shift in shiftList)
+                            @foreach (var shift in shiftList)
                             {                             
-                                <tr>
+                               <tr>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Name</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Description</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.startTime</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.endTime</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Duration</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Type</td>
+                                        <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">@shift.Area</td>
                                         <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                            <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 30px" @onclick="() => UpdatePriority(shift.Id)"></i>
-                                        </td>
-                                        <th scope="col" class="sticky top-0 z-10 border-b border-gray-200 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
-                                        @*<td><button type="button" @onclick="(()=>EditShift())" class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rediger vagt</button> </td>*@
-                                    </tr>
+                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 30px" @onclick="() => UpdatePriority(shift.Id)"></i></td>
+                                        <td scope="col" class="sticky top-0 z-10 border-b border-gray-200 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
+                                      
+                               </tr>
                             }                          
                         </tbody> 
                     </table>
@@ -229,7 +230,8 @@ else
                                     <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Sluttidspunkt</th>
                                     <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Varighed</th>
                                     <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Type</th>
-                                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
+                                    <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Område</th>
+                                    <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Prioritet</th>
                                 <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8" />
                                 <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell"></th>
                             </tr>
@@ -244,6 +246,7 @@ else
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell"><input type="text" @bind="shift.endTime" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 lg:tabl e-cell"><input type="text" @bind="shift.Duration" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.Type" /></td>
+                                        <td class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500"><input type="text" @bind="shift.Area" /></td>
                                     <td class="whitespace-nowrap border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
                                             <i class="bi @(shift.IsPriority ? "bi-star-fill" : "bi-star")" style="font-size: 2rem; color: cornflowerblue; padding-left: 10px" @onclick="() => UpdatePriority(shift.Id)"></i>
                                         </td>

@@ -13,6 +13,19 @@
 <!-- Implementing a login form with two inputfields. Styled with tailwind css.
 The form binds inputvalue to local variables, which then are passed to be validated via Login() method
 -->
+@if (isLoading)
+{
+    <div class="full-screen-overlay"></div>
+    <div class="loader-container">
+        <span class="loader"></span>
+    </div>
+
+}
+else
+{
+    <div class="card-deck">
+    </div>
+}
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Log ind</h2>
@@ -58,15 +71,18 @@ The form binds inputvalue to local variables, which then are passed to be valida
 </div>
 
 
+
+
 @code {
 
     //Local variables 
-    private string yourUsername = "";
-    private string yourPassword = "";
-    private string id = "";
-    private string message = "";
-    private string message2 = "";
-    private LoginDataDTO loginData = new();
+    private string yourUsername { get; set; } = "";
+    private string yourPassword { get; set; } = "";
+    private string id { get; set; } = "";
+    private string message { get; set; } = "";
+    private string message2 { get; set; } = "";
+    private LoginDataDTO loginData { get; set; } = new();
+    private bool isLoading { get; set; } = false;
 
 
 
@@ -74,16 +90,19 @@ The form binds inputvalue to local variables, which then are passed to be valida
     //...method proceeds to call Login() method. 
     private async Task Submit()
     {
+      
         if (string.IsNullOrEmpty(yourUsername) || string.IsNullOrEmpty(yourPassword))
         {
-    // Display an error message or handle the validation as desired
+            // Display an error message or handle the validation as desired
             message = "Brugernavn og kodeord er påkrævet.";
             return;
         }
         else
         {
             message = "";
+            isLoading = true;
             await Login();
+            isLoading = false;
         }
     }
 
