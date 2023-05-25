@@ -1,0 +1,58 @@
+﻿.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; /* Juster højden efter behov */
+}
+.loader {
+    width: 68px;
+    height: 68px;
+    border-radius: 100%;
+    display: inline-block;
+    border-top: 6px solid blue;
+    border-right: 6px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+
+}
+
+
+
+    .loader::after {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 68px;
+        height: 68px;
+        border-radius: 100%;
+        border-left: 6px solid darkblue;
+        border-bottom: 6px solid transparent;
+        animation: rotation 0.5s linear infinite reverse;
+    }
+
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.full-screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}

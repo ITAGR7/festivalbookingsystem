@@ -37,9 +37,19 @@ public class ShiftRepository : IShifts
     }
 
 
+    public async Task<Shift> CreateShift(Shift newShift)
+    {
+       collection.InsertOne(newShift);
+       return newShift;
+        
+    }
+
+
+
+
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
-        Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
+          Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
 
 
         var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
