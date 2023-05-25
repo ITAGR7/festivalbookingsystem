@@ -8,14 +8,12 @@ public interface IShiftService
     Task<List<Shift>> GetAllShifts();
 
     Task<Shift> CreateShift(Shift shift);
- 
-    
-    Task<Shift> GetShiftById(string id);
 
-    Task<bool> DeleteShift(string id);    
+    Task<bool> DeleteShift(string id);
 
     Task<Shift> UpdateShift(Shift _shift);
 
-
+    Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status);
     
+    Task<List<Shift>> GetShiftsByStatus();
 }

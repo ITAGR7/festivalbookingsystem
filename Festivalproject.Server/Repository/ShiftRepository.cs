@@ -30,11 +30,6 @@ public class ShiftRepository : IShifts
         var shifts = collection.Find(new BsonDocument()).ToList();
         return shifts;
     }
-    
-    public Shift GetShiftById(string id)
-    {
-        return collection.Find(i => i.Id == id).FirstOrDefault();
-    }
 
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -42,48 +37,49 @@ public class ShiftRepository : IShifts
     }
 
 
+    public async Task<Shift> UpdateShift(Shift shiftUpdated)
+    {
+        Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
 
 
-
-        public async Task<Shift> UpdateShift(Shift shiftUpdated)
-        {
-            Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
-
-
-            var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
+        var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
 
         //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
         //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
 
 
+        var update = Builders<Shift>.Update
+            .Set(u => u.Name, shiftUpdated.Name)
+            .Set(u => u.startTime, shiftUpdated.startTime)
+            .Set(u => u.endTime, shiftUpdated.endTime)
+            .Set(u => u.Description, shiftUpdated.Description)
+            .Set(u => u.Duration, shiftUpdated.Duration)
+            .Set(u => u.Type, shiftUpdated.Type)
+            .Set(u => u.Status, shiftUpdated.Status)
+            .Set(u => u.Area, shiftUpdated.Area);
+
+
+        var result = await collection.UpdateOneAsync(filter, update);
+
+        return shiftUpdated;
+    }
+
+    public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
+    {
+        var filter = Builders<Shift>.Filter.Eq(u => u.Id, Id);
 
         var update = Builders<Shift>.Update
-          .Set(u => u.Name, shiftUpdated.Name)
-          .Set(u => u.startTime, shiftUpdated.startTime)
-          .Set(u => u.endTime, shiftUpdated.endTime)
-          .Set(u => u.Description, shiftUpdated.Description)
-          .Set(u => u.Duration, shiftUpdated.Duration)
-          .Set(u => u.Type, shiftUpdated.Type)
-          .Set(u => u.Status, shiftUpdated.Status)
-          .Set(u => u.Area, shiftUpdated.Area);
+            .Set(u => u.Status, Status);
 
-
-
-            var result = await collection.UpdateOneAsync(filter, update);
-
-            return shiftUpdated; 
-
-        }
-
+        var updateResult = await collection.UpdateOneAsync(filter, update);
+        return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
+    }
 
 
     public async Task<bool> DeleteShift(string id)
     {
         var result = await collection.DeleteOneAsync(s => s.Id == id);
-        if(result.DeletedCount > 0)
-        {
-            return true;
-        }
+        if (result.DeletedCount > 0) return true;
         return false;
     }
 }

@@ -9,7 +9,6 @@
 @using Blazored.Modal.Services;
 
 
-
 <!-- Implementing header with image at top of userprofile page  -->
 <div>
   <div>
@@ -69,33 +68,33 @@
                     <div class="inline-block min-w-full py-2 align-middle">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
-                                <tr>
-                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">Navn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Efternavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adresse</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">By</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Postnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telefonnummer</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brugernavn</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Epost</th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
 
-                                    </th>
-                                </tr>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                <tr>
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
-                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 lg:pl-8">@user.FirstName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.SurName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Address</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.City</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Zip</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.PhoneNumber</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.UserName</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">@user.Email</td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -105,7 +104,6 @@
     }
     else
     {
-
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
@@ -130,8 +128,8 @@
                                     <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Epost</th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
 
-                                    </th>
-                                </tr>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 <tr>
@@ -153,7 +151,6 @@
                 </div>
             </div>
         </div>
-
     }
 
 
@@ -170,15 +167,12 @@
      </div>
    
     <!-- To avoid overabundance of code in this razorpage, we apply use of partial view. See components folder on client  -->
-    <ShiftList Shifts=ShiftRegistrations />
+    <ShiftList Shifts="ShiftRegistrations"/>
 
 
- </div>
+</div>
 
 
-    
-
-  
 @code {
 
     // Passing the userobjects ObjectId(BSON) from loginpage to be able to fetch userinformation and shiftregistrations by userId
@@ -186,16 +180,15 @@
     [SupplyParameterFromQuery]
     public string? id { get; set; }
 
-    private List<User> userList { get; set; } = new List<User>();
-    private User user { get; set; } = new User();
-    private User userUpdated { get; set; } = new User();
+    private List<User> userList { get; set; } = new();
+    private User user { get; set; } = new();
+    private User userUpdated { get; set; } = new();
     private bool EditMode { get; set; } = false;
     private List<ShiftRegistration> ShiftRegistrations { get; set; } = new List<ShiftRegistration>();
 
    
     protected override async Task OnInitializedAsync()
     {
-
         user = await userService.GetUserByObjectId(id);
         ShiftRegistrations = await ShiftRegistrationService.GetRegisteredShiftsById(id);
         Console.WriteLine(ShiftRegistrations.Count());
@@ -205,7 +198,6 @@
     //Method that sets the binded inputvalues for userUpdated to user, which is passed to service in "Save" method
     private void Edit()
     {
-
         EditMode = true;
         userUpdated.FirstName = user.FirstName;
         userUpdated.SurName = user.SurName;
@@ -218,8 +210,6 @@
         userUpdated.Password = user.Password;
         userUpdated.UserType = user.UserType;
         userUpdated.Id = user.Id;
-
-
     }
 
     //Method that calls the HttpPut method which updates the changed fields in user-document in the database
@@ -229,10 +219,9 @@
         await userService.UpdateUser(userUpdated);
         user = await userService.GetUserByObjectId(id);
         EditMode = false;
-
     }
 
-      //method that navigates to availableshifts page with userobjectid as parameter
+    //method that navigates to availableshifts page with userobjectid as parameter
     private void NavigateToAvailableShifts()
     {
         navigationManager.NavigateTo($"/availableshifts?id={id}");

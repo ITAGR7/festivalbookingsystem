@@ -22,7 +22,7 @@ public class UserService : IUserService
     {
         try
         {
-            var result = await Http.GetFromJsonAsync<User>($"https://localhost:7251/api/user/{id}");
+            var result = await Http.GetFromJsonAsync<User>($"/api/user/{id}");
             return result;
         }
         catch (Exception ex)
@@ -35,7 +35,7 @@ public class UserService : IUserService
 
     public async Task<User> CreateUser(User user)
     {
-        var response = await Http.PostAsJsonAsync<User>("https://localhost:7251/api/user", user);
+        var response = await Http.PostAsJsonAsync<User>("/api/user", user);
 
 
         if (response.IsSuccessStatusCode)
@@ -56,7 +56,7 @@ public class UserService : IUserService
     public async Task UpdateUser(User userUpdated)
     {
         Console.WriteLine(userUpdated.FirstName.ToString());
-        await Http.PutAsJsonAsync<User>("https://localhost:7251/api/user", userUpdated);
+        await Http.PutAsJsonAsync<User>("/api/user", userUpdated);
     }
 
 

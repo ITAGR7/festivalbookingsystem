@@ -20,7 +20,7 @@ public class LoginService : ILoginService
     //...uneccesseraly from database to client 
     public async Task<LoginResultDTO> GetLoginResult(LoginDataDTO loginData)
     {
-        var response = await Http.PostAsJsonAsync($"https://localhost:7251/api/user/login", loginData);
+        var response = await Http.PostAsJsonAsync("/api/user/login", loginData);
 
         if (response.IsSuccessStatusCode)
         {
