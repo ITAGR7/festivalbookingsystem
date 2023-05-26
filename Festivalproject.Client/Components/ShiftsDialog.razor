@@ -18,8 +18,8 @@
                 <div class="infoDiv">
                     <div>Beskrivelse: @ModalShiftDescription</div>
                     <div>Varighed: @ModalShiftDuration timer</div>
-                    <div>Starttidspunkt: @ModalShiftStart</div>
-                    <div>Sluttidspunkt: @ModalShiftEnd</div>
+                    <div>Starttidspunkt: @ModalShiftStartLocalTime</div>
+                    <div>Sluttidspunkt: @ModalShiftEndLocalTime</div>
                     <div>Område: @ModalShiftArea</div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                 <div class="infoDiv">
                     <div>Beskrivelse: @ModalShiftDescription</div>
                     <div>Varighed: @ModalShiftDuration timer</div>
-                    <div>Starttidspunkt: @ModalShiftStart</div>
-                    <div>Sluttidspunkt: @ModalShiftEnd</div>
+                    <div>Starttidspunkt: @ModalShiftStartLocalTime</div>
+                    <div>Sluttidspunkt: @ModalShiftEndLocalTime</div>
                     <div>Område: @ModalShiftArea</div>
                 </div>
                 <div class="buttonDiv">
@@ -64,12 +64,18 @@
 
     [Parameter]
     public string ModalShiftTitle { get; set; }
+    
+    [Parameter]
+    public DateTime ModalShiftStart { get; set; }
 
     [Parameter]
-    public string ModalShiftStart { get; set; }
+    public DateTime ModalShiftEnd { get; set; }
+    
+    [Parameter]
+    public DateTime ModalShiftStartLocalTime { get; set; }
 
     [Parameter]
-    public string ModalShiftEnd { get; set; }
+    public DateTime ModalShiftEndLocalTime { get; set; }
 
     [Parameter]
     public string ModalShiftDescription { get; set; }
@@ -85,10 +91,17 @@
 
     [Parameter]
     public string ModalShiftType { get; set; }
-    
 
     private List<Shift> AvailableShift { get; set; } = new();
     
+    //OnInitializedAsync method for setting the modal shift start and end time to local time which are being used in the html
+    protected override void OnInitialized()
+    {
+        ModalShiftStartLocalTime = ModalShiftStart.ToLocalTime();
+        ModalShiftEndLocalTime = ModalShiftEnd.ToLocalTime();
+    }
+
+
     //method for refreshing the calender
     public async Task RefreshCalenderEvents()
     {
@@ -125,13 +138,13 @@
         shiftRegistration.ShiftId = ModalShiftId;
         shiftRegistration.UserId = ModalUserId;
         shiftRegistration.ShiftName = ModalShiftTitle;
-        shiftRegistration.StartTime = DateTime.Parse(ModalShiftStart);
-        shiftRegistration.EndTime = DateTime.Parse(ModalShiftEnd);
+        shiftRegistration.StartTime = ModalShiftStart;
+        shiftRegistration.EndTime = ModalShiftEnd;
         shiftRegistration.ShiftDuration = int.Parse(ModalShiftDuration);
         shiftRegistration.Description = ModalShiftDescription;
         shiftRegistration.ShiftArea = ModalShiftArea;
         shiftRegistration.ShiftType = ModalShiftType;
-
+        
 
     //Create a new shiftregistration in the database
         await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
