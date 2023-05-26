@@ -25,8 +25,7 @@ public class ShiftRegistrationRepository : IShiftRegistration
 
     public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
     {
-        //return await collection.Find(i => true).ToListAsync();
-        return collection.Find(new BsonDocument()).ToList();
+        return collection.Find(sr => sr.UserId == UserId).ToList();
     }
 
 
