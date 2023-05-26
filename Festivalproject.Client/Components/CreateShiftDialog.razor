@@ -67,20 +67,21 @@
                   
                         <label for="startTime" class="block text-sm font-medium leading-6 text-gray-900">Starttidspunkt</label>
                         <div class="mt-2">
-                            <input type="datetime-local" @bind-value="@newShift.startTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value="@newShift.startTime"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
                     <div class="sm:col-span-2">
                      
                         <label for="endTime" class="block text-sm font-medium leading-6 text-gray-900">Sluttidspunkt</label>
                         <div class="mt-2">
-                            <input type="datetime-local" @bind-value="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value="newShift.endTime"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
+                       
                     </div>
                     <div class="sm:col-span-">
 
                         <div class="mt-2">
-                          
+                            <button @onclick="()=> CalculateDuration()"> Beregn varighed</button>
                             <label for="duration" class="block text-sm font-medium leading-6 text-gray-900">Vagtens varighed:</label>
                            <input type="text" @bind="newShift.Duration">Duration </input>
                         </div>
@@ -118,6 +119,10 @@
     private double totalHours { get; set; } 
     private string dateErrorMessage { get; set; }
 
+    private DateTime StartDate { get; set; } = DateTime.Now;
+    private DateTime EndDate { get; set; } = DateTime.Now;
+
+
 
     List<string> shiftTypes = new List<string> { "Barvagt", "Toiletvagt", "Indgang", 
     "Sikkerhedsvagt", "Køkkenvagt", "Parkeringsvagt", "Samaritan" };
@@ -153,8 +158,8 @@
         editContext = new EditContext(newShift);
 
         // Setting default value for start and endtime in calendar 
-        newShift.startTime = DateTime.UtcNow.ToLocalTime();
-        newShift.endTime = DateTime.UtcNow.ToLocalTime();
+        newShift.startTime = DateTime.Today;
+        newShift.endTime = DateTime.Today;
 
     }
 
@@ -176,7 +181,7 @@
     //Method that checks if endtime is after startrtime, and calculates the duration between start and endtime. 
     public void CalculateDuration()
     {
-        if (newShift.endTime.Minute > newShift.startTime.Minute)
+        if (newShift.endTime > newShift.startTime)
         {
             TimeSpan duration = newShift.endTime - newShift.startTime;
             newShift.Duration = (int)duration.TotalHours;
