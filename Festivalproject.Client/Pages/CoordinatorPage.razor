@@ -342,11 +342,9 @@
     private readonly List<string> DropdownOptions = new() { "Alle vagter", "Med frivillig", "Uden frivillig" };
     private bool? dropDownStatus { get; set; } = true;
 
-    //Sprivate List<Shift> searchFilteredShifts { get; set; } = new();
     public string SearchInput { get; set; } = "";
     public int occupiedShifts { get; set; }
     public int availableShifts { get; set; }
-    private List<Shift> prioritySortedShifts { get; set; } = new();
     private List<Shift> occupiedList { get; set; } = new();
     private List<Shift> availableList { get; set; } = new();
 
