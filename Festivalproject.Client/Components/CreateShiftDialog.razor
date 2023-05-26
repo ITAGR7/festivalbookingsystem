@@ -23,7 +23,7 @@
                                 <option value="">Vælg vagt type</option>
                                 <option value="Barvagt">Barvagt</option>
                                 <option value="Toiletvagt">Toiletvagt</option>
-                                <option value="Indgangvagt">Indgang</option>
+                                <option value="Indgangsvagt">Indgang</option>
                                 <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
                                 <option value="Køkkenvagt">Køkkenvagt</option>
                                 <option value="Parkeringsvagt">Parkerings</option>
@@ -35,12 +35,19 @@
                         <div class="mt-2">
                             <InputSelect @bind-Value="newShift.Name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Vælg funktion</option>
-                                <option value="Barvagt">Bar</option>
-                                <option value="Toiletvagt">Toiletvagt</option>
-                                <option value="Indgangvagt">Indgang</option>
+                                <option style="font-weight:bolder" value="Barvagt">Barvagt</option>
+                                <option value="Bartender">Bartender</option>
+                                <option value="Oprydder">Oprydder</option>
+                                <option style="font-weight:bolder" value="Toiletvagt">Toiletvagt</option>
+                                <option value="Oprydder/rengøring"> Oprydder/rengøring</option>
+                                <option style="font-weight:bolder" value="Barvagt">Sikkerhedsvagt</option>
                                 <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
-                                <option value="Køkkenvagt">Køkkenvagt</option>
-                                <option value="Parkeringsvagt">Parkerings</option>
+                                <option value="Sikkerhedassistent">Sikkerhedsassistent</option>
+                                <option style="font-weight:bolder" value="Barvagt">Køkkenvagt</option>
+                                <option value="Parkeringsvagt">Kok</option>
+                                <option value="Parkeringsvagt">Servering</option>
+                                <option value="Parkeringsvagt">Oprydning</option>
+                                <option style="font-weight:bolder" value="Barvagt">Barvagt</option>
                             </InputSelect>
                         </div>
                     </div>            
