@@ -13,106 +13,95 @@
        <p class="text-xl leading-6 text-black-600"> Opret en ny vagt!  </p>
         <EditForm Model="@newShift">
             <DataAnnotationsValidator />
-            <ValidationSummary />
             <div class="index container">
                 <div class="mt-16 grid grid-cols-4 gap-x-6 gap-y-12">
                     <div class="sm:col-span-2">
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+                 
+                        <label  class="block text-sm font-medium leading-6 text-gray-900">Vagttype</label>
                         <div class="mt-2">
                             <InputSelect @bind-Value="newShift.Type" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Vælg vagt type</option>
-                                <option value="Barvagt">Barvagt</option>
-                                <option value="Toiletvagt">Toiletvagt</option>
-                                <option value="Indgangsvagt">Indgang</option>
-                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
-                                <option value="Køkkenvagt">Køkkenvagt</option>
-                                <option value="Parkeringsvagt">Parkerings</option>
+                                <option>Vælg vagt type</option>
+                                @foreach (var shiftType in shiftTypes)
+                                {
+                                    <option value="@shiftType">@shiftType</option>
+                                }
                             </InputSelect>                       
                         </div>
                     </div>
                     <div class="sm:col-span-2">
+                       
                         <label for="shiftName" class="block text-sm font-medium leading-6 text-gray-900">Funktion/navn</label>
                         <div class="mt-2">
                             <InputSelect @bind-Value="newShift.Name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">Vælg funktion</option>
-                                <option style="font-weight:bolder" value="Barvagt">Barvagt</option>
-                                <option value="Bartender">Bartender</option>
-                                <option value="Oprydder">Oprydder</option>
-                                <option style="font-weight:bolder" value="Toiletvagt">Toiletvagt</option>
-                                <option value="Oprydder/rengøring"> Oprydder/rengøring</option>
-                                <option style="font-weight:bolder" value="Barvagt">Sikkerhedsvagt</option>
-                                <option value="Sikkerhedsvagt">Sikkerhedsvagt</option>
-                                <option value="Sikkerhedassistent">Sikkerhedsassistent</option>
-                                <option style="font-weight:bolder" value="Barvagt">Køkkenvagt</option>
-                                <option value="Parkeringsvagt">Kok</option>
-                                <option value="Parkeringsvagt">Servering</option>
-                                <option value="Parkeringsvagt">Oprydning</option>
-                                <option style="font-weight:bolder" value="Barvagt">Barvagt</option>
+                                @foreach (var shiftType in shiftFunctionsAndRoles)
+                                {
+                                    <option style="font-weight:bolder" disabled>@shiftType.Key</option>
+                                    foreach (var role in shiftType.Value)
+                                    {
+                                        <option>&nbsp;&nbsp;@role</option>
+                                    }
+                                }
                             </InputSelect>
                         </div>
                     </div>            
                     <div class="sm:col-span-2">
+                    
                         <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Vagtområde</label>
                         <div class="mt-2">                
-                            <InputSelect @bind-Value="newShift.Area" id="area" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="">Vælg område</option>
-                                <option style ="font-weight:bolder" value="Køkkenvagt">Bar</option>
-                                <option value="Mad/drikke">&nbsp;&nbsp;The Crazy bar</option>
-                                <option value="Mad/drikke">&nbsp;&nbsp;The Slow but fast bar</option>
-                                <option value="Køkkenvagt">&nbsp;&nbsp;Fontenen</option>
-                                <option style="font-weight:bolder" value="Mad/Drikke">Mad/drikke</option>
-                                <option value="Mad/drikke">&nbsp;&nbsp;Snackbar</option>
-                                <option value="Mad/Drikke">&nbsp;&nbsp;Foodcourt</option>
-                                <option style="font-weight:bolder" value="Scene">Sceneområde</option>
-                                <option value="Scene">&nbsp;&nbsp;Store scene</option>
-                                <option value="Scene">&nbsp;&nbsp;Lille scene</option>
-                                <option style ="font-weight:bolder" value="Indgang">Indgang</option>
-                                <option value="Indgang">&nbsp;&nbsp;Indgang Vest</option>
-                                <option style="font-weight:bolder" value="Toilet">Toiletter</option>
-                                <option value="Toilet">&nbsp;&nbsp;Toilet øst</option>
-                                <option value="Toilet">&nbsp;&nbsp;Toilet vest</option>
-                                <option style ="font-weight:bolder" value="Parkering">Parkering</option>
-                                <option value="Parkering"> &nbsp;&nbsp;Parkering 1</option>
-                                <option value="Parkering">&nbsp;&nbsp;Parkering 2</option>
-                                <option style="font-weight:bolder" value="Andet">Andet</option>
-                                <option value="Andet">&nbsp;&nbsp;Samaritan nord</option>                                                           
+                            <InputSelect @bind-Value="newShift.Area" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">Vælg funktion</option>
+                                @foreach (var shiftType in areaTypesAndLocations)
+                                {
+                                    <option style="font-weight:bolder" disabled>@shiftType.Key</option>
+                                    foreach (var role in shiftType.Value)
+                                    {
+                                        <option>&nbsp;&nbsp;@role</option>
+                                    }
+                                }
                             </InputSelect>
                         </div>
                     </div>
                     <br />
                     <div class="sm:col-span-2">
+                  
                         <label for="startTime" class="block text-sm font-medium leading-6 text-gray-900">Starttidspunkt</label>
                         <div class="mt-2">
-                            <input type="datetime-local" @bind-value="@newShift.startTime" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value="@newShift.startTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
                     <div class="sm:col-span-2">
+                     
                         <label for="endTime" class="block text-sm font-medium leading-6 text-gray-900">Sluttidspunkt</label>
                         <div class="mt-2">
-                            <input type="datetime-local"  @bind="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
+                            <input type="datetime-local" @bind-value="newShift.endTime" @oninput="CalculateDuration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
                     <div class="sm:col-span-">
 
                         <div class="mt-2">
-                           <p> Duration: @totalHours </p>
+                          
+                            <label for="duration" class="block text-sm font-medium leading-6 text-gray-900">Vagtens varighed:</label>
                            <input type="text" @bind="newShift.Duration">Duration </input>
                         </div>
+                        <ValidationSummary />
                     </div>
                     <div class="col-span-4">
+                        
                         <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Beskrivelse</label>
                         <div class="mt-2">
                             <InputTextArea @bind-Value="newShift.Description" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 form-control" />
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Beskrivelse</label>
+                       
+                        <p>@resultMessage</p>
                         <div class="mt-2">
                           <td><button type="submit" @onclick="() => HandleValidSubmit()"  class="block rounded-md bg-indigo-600 px-3 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Opret vagt!</button></td>
                         </div>
                     </div>
                  </div>
-                                 
+                            
             </div>
         </EditForm>
     </ModalContent>
@@ -127,79 +116,91 @@
     private string resultMessage { get; set; }
     private bool shiftCreated = false;
     private double totalHours { get; set; } 
-    private DateTime startTime;
-    private DateTime endTime;
+    private string dateErrorMessage { get; set; }
 
 
+    List<string> shiftTypes = new List<string> { "Barvagt", "Toiletvagt", "Indgang", 
+    "Sikkerhedsvagt", "Køkkenvagt", "Parkeringsvagt", "Samaritan" };
+    Dictionary<string, List<string>> shiftFunctionsAndRoles = new Dictionary<string, List<string>>
+{
+    { "Barvagt", new List<string> { "Bartender", "Oprydder" } },
+    { "Toiletvagt", new List<string> { "Oprydder/rengøring" } },
+    { "Indgangsvagtt", new List<string> { "Billetør", "Assistent" } },
+    { "Sikkerhedsvagt", new List<string> { "Sikkerhedsvagt", "Sikkerhedsassistent" } },
+    { "Køkkenvagt", new List<string> { "Kok", "Servering", "Oprydning" } },
+    { "Parkering", new List<string> { "Vagt", "Assistent" } },
+    { "Samaritan", new List<string> { "Førsthjælper", "Oprydning", "Sygeplejerske" } }
+};
+
+    Dictionary<string, List<string>> areaTypesAndLocations = new Dictionary<string, List<string>>
+{
+    { "Bar", new List<string> { "The Crazy bar", "The Slow but fast bar", "Fontenen" } },
+    { "Mad/drikke", new List<string> { "Snackbar", "Foodcourt" } },
+    { "Sceneområde", new List<string> { "Store scene", "Lille scene" } },
+    { "Indgang", new List<string> { "Indgang Vest" } },
+    { "Toiletter", new List<string> { "Toilet øst", "Toilet vest" } },
+    { "Parkering", new List<string> { "Parkering 1", "Parkering 2" } },
+    { "Samaritan", new List<string> { "Samaritan nord" } }
+};
+
+
+
+
+    //Method that creates an instance of edicContext taking the nedShift-object as parameter. And setting default time for input-date-field to today. 
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("OnInitialized in dialog");
         editContext = new EditContext(newShift);
 
-    // Setting default value for start and endtime in calendar 
+        // Setting default value for start and endtime in calendar 
         newShift.startTime = DateTime.UtcNow.ToLocalTime();
         newShift.endTime = DateTime.UtcNow.ToLocalTime();
+
     }
 
 
-
+    //Method that when form is submittet validets the form content, and if valid calls the CreateShiftmethod. 
     public async Task HandleValidSubmit()
     {
-        Console.WriteLine("Handling valid submit");
         if (editContext.Validate())
         {
             await CreateShift(newShift);
             if (shiftCreated == true)
             {
+                //Clearing the form by setting newShift value to a  new shift 
                 newShift = new Shift();
             }
         }
     }
 
-
+    //Method that checks if endtime is after startrtime, and calculates the duration between start and endtime. 
     public void CalculateDuration()
     {
-        JSRuntime.InvokeVoidAsync("console.log", $"Raw input - Start time: {newShift.startTime}, End time: {newShift.endTime}");
-
-        if(newShift.endTime > newShift.startTime)
+        if (newShift.endTime.Minute > newShift.startTime.Minute)
         {
             TimeSpan duration = newShift.endTime - newShift.startTime;
-            totalHours = duration.TotalHours;
-            newShift.Duration = (int)totalHours;
-
-            JSRuntime.InvokeVoidAsync("console.log", $"Calculated duration: {totalHours}");
+            newShift.Duration = (int)duration.TotalHours;
             StateHasChanged();
         }
         else
         {
-            JSRuntime.InvokeVoidAsync("console.error", "End time must be after start time");
+            dateErrorMessage = "Sluttidspunkt skal være efter starttidspunkt";
         }
     }
 
 
 
-
-
-
-
+    //Method that creates shift, by service sending a httpPost request. If the response "createdShift" is not null
     private async Task CreateShift(Shift newShift)
     {
         Console.WriteLine("Creating shift");
         try
         {
             // Call the shiftService to use createshift method 
-            var createdShift = await shiftService.CreateShift(newShift);
-
-            // If result is not null (success) the showValidIcon bool is set to true, and the gif is loaded 
-            if (createdShift != null)
+            var result = await shiftService.CreateShift(newShift);
+            
+            if (result != null)
             {
-                //showValidIcon = true;
-                //StateHasChanged(); // Force a re-render to show the GIF
-
-                //await Task.Delay(2100);
-                //showValidIcon = false; 
-                StateHasChanged(); // Force a re-render to hide the GIF
-
                 Console.WriteLine("Shift addedd Successfully");
                 resultMessage = "Vellykket oprættelse af vagt";
                 shiftCreated = true;

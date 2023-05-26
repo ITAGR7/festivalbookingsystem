@@ -183,10 +183,10 @@
 
         <div class="col-md-3 vagtBox">
             <div>
-                <p class="LedigeSkrift white-text">Ledige vagter: @availableShifts</p>
+                <p class="LedigeSkrift white-text">Ledige vagter: @availableShiftsCount</p>
             </div>
             <div>
-                <p class="OptagetSkrift white-text">Optagede vagter: @occupiedShifts</p>
+                <p class="OptagetSkrift white-text">Optagede vagter: @occupiedShiftsCount</p>
             </div>
         </div>
     </div>
@@ -250,7 +250,6 @@
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                 </div>
-       @*         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none"></div>*@
             </div>
             <div class="mt-8 flow-root">
                 <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
@@ -326,7 +325,6 @@
     [SupplyParameterFromQuery]
     public string? id { get; set; }
 
-    private List<User> userList { get; set; } = new();
     private User user { get; set; } = new();
     private User userUpdated { get; set; } = new();
 
@@ -341,11 +339,13 @@
     private readonly List<string> DropdownOptions = new() { "Alle vagter", "Med frivillig", "Uden frivillig" };
     private bool? dropDownStatus { get; set; } = true;
 
-    public string SearchInput { get; set; } = "";
-    public int occupiedShifts { get; set; }
-    public int availableShifts { get; set; }
+    private string SearchInput { get; set; } = "";
+    private int occupiedShiftsCount { get; set; }
+    private int availableShiftsCount { get; set; }
     private List<Shift> occupiedList { get; set; } = new();
     private List<Shift> availableList { get; set; } = new();
+
+    private bool isSortedByPriority;
 
 
     // On pageload method that runs async with other methods - fetches the user by id passed from signin and a list of all shifts 
@@ -357,7 +357,7 @@
         shiftList = await shiftService.GetAllShifts();
 
         //Setting the time-data from databases UTC+00 to local time: UTC+2
-         foreach(var shift in shiftList)
+        foreach(var shift in shiftList)
         {
             shift.startTime = shift.startTime.ToLocalTime();
             shift.endTime = shift.endTime.ToLocalTime(); 
@@ -369,9 +369,11 @@
         occupiedList = await shiftService.GetShiftsByStatus(true);
         availableList = await shiftService.GetShiftsByStatus(false);
 
-        occupiedShifts = occupiedList.Count();
-        availableShifts = availableList.Count();
+        occupiedShiftsCount = occupiedList.Count();
+        availableShiftsCount = availableList.Count();
     }
+
+
 
 
     public async Task HandleValidSubmit()
@@ -379,7 +381,7 @@
         if (editContext.Validate())
         {
             await SaveUserInfo();
-           
+
         }
     }
 
@@ -439,19 +441,19 @@
         shiftList = newList;
     }
 
-    private bool isSortedByPriority;
+  
 
     public void PrioritySort()
     {
         if (isSortedByPriority)
         {
-    // If the list is currently sorted by priority, restore the original unsorted order.
+            // If the list is currently sorted by priority, restore the original unsorted order.
             shiftList = new List<Shift>(filteredShifts);
             isSortedByPriority = false;
         }
         else
         {
-    // Sort the list by priority.
+            // Sort the list by priority.
             shiftList = shiftList.OrderBy(shift => shift.IsPriority ? 0 : 1).ToList();
             isSortedByPriority = true;
         }
@@ -460,12 +462,12 @@
 
     public void UpdatePriority(string Id)
     {
-    // Find the shift with the given ID in the shiftList.
-    // If a matching shift is found, its priority status is updated.
+        // Find the shift with the given ID in the shiftList.
+        // If a matching shift is found, its priority status is updated.
         var shift = shiftList.FirstOrDefault(s => s.Id == Id);
 
-    // If the shift is currently marked as priority, it will be unmarked.
-    // If the shift is not marked as priority, it will be marked as priority.
+        // If the shift is currently marked as priority, it will be unmarked.
+        // If the shift is not marked as priority, it will be marked as priority.
         if (shift != null)
         {
             shift.IsPriority = !shift.IsPriority;
@@ -479,8 +481,7 @@
 
         if (string.IsNullOrWhiteSpace(SearchInput))
         {
-            shiftList = new List
-                <Shift>(filteredShifts);
+            shiftList = new List<Shift>(filteredShifts);
         }
         else
         {
@@ -488,22 +489,22 @@
         }
     }
 
-
+    //Method that filters list by whether the shift is booked by a volunteer
     private void FilterStatusList(ChangeEventArgs e)
     {
-        Console.WriteLine(e.Value.ToString());
+
         StatusShift = e.Value.ToString();
         if (StatusShift == "Uden frivillig")
         {
-            shiftList = filteredShifts.Where(s => s.Status == false).ToList();
+            shiftList = availableList;
         }
         else if (StatusShift == "Med frivillig")
         {
-            shiftList = filteredShifts.Where(s => s.Status).ToList();
+            shiftList = occupiedList;
         }
         else
         {
-            shiftList = filteredShifts;
+            shiftList = shiftList;
         }
     }
 

@@ -83,4 +83,7 @@ public class ShiftService : IShiftService
         var result = await Http.GetFromJsonAsync<List<Shift>>("/api/shift/status/" + Status);
         return result;
     }
+
+
+
 }
