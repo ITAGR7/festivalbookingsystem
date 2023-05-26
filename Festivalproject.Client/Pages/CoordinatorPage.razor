@@ -329,7 +329,6 @@
     private List<User> userList { get; set; } = new();
     private User user { get; set; } = new();
     private User userUpdated { get; set; } = new();
-    private User updatedUser { get; set; }
 
     private bool EditModeShift { get; set; }
     private bool EditModeUser { get; set; }
@@ -414,7 +413,7 @@
     private async Task SaveUserInfo()
     {
         await userService.UpdateUser(userUpdated);
-        updatedUser = await userService.GetUserByObjectId(id);
+        user = await userService.GetUserByObjectId(id);
         EditModeUser = false;
     }
 

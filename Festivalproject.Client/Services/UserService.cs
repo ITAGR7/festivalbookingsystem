@@ -56,7 +56,7 @@ public class UserService : IUserService
     public async Task UpdateUser(User userUpdated)
     {
         Console.WriteLine(userUpdated.FirstName.ToString());
-        await Http.PutAsJsonAsync<User>("/api/user", userUpdated);
+        await Http.PutAsJsonAsync("/api/user", userUpdated);
     }
 
 
