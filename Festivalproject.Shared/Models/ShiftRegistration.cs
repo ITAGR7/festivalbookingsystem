@@ -15,9 +15,6 @@ public class ShiftRegistration
     [BsonElement("userId")] 
     public string UserId { get; set; } = "";
 
-    [BsonElement("registrationDate")] 
-    public DateTime RegistrationDate { get; set; }
-
     [BsonElement("shiftName")]
     public string ShiftName { get; set; } = "";
 

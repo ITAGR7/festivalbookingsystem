@@ -12,13 +12,15 @@
         @if (ConfirmationVisible)
         {
             <div class="HeaderContainer">
-                <h3 class="Header">You have successfully registered for @ModalShiftTitle</h3>
+                <h3 class="Header">Godt gået 👍, du har tilmeldt dig vagten @ModalShiftTitle</h3>
             </div>
             <div class="parent">
                 <div class="infoDiv">
-                    <div>Shift ID: @ModalShiftId</div>
-                    <div>Bruger ID: @ModalUserId</div>
-                    <div>Shift Type: @ModalShiftType</div>
+                    <div>Beskrivelse: @ModalShiftDescription</div>
+                    <div>Varighed: @ModalShiftDuration timer</div>
+                    <div>Starttidspunkt: @ModalShiftStart</div>
+                    <div>Sluttidspunkt: @ModalShiftEnd</div>
+                    <div>Område: @ModalShiftArea</div>
                 </div>
             </div>
         }
@@ -34,9 +36,6 @@
                     <div>Starttidspunkt: @ModalShiftStart</div>
                     <div>Sluttidspunkt: @ModalShiftEnd</div>
                     <div>Område: @ModalShiftArea</div>
-                    <div>Shift ID: @ModalShiftId</div>
-                    <div>Bruger ID: @ModalUserId</div>
-                    <div>Shift Type: @ModalShiftType</div>
                 </div>
                 <div class="buttonDiv">
                     <button @onclick="CreateShiftRegistration" class="submit-button">Tilmeld Vagt</button>
@@ -59,10 +58,6 @@
     {
         await BlazoredModal.CloseAsync(ModalResult.Ok(true));
     }
-
-
-    [Parameter]
-    public DateTime ModalRegistrationDate { get; set; } = DateTime.Now;
 
     [Parameter]
     public string ModalShiftId { get; set; }
@@ -129,7 +124,6 @@
     //Set the properties of the shiftregistration object
         shiftRegistration.ShiftId = ModalShiftId;
         shiftRegistration.UserId = ModalUserId;
-        shiftRegistration.RegistrationDate = ModalRegistrationDate;
         shiftRegistration.ShiftName = ModalShiftTitle;
         shiftRegistration.StartTime = DateTime.Parse(ModalShiftStart);
         shiftRegistration.EndTime = DateTime.Parse(ModalShiftEnd);
