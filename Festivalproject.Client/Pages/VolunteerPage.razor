@@ -201,6 +201,11 @@
     {
         user = await userService.GetUserByObjectId(id);
         ShiftRegistrations = await ShiftRegistrationService.GetRegisteredShiftsById(id);
+        foreach(var shift in ShiftRegistrations)
+        {
+            shift.StartTime = shift.StartTime.ToLocalTime();
+            shift.EndTime = shift.EndTime.ToLocalTime(); 
+        }
         editContext = new EditContext(userUpdated);
     }
 

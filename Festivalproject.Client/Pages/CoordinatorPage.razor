@@ -356,6 +356,13 @@
         user = await userService.GetUserByObjectId(id);
         shiftList = await shiftService.GetAllShifts();
 
+        //Setting the time-data from databases UTC+00 to local time: UTC+2
+         foreach(var shift in shiftList)
+        {
+            shift.startTime = shift.startTime.ToLocalTime();
+            shift.endTime = shift.endTime.ToLocalTime(); 
+        }
+
         filteredShifts = shiftList;
 
         //fetching required lists to count volunteers on shifts
