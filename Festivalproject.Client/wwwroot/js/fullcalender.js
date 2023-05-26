@@ -38,7 +38,7 @@ export function initializeCalendar(inputEvents, dotNetReference) {
             // Different settings for the calendar -> https://fullcalendar.io/docs
             events: events,
             initialDate: '2023-06-01',
-            timeZone: 'UTC',
+            timeZone: 'local',
             locale: 'da',
             dayMaxEvents: true,
             initialView: 'dayGridMonth',

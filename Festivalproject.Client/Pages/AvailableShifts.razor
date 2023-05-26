@@ -86,6 +86,7 @@
     // Your initialization code here
         AvailableShift = await shiftService.GetShiftsByStatus(false);
 
+
     // Create a DotNetObjectReference to pass to JavaScript
         var dotNetReference = DotNetObjectReference.Create(this);
 
@@ -110,7 +111,7 @@
     }
 
     [JSInvokable]
-    public async Task ShiftsDialog(string shiftType, string shiftId, string shiftName, string shiftStart, string shiftEnd, string shiftDescription, string shiftArea, string shiftDuration, string shiftUserId)
+    public async Task ShiftsDialog(string shiftType, string shiftId, string shiftName, DateTime shiftStart, DateTime shiftEnd, string shiftDescription, string shiftArea, string shiftDuration, string shiftUserId)
     {
         Console.WriteLine(shiftEnd);
         var options = new ModalOptions
