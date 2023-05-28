@@ -1,4 +1,5 @@
 ﻿using Festivalproject.Shared.Models;
+using MongoDB.Driver;
 
 namespace Festivalproject.Server.Interface;
 
@@ -11,9 +12,5 @@ public interface IUser
 
     User GetUserByObjectId(string id);
 
-    //int PostUser(User user);
-
-    //void DeleteUser(int userid);
-
-    Task<bool> UpdateUser(User userUpdated);
+    Task<UpdateResult> UpdateUser(User userUpdated);
 }

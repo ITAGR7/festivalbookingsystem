@@ -23,36 +23,69 @@ public class UserRepository : IUser
     }
 
 
+
+
+    //Method for checking is user exists in database, and returning a loginresult object 
     public LoginResultDTO GetLoginResult(string username, string password)
     {
-        var filter = Builders<User>.Filter.And(
-            Builders<User>.Filter.Eq(u => u.UserName, username), //Husk at ændre til username 
-            Builders<User>.Filter.Eq(u => u.Password, password)
-        );
-        var result = collection.Find(filter).FirstOrDefault();
+        try
+        {  // building a filter for matches in database
+            var filter = Builders<User>.Filter.And(
+                Builders<User>.Filter.Eq(u => u.UserName, username), // Husk at ændre til username 
+                Builders<User>.Filter.Eq(u => u.Password, password)
+            );
+            //applying the filter with a find method 
+            var result = collection.Find(filter).FirstOrDefault();
 
-        if (result != null)
-            return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
-        return new LoginResultDTO
-            { IsValid = false, UserType = " ", ObjectId = " " }; // use -1 or any other invalid value for RoleType
+            //if match is found, we return a loginresult object, with isvalid = true, usertype and ObjectId
+            if (result != null)
+                return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
+            else { 
+                return new LoginResultDTO { IsValid = false, UserType = " ", ObjectId = " " };
+            }
+               
+        }
+        catch (Exception ex)
+        {        
+            Console.WriteLine($"Der opstod en fejl under login: {ex.Message}");
+            return new LoginResultDTO { IsValid = false, UserType = " ", ObjectId = " " };
+        }
+
     }
 
 
+    //Method that retrieves all users from database 
     public List<User> GetAllUsers()
     {
-        //GetAllUsers test on Repo
-
-        return collection.Find(new BsonDocument()).ToList();
+        try
+        {
+            return collection.Find(new BsonDocument()).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Håndter exception her eller kast den videre
+            throw new Exception("Fejl ved hentning af alle brugere.", ex);
+        }
     }
 
+
+    //Method that gets user by MongoDbs object id 
     public User GetUserByObjectId(string id)
     {
-        Console.WriteLine("Getuserbyid repo");
-
-        var user = collection.Find<User>(i => i.Id == id).FirstOrDefault();
-        return user;
+        try
+        {
+            var user = collection.Find<User>(i => i.Id == id).FirstOrDefault();
+            return user;
+        }
+        catch (Exception ex)
+        {
+            // Håndter exception her eller kast den videre
+            throw new Exception("Fejl ved hentning af bruger ved ObjectId.", ex);
+        }
     }
 
+
+    //Method that creates a new user to the database. The method checks if the input username from the new user already exists 
     public User CreateUser(User newUser)
     {
         var userExist = collection.Find(u => u.UserName == newUser.UserName).FirstOrDefault();
@@ -69,27 +102,33 @@ public class UserRepository : IUser
     }
 
 
-    // Metode sat til task bool, fordi den er async, fordi den skal returnere resultat af 
-    //..updateoneasync metoden (validering)
-    public async Task<bool> UpdateUser(User userUpdated)
+    // Async method that awaits updateonasync method, with the updater variables for the user object 
+    public  Task<UpdateResult> UpdateUser(User userUpdated)
     {
-        var filter = Builders<User>.Filter.Eq(u => u.Id, userUpdated.Id);
+        try
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userUpdated.Id);
 
-        var update = Builders<User>.Update
-            .Set(u => u.UserName, userUpdated.UserName)
-            .Set(u => u.FirstName, userUpdated.FirstName)
-            .Set(u => u.SurName, userUpdated.SurName)
-            .Set(u => u.Address, userUpdated.Address)
-            .Set(u => u.Zip, userUpdated.Zip)
-            .Set(u => u.City, userUpdated.City)
-            .Set(u => u.PhoneNumber, userUpdated.PhoneNumber)
-            .Set(u => u.Email, userUpdated.Email)
-            .Set(u => u.Password, userUpdated.Password)
-            .Set(u => u.Id, userUpdated.Id);
+            var update = Builders<User>.Update
+                .Set(u => u.UserName, userUpdated.UserName)
+                .Set(u => u.Password, userUpdated.Password)
+                .Set(u => u.FirstName, userUpdated.FirstName)
+                .Set(u => u.SurName, userUpdated.SurName)
+                .Set(u => u.Address, userUpdated.Address)
+                .Set(u => u.Zip, userUpdated.Zip)
+                .Set(u => u.City, userUpdated.City)
+                .Set(u => u.PhoneNumber, userUpdated.PhoneNumber)
+                .Set(u => u.Email, userUpdated.Email)
+                .Set(u => u.Id, userUpdated.Id);
 
+            var result = collection.UpdateOneAsync(filter, update);
+            return result;
+        }
+        catch (Exception ex)
+        {
 
-            var result = await collection.UpdateOneAsync(filter, update);
-        // A way of checking if the count of changed objects is above 0 
-        return result.ModifiedCount > 0;
+            Console.WriteLine($"Der opstod en fejl under opdatering af brugeren: {ex.Message}");
+            return null;
+        }
     }
 }

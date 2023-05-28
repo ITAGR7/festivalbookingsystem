@@ -55,14 +55,20 @@ public class User
     [BsonElement("userName")]
     public string UserName { get; set; }
 
+    // Setting password to private, making it unaccessible from outside the class 
     [Required(ErrorMessage = "Et kodeord er påkrævet")]
     [BsonElement("password")]
-    public string Password { get; set; }
+    public  string Password { get; set; }
 
     [Required(ErrorMessage = " er påkrævet")]
     [BsonElement("userType")]
     public string UserType { get; set; }
 
-    //[BsonElement("volunteerId")]
-    //public string VolunteerId { get; set; }
+
+
+    //public void UpdatePassword(string newPassword)
+    //{
+    //    Password = newPassword;
+    //}
+
 }

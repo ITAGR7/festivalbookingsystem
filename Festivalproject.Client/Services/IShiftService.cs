@@ -5,9 +5,9 @@ namespace Festivalproject.Client.Services;
 
 public interface IShiftService
 {
-    Task<List<Shift>> GetAllShifts();
+    public Task<List<Shift>> GetAllShifts();
 
-    Task<Shift> CreateShift(Shift shift);
+    public Task<Shift> CreateShift(Shift shift);
 
     Task<bool> DeleteShift(string id);
 

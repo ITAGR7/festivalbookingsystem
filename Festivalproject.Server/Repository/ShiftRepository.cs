@@ -46,7 +46,6 @@ public class ShiftRepository : IShifts
 
 
 
-
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
           Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
