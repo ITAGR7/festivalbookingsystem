@@ -1,6 +1,6 @@
 let calendar; // Make the calendar object accessible in all functions
 
-// Define the color mapping globally so it can be accessed in all functions
+// hardcoding color map globally so it can be accessed in all functions
 const colorMap = {
     "barvagt": '#6D9EEB',
     "toiletvagt": '#D4BF77',
@@ -10,8 +10,9 @@ const colorMap = {
     "sikkerhedsvagt": '#A47AE2'
 };
 
-// Initialize the calendar with the given events
+// calendar being initialized with the given events
 export function initializeCalendar(inputEvents, dotNetReference) {
+    
     // Events are the inputEvents, but with a color added to each event, based on the type of event
     const events = inputEvents.map(event => {
         const color = colorMap[event.type];
@@ -30,7 +31,7 @@ export function initializeCalendar(inputEvents, dotNetReference) {
         calendar.removeAllEvents();
         calendar.addEventSource(events);
     } else {
-        // Declaring the calenderEL variable, and setting it to the element with the id "calendar"
+        // Declaring the calenderEL variable, and setting it to the element (div) with the id "calendar"
         const calendarEl = document.getElementById('calendar');
 
         // Declaring the calendar variable, and setting it to a new FullCalendar.Calendar
@@ -70,8 +71,10 @@ export function initializeCalendar(inputEvents, dotNetReference) {
             eventClick: function (info) {
                 console.log('ShiftsDialog - shiftEnd (JS):', info.event.end);
 
-                // Use the dotNetReference to invoke the C# method
+                // Use the dotNetReference to invoke the C# method with the given parameters
                 dotNetReference.invokeMethodAsync('ShiftsDialog',
+                    
+                    //extendedProps being used to get the properties of the event that are not "normal"
                     info.event.extendedProps.type,
                     info.event.extendedProps.shiftId,
                     info.event.title,

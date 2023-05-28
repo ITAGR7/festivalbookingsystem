@@ -46,31 +46,31 @@
 </div>
 
 @code {
-
+    
+    //Parameters
+    //Boolean to change html based on if the confirmation is visible or not
     private bool ConfirmationVisible { get; set; } = false;
 
-    //Injecting the modal service
+    //Injecting the modal services to be used later
     [CascadingParameter]
     BlazoredModalInstance BlazoredModal { get; set; }
 
-    //Method for closing the modal
-    private async Task CloseModal()
-    {
-        await BlazoredModal.CloseAsync(ModalResult.Ok(true));
-    }
-
+    
+    //Parameters from the modal method on AvailableShifts "ShiftsDialog"
     [Parameter]
     public string ModalShiftId { get; set; }
 
     [Parameter]
     public string ModalShiftTitle { get; set; }
     
+    //These two parameters are being used when passing/making a post "tilmeld vagt" to the database
     [Parameter]
     public DateTime ModalShiftStart { get; set; }
 
     [Parameter]
     public DateTime ModalShiftEnd { get; set; }
     
+    //Crating two new parameters for the local time of the shift start and end time to be used in the html
     [Parameter]
     public DateTime ModalShiftStartLocalTime { get; set; }
 
@@ -93,6 +93,12 @@
     public string ModalShiftType { get; set; }
 
     private List<Shift> AvailableShift { get; set; } = new();
+    
+    //Method for closing the modal
+    private async Task CloseModal()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+    }
     
     //OnInitializedAsync method for setting the modal shift start and end time to local time which are being used in the html
     protected override void OnInitialized()
@@ -146,10 +152,10 @@
         shiftRegistration.ShiftType = ModalShiftType;
         
 
-    //Create a new shiftregistration in the database
+    //Create a new shiftregistration in the database via service
         await ShiftRegistrationService.CreateShiftRegistration(shiftRegistration);
 
-    //Update the shift status by shift id to isOccupied true
+    //Update the shift status by shift id to isOccupied true via service
         await ShiftService.UpdateShiftStatusByShiftId(ModalShiftId, true);
 
         
