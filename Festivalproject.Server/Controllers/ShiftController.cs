@@ -25,7 +25,6 @@ public class ShiftsController : ControllerBase
 
 
 
-
     [HttpGet("status/{status}")]
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -33,7 +32,6 @@ public class ShiftsController : ControllerBase
 
         return ShiftRepository.GetShiftsByStatus(status);
     }
-
 
 
 
