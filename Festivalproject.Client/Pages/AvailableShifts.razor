@@ -64,36 +64,35 @@
 
 
 @code {
-    // User id parameter
+
+    //declaring the parameters being used on the page
     [Parameter]
+    
+    //declaring parameters that are used to display correct information on the page via html
+    //and being able to use the user class
     [SupplyParameterFromQuery]
     public string? id { get; set; }
-
-    public string UserId { get; set; }
     private User user { get; set; } = new();
+    
 
     private List<Shift> AvailableShift { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         user = await userService.GetUserByObjectId(id);
-
-    // Parse the query string to get the user id
-        var uri = new Uri(NavManager.Uri);
-        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-        UserId = query["id"];
-
-    // Your initialization code here
+        
+        //fetching shifts the are isOccupied = false
         AvailableShift = await shiftService.GetShiftsByStatus(false);
 
 
-    // Create a DotNetObjectReference to pass to JavaScript
+    // Creating a DotNetObjectReference to pass to JavaScript later
         var dotNetReference = DotNetObjectReference.Create(this);
 
-    // Convert the list of shifts to an array of events that's later passed over to the JS function
+    // Convert the list of AvailableShift to an array of events
+    // that's later passed over to the Javscript function
         var events = AvailableShift.Select(s => new
         {
-    // Setting the properties of the event object
+    // Setting the properties of the event objects in the array
             shiftId = s.Id,
             title = s.Name,
             start = s.startTime.ToString("o"),
@@ -102,14 +101,16 @@
             area = s.Area,
             _duration = Convert.ToString(s.Duration),
             type = s.Type,
-            _userId = UserId
+            _userId = id
         }).ToArray();
 
-    // Importing the JS file from "wwwroot/js" and calling the initializeCalendar function with the events array as parameters
+    // Importing the JS file from "wwwroot/js"
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
+        //calling the initializeCalendar function from the JS file with the events array and the dotNetReference
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
     }
 
+    //function that is called from the JS file when a shift is clicked
     [JSInvokable]
     public async Task ShiftsDialog(string shiftType, string shiftId, string shiftName, DateTime shiftStart, DateTime shiftEnd, string shiftDescription, string shiftArea, string shiftDuration, string shiftUserId)
     {

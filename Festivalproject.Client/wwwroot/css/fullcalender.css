@@ -1,9 +1,10 @@
-/* Making grids white */
+/* Making grids white in the calender less present */
 
 .fc-theme-standard td, .fc-theme-standard th, .fc-theme-standard, .fc-scrollgrid {
     border-color: #F5F5F5 !important;
 }
 
+/* Making week number less present */
 .fc .fc-daygrid-week-number {
     background-color: transparent;
     color: #E0E0E0;

@@ -1,7 +1,7 @@
 ﻿using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Festivalproject.Server.Interface;
-
+using MongoDB.Driver;
 
 namespace Festivalproject.Server.Controllers;
 
@@ -30,20 +30,39 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     public User GetUserByObjectId(string id)
     {
-        var user = UserRepository.GetUserByObjectId(id);
-        return user;
+        try
+        {
+            var user = UserRepository.GetUserByObjectId(id);
+            return user;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Der opstod en fejl under hentning af brugeren: {ex.Message}");
+            return null; // Eller kast en egendefineret undtagelse, hvis nødvendigt
+        }
     }
 
-
+    // Method that posts a a loginresult taking a LoginData object as parameter
     // Using a extension to our endpoint, to distinguish this from other HttpPost calls in the controller. 
-    // 
     [HttpPost("login")]
-    public LoginResultDTO GetLoginResult([FromBody] LoginDataDTO loginData)
+    public ActionResult<LoginResultDTO> GetLoginResult([FromBody] LoginDataDTO loginData)
     {
-        Console.WriteLine(loginData.Username);
-        Console.WriteLine("login");
-        var result = UserRepository.GetLoginResult(loginData.Username, loginData.Password);
-        return result;
+        try
+        {
+            var result = UserRepository.GetLoginResult(loginData.Username, loginData.Password);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound("Brugernavn eller adgangskode er ugyldig.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
 
@@ -62,14 +81,22 @@ public class UserController : ControllerBase
     }
 
 
-    // Considering changing this to something "easier" 
 
     [HttpPut]
-    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult UpdateUser(User userUpdated)
+    //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+    public async Task<UpdateResult> UpdateUser(User userUpdated)
     {
-        UserRepository.UpdateUser(userUpdated);
-        return NoContent();
+        try
+        {
+            var result = await UserRepository.UpdateUser(userUpdated);
+            return result;
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine($"Der opstod en fejl under opdatering af brugeren: {ex.Message}");
+            return null; 
+        }
     }
 
 

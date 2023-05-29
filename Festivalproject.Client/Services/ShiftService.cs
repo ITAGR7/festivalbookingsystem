@@ -41,7 +41,7 @@ public class ShiftService : IShiftService
 
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
-        Console.WriteLine(shiftUpdated.Name.ToString());
+        
 
          var response = await Http.PutAsJsonAsync("/api/shift", shiftUpdated);
 

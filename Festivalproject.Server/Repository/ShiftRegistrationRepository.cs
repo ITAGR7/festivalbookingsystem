@@ -15,6 +15,8 @@ public class ShiftRegistrationRepository : IShiftRegistration
     private const string collectionName = "ShiftRegistration";
     private IMongoCollection<ShiftRegistration> collection;
 
+
+
     public ShiftRegistrationRepository()
     {
         var client = new MongoClient(connectionString);
