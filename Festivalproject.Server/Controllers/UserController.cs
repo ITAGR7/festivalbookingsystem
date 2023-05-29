@@ -8,6 +8,7 @@ namespace Festivalproject.Server.Controllers;
 // Modtager HttpRequests fra services, sender requests til repositories og returnerer resultatet
 [Route("api/user")]
 [ApiController]
+
 public class UserController : ControllerBase
 {
     private readonly IUser UserRepository;

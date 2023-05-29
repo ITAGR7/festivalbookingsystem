@@ -1,12 +1,9 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace Festivalproject.Shared.Models;
-
-// Test udføres først med at der fås fat i et objekt id.
-[BsonIgnoreExtraElements]
+// We are using MongoDB drivers mapping function, to map our modelclasses fields to the database fields, if these do not match
 public class Shift
 {
     [BsonId]

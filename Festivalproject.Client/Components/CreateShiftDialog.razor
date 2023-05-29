@@ -208,7 +208,6 @@
     }
 
 
-
     //Method that creates shift, by service sending a httpPost request. If the response "createdShift" is not null
     private async Task CreateShift(Shift newShift)
     {
@@ -223,6 +222,7 @@
                 Console.WriteLine("Shift addedd Successfully");
                 await CloseModal();
                 shiftCreated = true; 
+               
 
             }
         }
