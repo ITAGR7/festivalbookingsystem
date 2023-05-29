@@ -9,5 +9,4 @@ public interface IUserService
     public Task UpdateUser(User user);
     public Task DeleteUser(string id);
 
-    //public Task<LoginResult> IsValidLogin(string username, string password);
 }

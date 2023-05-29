@@ -21,8 +21,7 @@ public class ShiftRegistrationService : IShiftRegistrationService
         try
         {
             var result =
-                await Http.GetFromJsonAsync<List<ShiftRegistration>>(
-                    $"/api/ShiftRegistration/{UserId}");
+                await Http.GetFromJsonAsync<List<ShiftRegistration>>($"/api/ShiftRegistration/{UserId}");
             Console.WriteLine("Test på getregistred Service : " + result.Count);
             return result;
         }
@@ -48,16 +47,12 @@ public class ShiftRegistrationService : IShiftRegistrationService
         }
     }
 
-    // public bla bla Task<shiftregistration> UpdateShiftregistrationByShiftId(string ShiftId) 
-
-    // passing id to controller , http.put<shift> ("/shiftregistration")
-
+   
     public async Task CreateShiftRegistration(ShiftRegistration shiftregistration)
     {
         try
         {
-            await Http.PostAsJsonAsync<ShiftRegistration>("/api/ShiftRegistration",
-                shiftregistration);
+            await Http.PostAsJsonAsync<ShiftRegistration>("/api/ShiftRegistration", shiftregistration);
         }
         catch (Exception ex)
         {
