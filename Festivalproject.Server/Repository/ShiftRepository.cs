@@ -17,8 +17,8 @@ public class ShiftRepository : IShifts
 
 
 
-    // Initializes the ShiftRepository by connecting to the MongoDB database using the provided connection string and database name.
-    // Retrieves the collection of Shifts objects from the database.
+    // Initializes the ShiftRepository by connecting MongoDB database with provided connection string and database name.
+    // Collects the collection of Shifts objects from the database.
     public ShiftRepository()
     {
         var client = new MongoClient(connectionString);
@@ -26,8 +26,7 @@ public class ShiftRepository : IShifts
         collection = database.GetCollection<Shift>(collectionName);
     }
 
-    // Retrieves all shifts from the collection and returns them as a list. Uses a query to find all documents in the collection.
-    // Returns the list of shifts.
+    // gets all shifts from collection and returns a list. Finds all documents in collections and returns as list of shifts.
     public List<Shift> GetAllShifts()
     {
         try
@@ -43,8 +42,7 @@ public class ShiftRepository : IShifts
         }
     }
 
-    // Retrieves shifts from the collection based on the given status.Uses a query to find documents where the Status field matches the provided status.
-    //  Returns the list of shifts with the matching status
+    // gets shifts from collection based on status, and finds documents where status field matches status. Returns list with matching status.
     public List<Shift> GetShiftsByStatus(bool status)
     {
         try
@@ -58,6 +56,7 @@ public class ShiftRepository : IShifts
         }
     }
 
+    // Creates a shift and inserts it in collection.
     public async Task<Shift> CreateShift(Shift newShift)
     {
         try
@@ -73,8 +72,8 @@ public class ShiftRepository : IShifts
         }
     }
 
-    // Updates a shift document in the collection with the provided shiftUpdated object
-    // Sets the fields of the shift document to the corresponding values from the shiftUpdated object. Returns the updated shift.
+    // updates shift document collection with the provided object id
+    // updates fields of the shift document to values from the shiftUpdated object. Returns the updated shift.
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
         try
@@ -84,13 +83,6 @@ public class ShiftRepository : IShifts
 
 
             var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
-
-
-
-            //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
-            //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
-
-
 
             var update = Builders<Shift>.Update
                 .Set(u => u.Name, shiftUpdated.Name)
@@ -119,8 +111,7 @@ public class ShiftRepository : IShifts
     }
 
 
-    // Updates the status of a shift document in the collection based on the given shift ID. Sets the Status field of the shift document to the provided status.
-    // Returns a boolean indicating whether the update was successful.
+    // updates status of shift document in the collection based on ID. Changes status to provided status. 
     public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
     {
         try

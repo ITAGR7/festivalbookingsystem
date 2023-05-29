@@ -17,8 +17,8 @@ public class ShiftRegistrationRepository : IShiftRegistration
     private IMongoCollection<ShiftRegistration> collection;
 
 
-    // Initializes the ShiftRegistrationRepository by connecting to the MongoDB database using the provided connection string and database name.
-    // Retrieves the collection of ShiftRegistration objects from the database.
+    // Initializes the ShiftRegistrationRepository by connecting MongoDB database with provided connection string and database name.
+    // Collects the collection of ShiftRegistration objects from the database.
     public ShiftRegistrationRepository()
     {
         var client = new MongoClient(connectionString);
@@ -26,7 +26,7 @@ public class ShiftRegistrationRepository : IShiftRegistration
         collection = database.GetCollection<ShiftRegistration>(collectionName);
     }
 
-    //Retrieves a list of ShiftRegistration objects by searching for registrations with the given UserId in the collection. R
+    //gets a list of ShiftRegistration objects by searching for registrations with UserId from collection. 
     public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
     {
         try
@@ -41,7 +41,7 @@ public class ShiftRegistrationRepository : IShiftRegistration
     }
 
 
-    // Inserts a new ShiftRegistration object asynchronously into the collection.
+    // Inserts a new ShiftRegistration object in collection.
     public async Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration)
     {
         try
@@ -57,8 +57,8 @@ public class ShiftRegistrationRepository : IShiftRegistration
     }
 
 
-    // Updates ShiftRegistration objects with matching ShiftId in the collection.
-    // Sets the ShiftName, StartTime, EndTime, and Description fields of the ShiftRegistration object to the corresponding values from the provided Shift object.
+    // Updates ShiftRegistration objects where a matching ShiftId is found in the collection.
+    // ShiftName, StartTime, EndTime, and Description gets updated by values from shift object
     public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
     {
         try

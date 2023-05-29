@@ -39,13 +39,13 @@ public class UserRepository : IUser
         {
              // Builds a filter to match the username and password in the database.
             var filter = Builders<User>.Filter.And(
-                Builders<User>.Filter.Eq(u => u.UserName, username), // Husk at ændre til username 
+                Builders<User>.Filter.Eq(u => u.UserName, username), 
                 Builders<User>.Filter.Eq(u => u.Password, password)
             );
-            //applying the filter with a find method 
+            //applies the filter with a find method 
             var result = collection.Find(filter).FirstOrDefault();
 
-            //Returns a LoginResultDTO with the UserType and ObjectId from the matching User document if found; otherwise, returns a LoginResultDTO indicating no match.
+            //Returns a LoginResultDTO with the UserType and ObjectId from the matching User document if found otherwise, returns no match.
             if (result != null)
                 return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
             else { 
@@ -76,7 +76,7 @@ public class UserRepository : IUser
     }
 
 
-    //Retrieves a user from the database based on the provided ObjectId. Returns the matching User object if found; otherwise, returns null.
+    //Retrieves a user from the database based on the provided ObjectId. Returns matching User object if found. if not, returns null.
     public User GetUserByObjectId(string id)
     {
         try
@@ -91,7 +91,7 @@ public class UserRepository : IUser
     }
 
 
-    //Method that creates a new user to the database. The method checks sername already exists and throws an exception if it does. Else it a new user document into user collection.
+    //reates new user to the database. checks username already exists and throws exception if yes. if not, new user document inserts into user collection.
     public User CreateUser(User newUser)
     {
         var userExist = collection.Find(u => u.UserName == newUser.UserName).FirstOrDefault();
@@ -108,8 +108,7 @@ public class UserRepository : IUser
     }
 
 
-    // Updates an existing user in the database with the provided userUpdated object. Uses the user's ObjectId to identify the document to update.
-    // Sets the fields of the user document to the corresponding values from the userUpdated object.
+    // updates existing user in database with userUpdated object. Checks user's ObjectId to identify the document to update. Updates fields in document from userUpdatedObject.
     public  Task<UpdateResult> UpdateUser(User userUpdated)
     {
         try
