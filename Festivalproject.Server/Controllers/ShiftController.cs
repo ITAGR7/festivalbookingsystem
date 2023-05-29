@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
+using static System.Net.WebRequestMethods;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Festivalproject.Server.Controllers;
 
@@ -11,11 +13,14 @@ public class ShiftsController : ControllerBase
     public readonly IShifts ShiftRepository;
 
 
+    // itializes the ShiftRepository to be a copy of iShifts.
     public ShiftsController(IShifts iShifts)
     {
         ShiftRepository = iShifts;
     }
 
+
+    //HTTP GET method to retrieve all shifts from the Shift collection.
     [HttpGet]
     public List<Shift> GetAllShifts()
     {
@@ -26,6 +31,7 @@ public class ShiftsController : ControllerBase
 
 
 
+    // HTTP GET method to retrieve shifts by their status from the Shift collection.
     [HttpGet("status/{status}")]
     public List<Shift> GetShiftsByStatus(bool status)
     {
@@ -36,6 +42,7 @@ public class ShiftsController : ControllerBase
 
 
 
+    // HTTP PUT method to update shifts.
     [HttpPut]
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
@@ -43,6 +50,7 @@ public class ShiftsController : ControllerBase
         return await ShiftRepository.UpdateShift(shiftUpdated);
     }
 
+    //HTTP PUT method to update the status of a shift by its ID.
     [HttpPut("update/{Id}/{Status}")]
     public async Task<IActionResult> UpdateShiftStatusByShiftId(string Id, bool Status)
     {
@@ -53,6 +61,8 @@ public class ShiftsController : ControllerBase
             return StatusCode(500, "Internal server error. Update failed.");
     }
 
+
+    // HTTP DELETE method to delete a shift by its ID.
     [HttpDelete("{id}")]
     public async Task<bool> DeleteShift(string id)
     {
@@ -61,6 +71,7 @@ public class ShiftsController : ControllerBase
     }
 
 
+    //HTTP POST method to create a new shift.
     [HttpPost]
     public async Task<Shift> CreateShift(Shift newShift)
     {

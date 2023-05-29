@@ -9,13 +9,16 @@ namespace Festivalproject.Server.Repository;
 
 public class ShiftRepository : IShifts
 {
-    private const string connectionString =
-        @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
+    private const string connectionString = @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
 
     private const string databaseName = "festivalData";
     private const string collectionName = "Shifts";
     private IMongoCollection<Shift> collection;
 
+
+
+    // Initializes the ShiftRepository by connecting MongoDB database with provided connection string and database name.
+    // Collects the collection of Shifts objects from the database.
     public ShiftRepository()
     {
         var client = new MongoClient(connectionString);
@@ -23,7 +26,7 @@ public class ShiftRepository : IShifts
         collection = database.GetCollection<Shift>(collectionName);
     }
 
-
+    // gets all shifts from collection and returns a list. Finds all documents in collections and returns as list of shifts.
     public List<Shift> GetAllShifts()
     {
         try
@@ -39,6 +42,7 @@ public class ShiftRepository : IShifts
         }
     }
 
+    // gets shifts from collection based on status, and finds documents where status field matches status. Returns list with matching status.
     public List<Shift> GetShiftsByStatus(bool status)
     {
         try
@@ -52,6 +56,7 @@ public class ShiftRepository : IShifts
         }
     }
 
+    // Creates a shift and inserts it in collection.
     public async Task<Shift> CreateShift(Shift newShift)
     {
         try
@@ -67,18 +72,17 @@ public class ShiftRepository : IShifts
         }
     }
 
-
-
+    // updates shift document collection with the provided object id
+    // updates fields of the shift document to values from the shiftUpdated object. Returns the updated shift.
     public async Task<Shift> UpdateShift(Shift shiftUpdated)
     {
         try
         {
             Console.WriteLine("Updateshift test repo " + shiftUpdated.Id);
 
-            var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
 
-            //DateTime startTimeUtc = shiftUpdated.startTime.ToUniversalTime();
-            //DateTime endTimeUtc = shiftUpdated.endTime.ToUniversalTime();
+
+            var filter = Builders<Shift>.Filter.Eq(u => u.Id, shiftUpdated.Id);
 
             var update = Builders<Shift>.Update
                 .Set(u => u.Name, shiftUpdated.Name)
@@ -90,7 +94,11 @@ public class ShiftRepository : IShifts
                 .Set(u => u.Status, shiftUpdated.Status)
                 .Set(u => u.Area, shiftUpdated.Area);
 
+
+
             var result = await collection.UpdateOneAsync(filter, update);
+
+
 
             return shiftUpdated;
         }
@@ -102,14 +110,20 @@ public class ShiftRepository : IShifts
         }
     }
 
+
+    // updates status of shift document in the collection based on ID. Changes status to provided status. 
     public async Task<bool> UpdateShiftStatusByShiftId(string Id, bool Status)
     {
         try
         {
             var filter = Builders<Shift>.Filter.Eq(u => u.Id, Id);
 
+
+
             var update = Builders<Shift>.Update
                 .Set(u => u.Status, Status);
+
+
 
             var updateResult = await collection.UpdateOneAsync(filter, update);
             return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
@@ -117,11 +131,11 @@ public class ShiftRepository : IShifts
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred while updating shift status: " + ex.Message);
-            throw; 
+            throw;
         }
     }
 
-
+    // deletes a shift document from the collection based on the given shift ID.
     public async Task<bool> DeleteShift(string id)
     {
         try
@@ -132,7 +146,7 @@ public class ShiftRepository : IShifts
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred while deleting a shift: " + ex.Message);
-            throw; 
+            throw;
         }
     }
 }

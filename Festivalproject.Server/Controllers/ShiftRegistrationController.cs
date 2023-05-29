@@ -2,6 +2,7 @@
 using Festivalproject.Server.Interface;
 using Festivalproject.Shared.Models;
 using Festivalproject.Server.Repository;
+using static System.Net.WebRequestMethods;
 
 namespace Festivalproject.Server.Controllers;
 
@@ -11,12 +12,15 @@ public class ShiftRegistrationController : ControllerBase
 {
     public readonly IShiftRegistration ShiftRegistrationRepo;
 
+
+   // Initializes the ShiftRegistrationRepo to be a copy of iShiftRegistrationRepo
     public ShiftRegistrationController(IShiftRegistration iShiftRegistrationRepo)
     {
         ShiftRegistrationRepo = iShiftRegistrationRepo;
     }
 
 
+    // HTTP GET method to retrieve registered shifts by user ID, and returns a list of ShiftRegistration objects.
     [HttpGet("{UserId}")]
     public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
     {
@@ -25,7 +29,7 @@ public class ShiftRegistrationController : ControllerBase
         return result;
     }
 
-
+    //HTTP PUT method to update a shift registration by shift ID.
     [HttpPut]
     public Task<bool> UpdateShiftRegistrationbyShiftId(Shift _shift)
     {
@@ -33,6 +37,8 @@ public class ShiftRegistrationController : ControllerBase
         return result;
     }
 
+
+    //HTTP POST method to create a new shift registration.
     [HttpPost]
     public async Task<IActionResult> CreateShiftRegistration(ShiftRegistration shiftregistration)
     {
