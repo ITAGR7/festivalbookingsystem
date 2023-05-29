@@ -35,7 +35,6 @@ public class ShiftService : IShiftService
         try
         {
             var response = await Http.PostAsJsonAsync("/api/shift", shift);
-            Console.WriteLine("CreateShift på service(client) " + shift.Name);
             response.EnsureSuccessStatusCode();
             var newShift = await response.Content.ReadFromJsonAsync<Shift>();
             return newShift;
@@ -43,7 +42,8 @@ public class ShiftService : IShiftService
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred while creating a shift: " + ex.Message);
-            throw;
+            return null; 
+            
         }
     }
 
