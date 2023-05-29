@@ -12,7 +12,7 @@ const colorMap = {
 
 // calendar being initialized with the given events
 export function initializeCalendar(inputEvents, dotNetReference) {
-    
+    console.log("initializeCalendar called");
     // Events are the inputEvents, but with a color added to each event, based on the type of event
     const events = inputEvents.map(event => {
         const color = colorMap[event.type];
@@ -23,14 +23,22 @@ export function initializeCalendar(inputEvents, dotNetReference) {
             return event;
         }
     });
-
-    console.log("Events: ", events); // Log the events after the color has been added to the console, to see if it worked
+    console.log("Input Events: ", inputEvents);
+    console.log("Events with colors: ", events);
 
     // If the calendar is already initialized, remove old events before adding new ones
+    // If the calendar is already initialized, remove old events before adding new ones
     if (calendar) {
-        calendar.removeAllEvents();
+        console.log("Calendar already initialized. Updating events.");
+        calendar.getEventSources().forEach(function(eventSource) {
+            eventSource.remove();
+        });
         calendar.addEventSource(events);
+        console.log("Events updated.");
+        calendar.render();
+        console.log("Calendar re-rendered.");
     } else {
+        console.log("Initializing new calendar");
         // Declaring the calenderEL variable, and setting it to the element (div) with the id "calendar"
         const calendarEl = document.getElementById('calendar');
 
@@ -96,5 +104,6 @@ export function initializeCalendar(inputEvents, dotNetReference) {
 
         // Lastly rendering the calendar
         calendar.render();
+        console.log("Calendar initialized and rendered.");
     }
 }

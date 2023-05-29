@@ -3,6 +3,7 @@
 @using Festivalproject.Client.Components
 @using Blazored.Modal.Services
 @using Festivalproject.Client.Services
+@using System.Text.Json
 
 @inject IJSRuntime JSRuntime
 @inject IModalService ModalService
@@ -79,9 +80,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine("OnInitializedAsync called.");
         user = await userService.GetUserByObjectId(id);
-        
-        //fetching shifts the are isOccupied = false
+
+    //fetching shifts the are isOccupied = false
         AvailableShift = await shiftService.GetShiftsByStatus(false);
 
 
@@ -106,9 +108,14 @@
 
     // Importing the JS file from "wwwroot/js"
         var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/fullcalender.js");
-        //calling the initializeCalendar function from the JS file with the events array and the dotNetReference
+        Console.WriteLine("Imported JavaScript module.");
+    //calling the initializeCalendar function from the JS file with the events array and the dotNetReference
         await module.InvokeVoidAsync("initializeCalendar", new object[] { events, dotNetReference });
+        Console.WriteLine("Called initializeCalendar from JavaScript.");
+
     }
+
+
 
     //function that is called from the JS file when a shift is clicked
     [JSInvokable]
@@ -139,5 +146,6 @@
     {
         NavigationManager.NavigateTo($"/volunteer?id={id}");
     }
+    
 
 }
