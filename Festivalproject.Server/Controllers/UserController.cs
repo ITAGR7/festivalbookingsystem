@@ -8,6 +8,7 @@ namespace Festivalproject.Server.Controllers;
 // Modtager HttpRequests fra services, sender requests til repositories og returnerer resultatet
 [Route("api/user")]
 [ApiController]
+
 public class UserController : ControllerBase
 {
     private readonly IUser UserRepository;
@@ -18,6 +19,7 @@ public class UserController : ControllerBase
     }
 
 
+    // HTTP GET all users in the user collection.
     [HttpGet]
     public List<User> GetAllUsers()
     {
@@ -66,6 +68,7 @@ public class UserController : ControllerBase
     }
 
 
+    // HTTP post to create a new user, and inset it in collection. 
     [HttpPost]
     public IActionResult CreateUser(User newUser)
     {

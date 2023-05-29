@@ -110,8 +110,12 @@
 
 
 @code{
-    [CascadingParameter] 
+
+    [CascadingParameter]
     public IModalService Modal { get; set; } = default!;
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; }
+
     private Shift newShift { get; set; } = new Shift();
     private EditContext editContext; 
     private string resultMessage { get; set; }
@@ -123,7 +127,7 @@
     private DateTime EndDate { get; set; } = DateTime.Now;
 
 
-    //Hardcoding the data for shifttype, function and area as dictionaries/lists
+    //Hardcoded data as dictionaries, to be used in dropdown menus 
     List<string> shiftTypes = new List<string> { "Barvagt", "Toiletvagt", "Indgang", 
     "Sikkerhedsvagt", "Køkkenvagt", "Parkeringsvagt", "Samaritan" };
     Dictionary<string, List<string>> shiftFunctionsAndRoles = new Dictionary<string, List<string>>
@@ -150,11 +154,10 @@
 
 
 
-
     //Method that creates an instance of edicContext taking the nedShift-object as parameter. And setting default time for input-date-field to today. 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("OnInitialized in dialog");
+
         editContext = new EditContext(newShift);
 
         // Setting default value for start and endtime in calendar 
@@ -164,14 +167,17 @@
     }
 
 
-    //Method that when form is submittet validets the form content, and if valid calls the CreateShiftmethod. 
+    //Method that calls the Createshift method, if form is valid on submit 
     public async Task HandleValidSubmit()
     {
         if (editContext.Validate())
         {
+            resultMessage = "Vellykket oprættelse af vagt";
+
             await CreateShift(newShift);
             if (shiftCreated == true)
             {
+              
                 //Clearing the form by setting newShift value to a  new shift 
                 newShift = new Shift();
             }
@@ -194,27 +200,35 @@
     }
 
 
+    private async Task CloseModal()
+    {
+        await Task.Delay(3000);
+        await BlazoredModal.CloseAsync(ModalResult.Ok(true));
+       
+    }
+
 
     //Method that creates shift, by service sending a httpPost request. If the response "createdShift" is not null
     private async Task CreateShift(Shift newShift)
     {
-        Console.WriteLine("Creating shift");
+
         try
         {
             // Call the shiftService to use createshift method 
             var result = await shiftService.CreateShift(newShift);
-            
+
             if (result != null)
             {
                 Console.WriteLine("Shift addedd Successfully");
-                resultMessage = "Vellykket oprættelse af vagt";
-                shiftCreated = true;
+                await CloseModal();
+                shiftCreated = true; 
+               
+
             }
         }
         catch (Exception ex)
         {
             resultMessage = ex.Message;
-            Console.WriteLine("Error: " + ex.Message);
         }
     }
 }

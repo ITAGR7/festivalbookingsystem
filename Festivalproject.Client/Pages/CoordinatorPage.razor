@@ -482,6 +482,7 @@
 
   
 
+    // Method to sort shiftList by priority. 
     public void PrioritySort()
     {
         if (isSortedByPriority)
@@ -499,14 +500,13 @@
     }
 
 
+    // Method updates the priority status of a shift in the shiftList based on the given ID, toggling the current priority status.
     public void UpdatePriority(string Id)
     {
-        // Find the shift with the given ID in the shiftList.
-        // If a matching shift is found, its priority status is updated.
+        // Find the shift with the given ID in the shiftList, if a matching shift is found, its priority status is updated.
         var shift = shiftList.FirstOrDefault(s => s.Id == Id);
 
-        // If the shift is currently marked as priority, it will be unmarked.
-        // If the shift is not marked as priority, it will be marked as priority.
+        // True/fase toggle of priority mark. 
         if (shift != null)
         {
             shift.IsPriority = !shift.IsPriority;
@@ -514,6 +514,7 @@
     }
 
 
+    // Method that filters shifts based on search input.
     public void FilterShifts(ChangeEventArgs e)
     {
         SearchInput = e.Value.ToString();

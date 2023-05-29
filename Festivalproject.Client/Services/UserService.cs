@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 
 namespace Festivalproject.Client.Services;
-//Bruges til at kommunikere mellem klient og server, fjerner kode fra razorpage
+//Service is used for Http calls to the controller, removes this code from razorpage 
 
 public class UserService : IUserService
 {
