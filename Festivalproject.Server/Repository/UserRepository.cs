@@ -3,6 +3,7 @@ using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Festivalproject.Server.Repository;
@@ -54,7 +55,7 @@ public class UserRepository : IUser
         }
         catch (Exception ex)
         {        
-            Console.WriteLine($"Der opstod en fejl under login: {ex.Message}");
+            Console.WriteLine($"An Error occured while trying to get loginresult: {ex.Message}");
             return new LoginResultDTO { IsValid = false, UserType = " ", ObjectId = " " };
         }
 
@@ -70,7 +71,7 @@ public class UserRepository : IUser
         }
         catch (Exception ex)
         {
-            throw new Exception("Fejl ved hentning af alle brugere.", ex);
+            throw new Exception("An error occured trying to retrieve users.", ex);
         }
     }
 
@@ -85,7 +86,7 @@ public class UserRepository : IUser
         }
         catch (Exception ex)
         {
-            throw new Exception("Fejl ved hentning af bruger ved ObjectId.", ex);
+            throw new Exception("An error occured trying go tet user by Objectid.", ex);
         }
     }
 
@@ -133,7 +134,7 @@ public class UserRepository : IUser
         catch (Exception ex)
         {
 
-            Console.WriteLine($"Der opstod en fejl under opdatering af brugeren: {ex.Message}");
+            Console.WriteLine($"An error occured trying to update the user: {ex.Message}");
             return null;
         }
     }

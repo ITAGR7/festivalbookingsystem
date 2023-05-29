@@ -9,6 +9,8 @@ namespace Festivalproject.Server.Repository;
 
 public class ShiftRegistrationRepository : IShiftRegistration
 {
+    private const string connectionString =
+        @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
 
     
     private const string connectionString =@"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
@@ -31,15 +33,31 @@ public class ShiftRegistrationRepository : IShiftRegistration
     //Retrieves a list of ShiftRegistration objects by searching for registrations with the given UserId in the collection. R
     public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
     {
-        return collection.Find(sr => sr.UserId == UserId).ToList();
+        try
+        {
+            return collection.Find(sr => sr.UserId == UserId).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while retrieving registered shifts by user ID: " + ex.Message);
+            return new List<ShiftRegistration>(); // Return an empty list or default value
+        }
     }
 
 
     // Inserts a new ShiftRegistration object asynchronously into the collection.
     public async Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration)
     {
-        await collection.InsertOneAsync(shiftRegistration);
-        return true;
+        try
+        {
+            await collection.InsertOneAsync(shiftRegistration);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while creating a shift registration: " + ex.Message);
+            throw; // Rethrow the exception or throw a custom exception
+        }
     }
 
 
@@ -47,16 +65,24 @@ public class ShiftRegistrationRepository : IShiftRegistration
     // Sets the ShiftName, StartTime, EndTime, and Description fields of the ShiftRegistration object to the corresponding values from the provided Shift object.
     public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
     {
-        var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
+        try
+        {
+            var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);
 
-        var update = Builders<ShiftRegistration>.Update
-            .Set(u => u.ShiftName, _shift.Name)
-            .Set(u => u.StartTime, _shift.startTime)
-            .Set(u => u.EndTime, _shift.endTime)
-            .Set(u => u.Description, _shift.Description);
+            var update = Builders<ShiftRegistration>.Update
+                .Set(u => u.ShiftName, _shift.Name)
+                .Set(u => u.StartTime, _shift.startTime)
+                .Set(u => u.EndTime, _shift.endTime)
+                .Set(u => u.Description, _shift.Description);
 
-        var result = await collection.UpdateManyAsync(filter, update);
+            var result = await collection.UpdateManyAsync(filter, update);
 
-        return result.ModifiedCount > 0;
+            return result.ModifiedCount > 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while updating shift registration: " + ex.Message);
+            throw; 
+        }
     }
 }
