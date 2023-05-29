@@ -8,11 +8,7 @@ using System.Xml.Linq;
 namespace Festivalproject.Server.Repository;
 
 public class ShiftRegistrationRepository : IShiftRegistration
-{
-    private const string connectionString =
-        @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
-
-    
+{ 
     private const string connectionString =@"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
     private const string databaseName = "festivalData";
     private const string collectionName = "ShiftRegistration";
