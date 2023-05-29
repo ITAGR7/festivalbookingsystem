@@ -18,6 +18,7 @@ public class UserController : ControllerBase
     }
 
 
+    // HTTP GET all users in the user collection.
     [HttpGet]
     public List<User> GetAllUsers()
     {
@@ -66,6 +67,7 @@ public class UserController : ControllerBase
     }
 
 
+    // HTTP post to create a new user, and inset it in collection. 
     [HttpPost]
     public IActionResult CreateUser(User newUser)
     {
