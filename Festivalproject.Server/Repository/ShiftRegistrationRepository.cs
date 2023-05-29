@@ -2,21 +2,25 @@
 using MongoDB.Driver;
 using Festivalproject.Shared.Models;
 using Festivalproject.Server.Interface;
+using System.Xml.Linq;
 
 
 namespace Festivalproject.Server.Repository;
 
 public class ShiftRegistrationRepository : IShiftRegistration
 {
-    private const string connectionString =
-        @"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
 
+    
+    private const string connectionString =@"mongodb+srv://admin:LgyyJ6R8qFXcQgtg@festivalcluster0.wn5s5bo.mongodb.net/";
     private const string databaseName = "festivalData";
     private const string collectionName = "ShiftRegistration";
+   
+    
     private IMongoCollection<ShiftRegistration> collection;
 
 
-
+    // Initializes the ShiftRegistrationRepository by connecting to the MongoDB database using the provided connection string and database name.
+    // Retrieves the collection of ShiftRegistration objects from the database.
     public ShiftRegistrationRepository()
     {
         var client = new MongoClient(connectionString);
@@ -24,14 +28,14 @@ public class ShiftRegistrationRepository : IShiftRegistration
         collection = database.GetCollection<ShiftRegistration>(collectionName);
     }
 
-
+    //Retrieves a list of ShiftRegistration objects by searching for registrations with the given UserId in the collection. R
     public List<ShiftRegistration> GetRegisteredShiftsById(string UserId)
     {
         return collection.Find(sr => sr.UserId == UserId).ToList();
     }
 
 
-    
+    // Inserts a new ShiftRegistration object asynchronously into the collection.
     public async Task<bool> CreateShiftRegistration(ShiftRegistration shiftRegistration)
     {
         await collection.InsertOneAsync(shiftRegistration);
@@ -39,6 +43,8 @@ public class ShiftRegistrationRepository : IShiftRegistration
     }
 
 
+    // Updates ShiftRegistration objects with matching ShiftId in the collection.
+    // Sets the ShiftName, StartTime, EndTime, and Description fields of the ShiftRegistration object to the corresponding values from the provided Shift object.
     public async Task<bool> UpdateShiftRegistrationByShiftId(Shift _shift)
     {
         var filter = Builders<ShiftRegistration>.Filter.Eq(u => u.ShiftId, _shift.Id);

@@ -3,6 +3,7 @@ using Festivalproject.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.RegularExpressions;
 
 namespace Festivalproject.Server.Repository;
 
@@ -15,6 +16,10 @@ public class UserRepository : IUser
     private const string collectionName = "Users";
     private IMongoCollection<User> collection;
 
+
+
+    //Initializes the UserRepository by connecting to the MongoDB database using the provided connection string and database name.
+    // Retrieves the collection of User objects from the database.
     public UserRepository()
     {
         var client = new MongoClient(connectionString);
@@ -25,11 +30,13 @@ public class UserRepository : IUser
 
 
 
-    //Method for checking is user exists in database, and returning a loginresult object 
+
+    // Retrieves a LoginResultDTO based on the provided username and password.
     public LoginResultDTO GetLoginResult(string username, string password)
     {
         try
-        {  // building a filter for matches in database
+        {
+             // Builds a filter to match the username and password in the database.
             var filter = Builders<User>.Filter.And(
                 Builders<User>.Filter.Eq(u => u.UserName, username), // Husk at ændre til username 
                 Builders<User>.Filter.Eq(u => u.Password, password)
@@ -37,7 +44,7 @@ public class UserRepository : IUser
             //applying the filter with a find method 
             var result = collection.Find(filter).FirstOrDefault();
 
-            //if match is found, we return a loginresult object, with isvalid = true, usertype and ObjectId
+            //Returns a LoginResultDTO with the UserType and ObjectId from the matching User document if found; otherwise, returns a LoginResultDTO indicating no match.
             if (result != null)
                 return new LoginResultDTO { IsValid = true, UserType = result.UserType, ObjectId = result.Id };
             else { 
@@ -54,7 +61,7 @@ public class UserRepository : IUser
     }
 
 
-    //Method that retrieves all users from database 
+    //Retrieves all users from the database. Returns list of User objects.
     public List<User> GetAllUsers()
     {
         try
@@ -63,13 +70,12 @@ public class UserRepository : IUser
         }
         catch (Exception ex)
         {
-            // Håndter exception her eller kast den videre
             throw new Exception("Fejl ved hentning af alle brugere.", ex);
         }
     }
 
 
-    //Method that gets user by MongoDbs object id 
+    //Retrieves a user from the database based on the provided ObjectId. Returns the matching User object if found; otherwise, returns null.
     public User GetUserByObjectId(string id)
     {
         try
@@ -79,13 +85,12 @@ public class UserRepository : IUser
         }
         catch (Exception ex)
         {
-            // Håndter exception her eller kast den videre
             throw new Exception("Fejl ved hentning af bruger ved ObjectId.", ex);
         }
     }
 
 
-    //Method that creates a new user to the database. The method checks if the input username from the new user already exists 
+    //Method that creates a new user to the database. The method checks sername already exists and throws an exception if it does. Else it a new user document into user collection.
     public User CreateUser(User newUser)
     {
         var userExist = collection.Find(u => u.UserName == newUser.UserName).FirstOrDefault();
@@ -102,7 +107,8 @@ public class UserRepository : IUser
     }
 
 
-    // Async method that awaits updateonasync method, with the updater variables for the user object 
+    // Updates an existing user in the database with the provided userUpdated object. Uses the user's ObjectId to identify the document to update.
+    // Sets the fields of the user document to the corresponding values from the userUpdated object.
     public  Task<UpdateResult> UpdateUser(User userUpdated)
     {
         try
